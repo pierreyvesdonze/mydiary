@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Journal intime{% endblock %}
+
+{% block body %}
+<h1>Journal intime</h1>
+
+<hr class="hr-white">
+
+<a href="{{ path('book_content_new')}}" class="custom-btn">Ajouter du contenu</a>
+
+<hr class="hr-white">
+
+{% for content in book.bookContents %}
+
+{% if content.updatedAt %}
+
+<div class="container-inline">
+    <h4>Le {{ content.updatedAt|date("d/m/Y") }}</h4>
+    {% else %}
+    <h4>Le {{ content.createdAt|date("d/m/Y") }}</h4>
+    {% endif %}
+    <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
+</div>
+
+<p>{{ content.content }}</p>
+
+{% endfor %}
+{% endblock %}

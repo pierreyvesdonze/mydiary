@@ -7,5 +7,138 @@ HOME
 *******************************
 */
 body {
-    margin: 0 300px;
+    overflow-y: auto;
+    padding: 0 200px;
+
+    @include sm {
+        padding: 20px;
+    }
+
+    @include xs {
+        padding: 20px;
+    }
+}
+
+/*
+ ***************************
+SPINNER LOADING ANIMATION
+ ***************************
+ */
+.animation-loading-container {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.411);
+    width: 100%;
+    height: 100vh;
+    z-index: 2000;
+}
+
+.lds-dual-ring {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*
+ ***************************
+ALERT / FLASH MESSAGE
+ ***************************
+ */
+.alert,
+.alert-success {
+    background-color: var(--alert-bg);
+    color: white;
+    border: none;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 1200;
+    font-size: 2.5em;
+
+    @include xs {
+        font-size: 1.8em;
+    }
+
+    @include sm {
+        font-size: 1.8em;
+    }
+}
+
+/*
+ ***************************
+NAV
+ ***************************
+ */
+nav {
+    background-color: var(--nav-color) !important;
+
+    .nav-wrapper a {
+        color: var(--primary-color) !important;
+    }
+}
+
+/*
+ ***************************
+BUTTONS
+ ***************************
+ */
+.custom-btn {
+    padding: 10px;
+    border: solid 1px var(--blue-color);
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.521);
+
+    &:hover {
+        box-shadow: none;
+    }
+
+    &:focus {
+        background-color: #fff;
+    }
+}
+
+/*
+ ***************************
+BOOK
+ ***************************
+ */
+
+.large-input {
+    width: 100%;
+    height: 40vh !important;
+    overflow-y: auto;
+}
+
+.container-inline {
+    display: flex;
+    align-items: center;
+    .custom-btn {
+        margin-left: 25px;
+    }
 }

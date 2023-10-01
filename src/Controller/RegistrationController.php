@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,6 +24,9 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
+
+        // Create book for User
+        $user->setBook(new Book);
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 

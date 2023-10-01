@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BookContent{% endblock %}
+
+{% block body %}
+    <h1>BookContent</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ book_content.id }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ book_content.content }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ book_content.createdAt ? book_content.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ book_content.updatedAt ? book_content.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ include('book_content/_delete_form.html.twig') }}
+{% endblock %}

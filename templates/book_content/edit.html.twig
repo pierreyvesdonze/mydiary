@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le contenut{% endblock %}
+
+{% block body %}
+    <h1>Modifier le contenu</h1>
+
+    {{ include('book_content/_form.html.twig') }}
+
+    {{ include('book_content/_delete_form.html.twig') }}
+{% endblock %}

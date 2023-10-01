@@ -1,7 +1,9 @@
 :root {
   --body-bg: white;
-  --primary-color: rgb(0, 0, 0);
-  --blue-color: #8bc4e4;
+  --alert-bg: rgba(0, 0, 0, 0.589);
+  --primary-color: #6f6767;
+  --blue-color: #325061;
+  --nav-color: #c6d0f3;
 }
 
 body {
@@ -21,6 +23,7 @@ html {
 a {
   text-decoration: none;
   color: var(--blue-color);
+  font-weight: bold;
 }
 
 .flex-left-right {
