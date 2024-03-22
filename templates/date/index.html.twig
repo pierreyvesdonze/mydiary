@@ -8,18 +8,25 @@
 {% if dates %}
 
 <ul class="collapsible">
-    {% for date in dates %}
-    {% set year = date.date|date('Y') %} {# Extraction de l'année à partir de la propriété date #}
+   
 
+
+    {% set previous_year = null %}
+    {% for date in dates %}
+    {% set year = date.date|date('Y') %}
+    {% if previous_year is null or previous_year != year %}
+    {% if previous_year is not null %}
+    </div>
+    {% endif %}
     <li>
-        <div class="collapsible-header">
-            <h5>{{ year }}</h5>
-        </div>
+        <div class="collapsible-header"><h5>{{ year }}</h5></div>
         <div class="collapsible-body">
             <span>
-                <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|date('d-m-Y') }}</span>
-                <br>
-                <strong class="more-strong-txt">Événement :</strong><span class="span-txt"> {{ date.event }}</span>
+                {% endif %}
+                <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|date('d-m-Y')
+                }}</span>
+            <br>
+            <strong class="more-strong-txt">Événement :</strong><span class="span-txt"> {{ date.event }}</span>
             <br>
             <strong class="more-strong-txt">Commentaire :</strong><span class="span-txt"> {{ date.comment }}</span>
 
@@ -34,14 +41,20 @@
                     <button type="submit" class="custom-btn btn-danger">Supprimer</button>
                 </form>
             </div>
+
+            <br>
+            
+                {% set previous_year = year %}
+                {% if loop.last %}
             </span>
         </div>
     </li>
+    {% endif %}
     {% endfor %}
 </ul>
 
 {% else %}
-    
+
 <h2>Vous n'avez aucune date enregistrée.</h2>
 
 {% endif %}
