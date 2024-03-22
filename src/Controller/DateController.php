@@ -32,10 +32,13 @@ class DateController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $date = new Date();
+        $user = $this->getUser();
         $form = $this->createForm(DateType::class, $date);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date->setUser($user);
+ 
             $entityManager->persist($date);
             $entityManager->flush();
 
