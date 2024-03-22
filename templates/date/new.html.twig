@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Date{% endblock %}
+
+{% block body %}
+    <h1>Créer une nouvelle date</h1>
+
+    {{ include('date/_form.html.twig') }}
+
+    <br>
+
+    <a href="{{ path('date_index') }}" class="custom-btn">Retour à la liste</a>
+{% endblock %}

@@ -20,6 +20,8 @@ var app = {
         // MATERIALIZE INIT 
         $(document).ready(function(){
             $('.sidenav').sidenav();
+            $(".dropdown-trigger").dropdown();
+            $('.collapsible').collapsible();
           });
 
     },

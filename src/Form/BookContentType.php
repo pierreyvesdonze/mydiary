@@ -24,7 +24,7 @@ class BookContentType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
                 'attr' => [
-                    'class' => "custom-btn validate-btn"
+                    'class' => "custom-btn validate-btn" 
                 ]
             ]);
         ;

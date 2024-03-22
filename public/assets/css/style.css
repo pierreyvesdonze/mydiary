@@ -9,7 +9,8 @@ MEDIA QUERIES
   --alert-bg: rgba(0, 0, 0, 0.589);
   --primary-color: #6f6767;
   --link-color: #5181a3;
-  --nav-color: #607e996c;
+  --danger-color: #a3515c;
+  --nav-color: #e6eaeee8;
 }
 
 body {
@@ -80,6 +81,19 @@ a {
 p,
 label {
   font-weight: 400;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  h1 {
+    font-size: 2.4em !important;
+    text-align: center;
+  }
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  h1 {
+    font-size: 2.4em !important;
+    text-align: center;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
@@ -173,6 +187,7 @@ NAV
  */
 nav {
   background-color: var(--nav-color) !important;
+  border-radius: 0 0 20px 20px;
 }
 nav .nav-wrapper a {
   color: var(--dark-text) !important;
@@ -201,6 +216,11 @@ BUTTONS
 }
 .custom-btn:focus {
   background-color: #fff;
+}
+
+.btn-danger {
+  border: solid 1px var(--danger-color);
+  color: var(--danger-color) !important;
 }
 
 form button.custom-btn {
@@ -255,4 +275,18 @@ FILES / IMG
 
 .img-mini {
   width: 25%;
+}
+
+/*
+ ***************************
+DATE
+ ***************************
+ */
+.span-txt {
+  color: var(--dark-text);
+  font-weight: 400;
+}
+
+.more-strong-txt {
+  font-weight: bold;
 }/*# sourceMappingURL=style.css.map */

@@ -17,10 +17,23 @@ label {
     font-weight: 400;
 }
 
+h1 {
+    @include sm {
+        font-size: 2.4em !important;
+        text-align: center;
+    }
+
+    @include xs {
+        font-size: 2.4em !important;
+        text-align: center;
+    }
+}
+
 h5 {
     @include sm {
         font-size: 1.4em !important;
     }
+
     @include xs {
         font-size: 1.3em !important;
     }
@@ -104,6 +117,7 @@ NAV
  */
 nav {
     background-color: var(--nav-color) !important;
+    border-radius: 0 0 20px 20px;
 
     .nav-wrapper a {
         color: var(--dark-text) !important;
@@ -138,6 +152,11 @@ BUTTONS
     }
 }
 
+.btn-danger {
+    border: solid 1px var(--danger-color);
+    color: var(--danger-color) !important;
+}
+
 form button.custom-btn {
     padding: 10px;
     font-family: "Montserrat", sans-serif;
@@ -154,6 +173,7 @@ BOOK
  */
 #counter-documents {
     margin-left: 2em;
+
     span {
         color: var(--link-color);
         font-weight: bold;
@@ -190,4 +210,18 @@ FILES / IMG
 
 .img-mini {
     width: 25%;
+}
+
+/*
+ ***************************
+DATE
+ ***************************
+ */
+.span-txt {
+    color: var(--dark-text);
+    font-weight: 400;
+}
+
+.more-strong-txt {
+font-weight: bold;
 }

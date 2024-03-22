@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dates index{% endblock %}
+
+{% block body %}
+<h1>Dates</h1>
+
+<ul class="collapsible">
+    {% for date in dates %}
+    {% set year = date.date|date('Y') %} {# Extraction de l'année à partir de la propriété date #}
+    <li>
+        <div class="collapsible-header">
+            <h5>{{ year }}</h5>
+        </div>
+        <div class="collapsible-body">
+            <span>
+                <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|date('d-m-Y') }}</span>
+                <br>
+                <strong class="more-strong-txt">Événement :</strong><span class="span-txt"> {{ date.event }}</span>
+            <br>
+            <strong class="more-strong-txt">Commentaire :</strong><span class="span-txt"> {{ date.comment }}</span>
+
+            <br>
+            <br>
+
+            <div class="btn-control-flex">
+                <a href="{{ path('date_edit', {'id':date.id}) }}" class="custom-btn">Modifier</a>
+                <br>
+                <br>
+                <form action="{{ path('date_delete', {'id': date.id}) }}" method="post">
+                    <button type="submit" class="custom-btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+            </span>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+<br>
+
+<a href="{{ path('date_new') }}" class="custom-btn">Créer une nouvelle date</a>
+{% endblock %}
