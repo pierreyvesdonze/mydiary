@@ -26,6 +26,7 @@ class DateType extends AbstractType
             ])
             ->add('comment', TextareaType::class, [
                 'label' => 'Contenu',
+                'required' => false,
                 'attr' => [
                     'class' => 'large-input',
                     'placeholder' => "Ajouter un commentaire"

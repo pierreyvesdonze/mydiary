@@ -7,12 +7,14 @@ var app = {
         * L I S T E N E R S
         * *****************************
         */
-        $('.custom-btn').on('click', app.loadingAnim);
+        //$('.custom-btn').on('click', app.loadingAnim);
        
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')
         }, 3000);
+
+        var form = document.querySelector('form');
 
         // If Spinner anim, disabled it onload
         app.closeLoadingAnim();
