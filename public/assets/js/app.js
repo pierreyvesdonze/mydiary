@@ -14,8 +14,6 @@ var app = {
             $('.alert').fadeOut('fast')
         }, 3000);
 
-        var form = document.querySelector('form');
-
         // If Spinner anim, disabled it onload
         app.closeLoadingAnim();
 

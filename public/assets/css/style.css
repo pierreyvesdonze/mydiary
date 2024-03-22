@@ -205,6 +205,10 @@ nav .nav-wrapper a {
 BUTTONS
  ***************************
  */
+.btn-control-flex {
+  display: flex;
+}
+
 .custom-btn {
   padding: 7px;
   border: solid 1px var(--link-color);
@@ -218,9 +222,14 @@ BUTTONS
   background-color: #fff;
 }
 
+form button.custom-btn {
+  height: 47px;
+}
+
 .btn-danger {
   border: solid 1px var(--danger-color);
   color: var(--danger-color) !important;
+  margin-left: 10px;
 }
 
 form button.custom-btn {
