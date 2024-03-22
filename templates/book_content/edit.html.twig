@@ -3,9 +3,10 @@
 {% block title %}Modifier le contenut{% endblock %}
 
 {% block body %}
+<div class="book">
     <h1>Modifier le contenu</h1>
-
+    
     {{ include('book_content/_form.html.twig') }}
-
-    {{ include('book_content/_delete_form.html.twig') }}
+    
+</div>
 {% endblock %}

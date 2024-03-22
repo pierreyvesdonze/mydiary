@@ -21,20 +21,19 @@ class BookContentRepository extends ServiceEntityRepository
         parent::__construct($registry, BookContent::class);
     }
 
-//    /**
-//     * @return BookContent[] Returns an array of BookContent objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return BookContent[] Returns an array of BookContent objects
+    */
+   public function findBookContentByDesc($value): array
+   {
+       return $this->createQueryBuilder('b')
+           ->andWhere('b.book = :val')
+           ->setParameter('val', $value)
+           ->orderBy('b.updatedAt', 'DESC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?BookContent
 //    {

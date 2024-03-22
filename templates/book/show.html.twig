@@ -1,29 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Journal intime{% endblock %}
+{% block title %}Journal de bord{% endblock %}
 
 {% block body %}
-<h1>Journal intime</h1>
+<div class="book">
+    <h1>Journal de bord</h1>
 
-<hr class="hr-white">
+    <hr class="hr">
 
-<a href="{{ path('book_content_new')}}" class="custom-btn">Ajouter du contenu</a>
+    <div class="container-inline">
+        <a href="{{ path('book_content_new')}}" class="custom-btn">Ajouter du contenu</a>
+        <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length }}</span> documents rédigés.</p>
+    </div>
+        
+    <hr class="hr">
 
-<hr class="hr-white">
+    {% for content in bookContents %}
 
-{% for content in book.bookContents %}
+    <div class="container-inline">
+        {% if content.updatedAt %}
+        <h5>Le {{ content.updatedAt|date("d/m/Y") }}</h5>
+        {% else %}
+        <h5>Le {{ content.createdAt|date("d/m/Y") }}</h5>
+        {% endif %}
+        <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
 
-{% if content.updatedAt %}
+        {% include "book_content/_delete_form.html.twig" %}
+    </div>
 
-<div class="container-inline">
-    <h4>Le {{ content.updatedAt|date("d/m/Y") }}</h4>
-    {% else %}
-    <h4>Le {{ content.createdAt|date("d/m/Y") }}</h4>
-    {% endif %}
-    <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
+    <div class="content">
+        <p>{{ content.content }}</p>
+    </div>
+
+    {% endfor %}
 </div>
-
-<p>{{ content.content }}</p>
-
-{% endfor %}
 {% endblock %}

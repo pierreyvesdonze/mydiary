@@ -1,3 +1,7 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.content) }}
+    <div class="container-inline">
+        {{ form_row(form.submit) }}
+        <a href="{{ path('book_show', {id:book.id}) }}" class="custom-btn">Retour</a>
+    </div>
 {{ form_end(form) }}

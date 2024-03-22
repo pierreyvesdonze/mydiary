@@ -4,31 +4,48 @@ MEDIA QUERIES
 ***********************************
 */
 :root {
-  --body-bg: white;
+  --body-bg: radial-gradient(circle, rgba(230,235,238,1) 0%, rgba(144,175,194,1) 100%);
+  --dark-text: rgb(80, 82, 83);
   --alert-bg: rgba(0, 0, 0, 0.589);
   --primary-color: #6f6767;
-  --blue-color: #325061;
-  --nav-color: #c6d0f3;
+  --link-color: #5181a3;
+  --nav-color: #607e996c;
 }
 
 body {
   height: 100vh;
   background: var(--body-bg);
+  background-image: url("../images/always-grey.png");
+  background-repeat: repeat;
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
-  color: var(--primary-color);
+  color: var(--dark-text);
+  overflow-y: auto;
+  padding: 0 100px;
+}
+@media (min-width: 992px) and (max-width: 1280px) {
+  body {
+    padding: 0 130px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  body {
+    padding: 0 100px;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  body {
+    padding: 20px;
+  }
 }
 
-body,
-html {
-  overflow: hidden;
-  margin: 0;
-}
-
-a {
-  text-decoration: none;
-  color: var(--blue-color);
-  font-weight: bold;
+textarea {
+  color: var(--dark-text) !important;
 }
 
 .flex-left-right {
@@ -40,32 +57,39 @@ a {
   width: 50%;
 }
 
-.hr-white {
+.hr {
   height: 1px;
   border: 0;
   width: 90%;
   margin: 40px auto;
-  background: rgb(226, 226, 226);
-  background: radial-gradient(circle, rgb(240, 240, 240) 0%, rgba(255, 255, 255, 0.144) 50%, rgba(255, 254, 254, 0) 100%);
+  background: rgb(42, 61, 82);
+  background: radial-gradient(circle, rgb(41, 54, 83) 0%, rgba(255, 255, 255, 0.144) 50%, rgba(253, 253, 253, 0) 100%);
 }
 
 /*
 *******************************
-HOME 
+GENERAL
 *******************************
 */
-body {
-  overflow-y: auto;
-  padding: 0 200px;
+a {
+  text-decoration: none;
+  color: var(--link-color) !important;
+  font-weight: bold;
 }
+
+p,
+label {
+  font-weight: 400;
+}
+
 @media (min-width: 576px) and (max-width: 768px) {
-  body {
-    padding: 20px;
+  h5 {
+    font-size: 1.4em !important;
   }
 }
 @media (min-width: 300px) and (max-width: 576px) {
-  body {
-    padding: 20px;
+  h5 {
+    font-size: 1.3em !important;
   }
 }
 
@@ -151,7 +175,14 @@ nav {
   background-color: var(--nav-color) !important;
 }
 nav .nav-wrapper a {
-  color: var(--primary-color) !important;
+  color: var(--dark-text) !important;
+}
+
+.sidenav {
+  background-color: var(--nav-color) !important;
+}
+.sidenav li a {
+  color: var(--dark-text) !important;
 }
 
 /*
@@ -160,9 +191,9 @@ BUTTONS
  ***************************
  */
 .custom-btn {
-  padding: 10px;
-  border: solid 1px var(--blue-color);
-  border-radius: 10px;
+  padding: 7px;
+  border: solid 1px var(--link-color);
+  border-radius: 0 10px 0 10px;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.521);
 }
 .custom-btn:hover {
@@ -172,11 +203,28 @@ BUTTONS
   background-color: #fff;
 }
 
+form button.custom-btn {
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  background-color: transparent !important;
+  color: var(--link-color);
+  font-weight: bold;
+  cursor: pointer;
+}
+
 /*
  ***************************
 BOOK
  ***************************
  */
+#counter-documents {
+  margin-left: 2em;
+}
+#counter-documents span {
+  color: var(--link-color);
+  font-weight: bold;
+}
+
 .large-input {
   width: 100%;
   height: 40vh !important;
@@ -189,4 +237,22 @@ BOOK
 }
 .container-inline .custom-btn {
   margin-left: 25px;
+}
+
+.content {
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+
+/*
+ ***************************
+FILES / IMG
+ ***************************
+ */
+.img-medium {
+  width: 100%;
+}
+
+.img-mini {
+  width: 25%;
 }/*# sourceMappingURL=style.css.map */

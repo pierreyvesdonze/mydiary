@@ -7,7 +7,7 @@ var app = {
         * L I S T E N E R S
         * *****************************
         */
-        $('.validate-btn').on('click', app.loadingAnim);
+        $('.custom-btn').on('click', app.loadingAnim);
        
         // Fade out flash messages
         setTimeout(() => {

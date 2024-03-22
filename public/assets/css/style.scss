@@ -3,19 +3,26 @@
 
 /*
 *******************************
-HOME 
+GENERAL
 *******************************
 */
-body {
-    overflow-y: auto;
-    padding: 0 200px;
+a {
+    text-decoration: none;
+    color: var(--link-color) !important;
+    font-weight: bold;
+}
 
+p,
+label {
+    font-weight: 400;
+}
+
+h5 {
     @include sm {
-        padding: 20px;
+        font-size: 1.4em !important;
     }
-
     @include xs {
-        padding: 20px;
+        font-size: 1.3em !important;
     }
 }
 
@@ -99,7 +106,15 @@ nav {
     background-color: var(--nav-color) !important;
 
     .nav-wrapper a {
-        color: var(--primary-color) !important;
+        color: var(--dark-text) !important;
+    }
+}
+
+.sidenav {
+    background-color: var(--nav-color) !important;
+
+    li a {
+        color: var(--dark-text) !important;
     }
 }
 
@@ -109,9 +124,9 @@ BUTTONS
  ***************************
  */
 .custom-btn {
-    padding: 10px;
-    border: solid 1px var(--blue-color);
-    border-radius: 10px;
+    padding: 7px;
+    border: solid 1px var(--link-color);
+    border-radius: 0 10px 0 10px;
     box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.521);
 
     &:hover {
@@ -123,11 +138,27 @@ BUTTONS
     }
 }
 
+form button.custom-btn {
+    padding: 10px;
+    font-family: "Montserrat", sans-serif;
+    background-color: transparent !important;
+    color: var(--link-color);
+    font-weight: bold;
+    cursor: pointer;
+}
+
 /*
  ***************************
 BOOK
  ***************************
  */
+#counter-documents {
+    margin-left: 2em;
+    span {
+        color: var(--link-color);
+        font-weight: bold;
+    }
+}
 
 .large-input {
     width: 100%;
@@ -138,7 +169,25 @@ BOOK
 .container-inline {
     display: flex;
     align-items: center;
+
     .custom-btn {
         margin-left: 25px;
     }
+}
+
+.content {
+    backdrop-filter: blur(2px);
+}
+
+/*
+ ***************************
+FILES / IMG
+ ***************************
+ */
+.img-medium {
+    width: 100%;
+}
+
+.img-mini {
+    width: 25%;
 }

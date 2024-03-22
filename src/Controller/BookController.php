@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Entity\BookDiaryContent;
 use App\Form\BookType;
+use App\Repository\BookContentRepository;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,10 +47,16 @@ class BookController extends AbstractController
     }
 
     #[Route('/{id}', name: 'book_show', methods: ['GET'])]
-    public function show(Book $book): Response
+    public function show(
+        Book $book,
+        BookContentRepository $bookContentRepository
+        ): Response
     {
+        $bookContents = $bookContentRepository->findBookContentByDesc($book);
+
         return $this->render('book/show.html.twig', [
-            'book' => $book,
+            'book'         => $book,
+            'bookContents' => $bookContents
         ]);
     }
 

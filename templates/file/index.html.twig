@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes fichiers{% endblock %}
+
+{% block body %}
+    <h1>Mes fichiers</h1>
+
+    <hr class="hr">
+    <a href="{{ path('file_new') }}" class="custom-btn">Uploader</a>
+    <hr class="hr">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Aperçu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for file in files %}
+            <tr>
+                <td>{{ file.title }}</td>
+                <td>
+                    <img src="{{ asset('assets/files/' ~ file.image) }}" alt="Miniature" class="img-mini">
+                </td>
+                <td>
+                    <a href="{{ path('file_show', {'id': file.id}) }}" class="custom-btn">Voir</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Vous n'avez aucun fichier pour le moment</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table> 
+{% endblock %}

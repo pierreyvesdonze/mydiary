@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fichier{% endblock %}
+
+{% block body %}
+    <h1>{{ file.title }}</h1>
+
+    <a href="{{ asset(file.image) }}">
+        <img src="{{ asset('assets/files/' ~ file.image) }}" alt="Miniature" class="img-medium">
+    </a>
+
+    <div class="container-inline">
+        <a href="{{ path('file_index') }}" class="custom-btn">Retour</a>
+        <a href="{{ path('file_download', { 'filePath': file.image }) }}" download={{ file.image }} class="custom-btn">Télécharger</a>
+
+        {{ include('file/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

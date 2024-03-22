@@ -25,6 +25,7 @@ class BookContentController extends AbstractController
         $bookContent = new BookContent();
         $bookContent->setBook($book);
         $bookContent->setCreatedAt(new \DatetimeImmutable());
+        $bookContent->setUpdatedAt(new \DatetimeImmutable());
         
         $form = $this->createForm(BookContentType::class, $bookContent);
         $form->handleRequest($request);
@@ -85,7 +86,7 @@ class BookContentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'book_content_delete', methods: ['POST'])]
+    #[Route('/delete{id}', name: 'book_content_delete', methods: ['POST'])]
     public function delete(
         Request $request,
         BookContent $bookContent,
