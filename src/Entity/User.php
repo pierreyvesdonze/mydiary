@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -29,6 +31,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Book $book = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Date::class)]
+    private Collection $dates;
+
+    public function __construct()
+    {
+        $this->dates = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -113,6 +123,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->book = $book;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Date>
+     */
+    public function getDates(): Collection
+    {
+        return $this->dates;
+    }
+
+    public function addDate(Date $date): static
+    {
+        if (!$this->dates->contains($date)) {
+            $this->dates->add($date);
+            $date->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDate(Date $date): static
+    {
+        if ($this->dates->removeElement($date)) {
+            // set the owning side to null (unless already changed)
+            if ($date->getUser() === $this) {
+                $date->setUser(null);
+            }
+        }
 
         return $this;
     }

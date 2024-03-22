@@ -10,7 +10,7 @@ MEDIA QUERIES
   --primary-color: #6f6767;
   --link-color: #5181a3;
   --danger-color: #a3515c;
-  --nav-color: #e6eaeee8;
+  --nav-color: #ffffffe8;
 }
 
 body {
@@ -65,6 +65,15 @@ textarea {
   margin: 40px auto;
   background: rgb(42, 61, 82);
   background: radial-gradient(circle, rgb(41, 54, 83) 0%, rgba(255, 255, 255, 0.144) 50%, rgba(253, 253, 253, 0) 100%);
+}
+
+/*
+ ***************************
+MATERIALIZE
+ ***************************
+ */
+.collapsible-header {
+  justify-content: center;
 }
 
 /*

@@ -17,7 +17,7 @@ class DateController extends AbstractController
     #[Route('/', name: 'date_index', methods: ['GET'])]
     public function index(DateRepository $dateRepository): Response
     {
-        $dates = $dateRepository->findAll();
+        $dates = $dateRepository->findBy(['user' => $this->getUser()]);
 
         // Trier les dates par année
         usort($dates, function ($a, $b) {

@@ -23,9 +23,12 @@
         {% else %}
         <h5>Le {{ content.createdAt|date("d/m/Y") }}</h5>
         {% endif %}
-        <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
 
-        {% include "book_content/_delete_form.html.twig" %}
+        <div class="btn-control-flex">
+            <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
+            
+            {% include "book_content/_delete_form.html.twig" %}
+        </div>
     </div>
 
     <div class="content">
