@@ -17,8 +17,14 @@ class DateController extends AbstractController
     #[Route('/', name: 'date_index', methods: ['GET'])]
     public function index(DateRepository $dateRepository): Response
     {
+        $dates = $dateRepository->findAll();
+
+        // Trier les dates par année
+        usort($dates, function ($a, $b) {
+            return $a->getDate()->format('Y') - $b->getDate()->format('Y');
+        });
         return $this->render('date/index.html.twig', [
-            'dates' => $dateRepository->findAll(),
+            'dates' => $dates,
         ]);
     }
 
