@@ -162,7 +162,7 @@ ALERT / FLASH MESSAGE
   color: white;
   border: none;
   position: absolute;
-  width: 100%;
+  width: 80%;
   text-align: center;
   z-index: 1200;
   font-size: 2.5em;
@@ -285,6 +285,7 @@ DATE
 .span-txt {
   color: var(--dark-text);
   font-weight: 400;
+  overflow-wrap: break-word;
 }
 
 .more-strong-txt {

@@ -5,9 +5,12 @@
 {% block body %}
 <h1>Dates</h1>
 
+{% if dates %}
+
 <ul class="collapsible">
     {% for date in dates %}
     {% set year = date.date|date('Y') %} {# Extraction de l'année à partir de la propriété date #}
+
     <li>
         <div class="collapsible-header">
             <h5>{{ year }}</h5>
@@ -36,6 +39,12 @@
     </li>
     {% endfor %}
 </ul>
+
+{% else %}
+    
+<h2>Vous n'avez aucune date enregistrée.</h2>
+
+{% endif %}
 
 <br>
 
