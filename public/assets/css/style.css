@@ -11,6 +11,7 @@ MEDIA QUERIES
   --link-color: #5181a3;
   --danger-color: #a3515c;
   --nav-color: #ffffffe8;
+  --flash-alert: rgb(49, 114, 49);
 }
 
 body {
@@ -167,14 +168,14 @@ ALERT / FLASH MESSAGE
  */
 .alert,
 .alert-success {
-  background-color: var(--alert-bg);
-  color: white;
+  width: 80%;
+  color: var(--flash-alert);
   border: none;
   position: absolute;
-  width: 80%;
   text-align: center;
   z-index: 1200;
   font-size: 2.5em;
+  font-weight: 400;
 }
 @media (min-width: 300px) and (max-width: 576px) {
   .alert,

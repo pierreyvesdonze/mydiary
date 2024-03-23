@@ -27,6 +27,9 @@ class Date
     #[ORM\JoinColumn(nullable: false)]
     private ?user $user = null;
 
+    #[ORM\Column]
+    private ?bool $visibility = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Date
     public function setUser(?user $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isVisibility(): ?bool
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(bool $visibility): static
+    {
+        $this->visibility = $visibility;
 
         return $this;
     }

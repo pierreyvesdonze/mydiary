@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     {% block stylesheets %}
-    {% endblock %}  
+    {% endblock %}
 </head>
 
 <body>
@@ -25,6 +25,9 @@
     <div class="animation-loading-container">
         <div class="lds-dual-ring"></div>
     </div>
+
+    {# NAV #}
+    {% include "nav/nav.html.twig" %}
 
     {# Flash messages #}
     <div class="flash-container">
@@ -38,9 +41,6 @@
         {% endfor %}
     </div>
 
-    {# NAV #}
-    {% include "nav/nav.html.twig" %}
-
     {% block body %}{% endblock %}
 
     {% block javascripts %}
@@ -49,7 +49,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('script.js') }}"></script>
-      {% endblock %}
+    {% endblock %}
 </body>
 
 </html>

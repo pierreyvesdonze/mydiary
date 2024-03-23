@@ -5,7 +5,11 @@
 {% block body %}
 <div class="container-flex-between">
     <h1>Dates</h1>
-    <a href="{{ path('date_index_guest') }}">Vue invité</a>
+
+    <div>
+        <a href="{{ path('date_index_guest') }}">Vue invité</a>
+        <i class="material-icons">add</i>
+    </div>
 </div>
 
 {% if dates %}

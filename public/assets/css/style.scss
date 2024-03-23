@@ -92,14 +92,14 @@ ALERT / FLASH MESSAGE
  */
 .alert,
 .alert-success {
-    background-color: var(--alert-bg);
-    color: white;
+    width: 80%;
+    color: var(--flash-alert);
     border: none;
     position: absolute;
-    width: 80%;
     text-align: center;
     z-index: 1200;
     font-size: 2.5em;
+    font-weight: 400;
 
     @include xs {
         font-size: 1.8em;

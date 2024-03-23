@@ -8,7 +8,7 @@ var app = {
         * *****************************
         */
         //$('.custom-btn').on('click', app.loadingAnim);
-       
+
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')
@@ -18,11 +18,11 @@ var app = {
         app.closeLoadingAnim();
 
         // MATERIALIZE INIT 
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.sidenav').sidenav();
             $(".dropdown-trigger").dropdown();
             $('.collapsible').collapsible();
-          });
+        });
 
     },
 
@@ -42,4 +42,4 @@ var app = {
     },
 }
 
-document.addEventListener('DOMContentLoaded', app.init)
+document.addEventListener('DOMContentLoaded', app.init);

@@ -31,10 +31,7 @@ class DateController extends AbstractController
         // Récupérer le nom de la route pour orienter la vue
 
         $routeName = $request->get('_route');
-
         if ($routeName === 'date_index') {
-
-            
             return $this->render('date/index.html.twig', [
                 'dates' => $dates,
             ]);
@@ -55,6 +52,7 @@ class DateController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $date->setUser($user);
+            $date->setVisibility(0);
  
             $entityManager->persist($date);
             $entityManager->flush();
