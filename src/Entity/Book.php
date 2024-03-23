@@ -23,6 +23,9 @@ class Book
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: BookContent::class, orphanRemoval: true)]
     private Collection $bookContents;
 
+    #[ORM\Column]
+    private ?bool $visibility = null;
+
     public function __construct()
     {
         $this->bookContents = new ArrayCollection();
@@ -71,6 +74,18 @@ class Book
                 $bookContent->setBook(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVisibility(): ?bool
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(bool $visibility): static
+    {
+        $this->visibility = $visibility;
 
         return $this;
     }
