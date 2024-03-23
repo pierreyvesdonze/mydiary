@@ -15,7 +15,11 @@ use Symfony\Component\Routing\Attribute\Route;
 class DateController extends AbstractController
 {
     #[Route('/', name: 'date_index', methods: ['GET'])]
-    public function index(DateRepository $dateRepository): Response
+    #[Route('/index/guest', name: 'date_index_guest', methods: ['GET'])]
+    public function index(
+        DateRepository $dateRepository,
+        Request $request
+        ): Response
     {
         $dates = $dateRepository->findBy(['user' => $this->getUser()]);
 
@@ -23,9 +27,22 @@ class DateController extends AbstractController
         usort($dates, function ($a, $b) {
             return $a->getDate()->format('Y') - $b->getDate()->format('Y');
         });
-        return $this->render('date/index.html.twig', [
-            'dates' => $dates,
-        ]);
+
+        // Récupérer le nom de la route pour orienter la vue
+
+        $routeName = $request->get('_route');
+
+        if ($routeName === 'date_index') {
+
+            
+            return $this->render('date/index.html.twig', [
+                'dates' => $dates,
+            ]);
+        } else {
+            return $this->render('date/index.guest.html.twig', [
+                'dates' => $dates,
+            ]);
+        }
     }
 
     #[Route('/new', name: 'date_new', methods: ['GET', 'POST'])]

@@ -22,7 +22,7 @@ body {
   font-weight: 200;
   color: var(--dark-text);
   overflow-y: auto;
-  padding: 0 100px;
+  padding: 0 250px;
 }
 @media (min-width: 992px) and (max-width: 1280px) {
   body {
@@ -252,6 +252,28 @@ form button.custom-btn {
 
 /*
  ***************************
+CONTAINERS
+ ***************************
+ */
+.container-flex-between {
+  height: 110px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .container-flex-between {
+    height: 80px;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .container-flex-between {
+    height: 80px;
+  }
+}
+
+/*
+ ***************************
 BOOK
  ***************************
  */
@@ -308,4 +330,8 @@ DATE
 
 .more-strong-txt {
   font-weight: bold;
+}
+
+.date-guest-container {
+  margin-left: 50px;
 }/*# sourceMappingURL=style.css.map */

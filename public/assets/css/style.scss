@@ -137,9 +137,9 @@ nav {
 BUTTONS
  ***************************
  */
- .btn-control-flex {
+.btn-control-flex {
     display: flex;
- }
+}
 
 .custom-btn {
     padding: 7px;
@@ -155,6 +155,7 @@ BUTTONS
         background-color: #fff;
     }
 }
+
 form button.custom-btn {
     height: 47px;
 }
@@ -172,6 +173,26 @@ form button.custom-btn {
     color: var(--link-color);
     font-weight: bold;
     cursor: pointer;
+}
+
+/*
+ ***************************
+CONTAINERS
+ ***************************
+ */
+.container-flex-between {
+    height: 110px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    @include xs {
+        height: 80px;
+    }
+
+    @include sm {
+        height: 80px;
+    }
 }
 
 /*
@@ -225,6 +246,7 @@ FILES / IMG
 DATE
  ***************************
  */
+
 .span-txt {
     color: var(--dark-text);
     font-weight: 400;
@@ -232,5 +254,9 @@ DATE
 }
 
 .more-strong-txt {
-font-weight: bold;
+    font-weight: bold;
+}
+
+.date-guest-container {
+    margin-left: 50px;
 }
