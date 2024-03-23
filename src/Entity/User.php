@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Date::class)]
     private Collection $dates;
 
+    #[ORM\Column(length: 64)]
+    private ?string $pseudo = null;
+
     public function __construct()
     {
         $this->dates = new ArrayCollection();
@@ -153,6 +156,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $date->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): static
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }

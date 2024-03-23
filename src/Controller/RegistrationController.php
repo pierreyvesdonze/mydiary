@@ -26,7 +26,10 @@ class RegistrationController extends AbstractController
         $user = new User();
 
         // Create book for User
-        $user->setBook(new Book);
+        $book = new Book;
+        $book->setVisibility(0);
+        $user->setBook($book);
+        
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
