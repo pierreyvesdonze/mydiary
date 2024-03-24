@@ -38,9 +38,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 64)]
     private ?string $pseudo = null;
 
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: FriendshipRequest::class)]
+    private Collection $friendshipRequests;
+
+    #[ORM\OneToMany(mappedBy: 'user1', targetEntity: Friendship::class)]
+    private Collection $friendships;
+
     public function __construct()
     {
         $this->dates = new ArrayCollection();
+        $this->friendshipRequests = new ArrayCollection();
+        $this->friendships = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,6 +176,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FriendshipRequest>
+     */
+    public function getFriendshipRequests(): Collection
+    {
+        return $this->friendshipRequests;
+    }
+
+    public function addFriendshipRequest(FriendshipRequest $friendshipRequest): static
+    {
+        if (!$this->friendshipRequests->contains($friendshipRequest)) {
+            $this->friendshipRequests->add($friendshipRequest);
+            $friendshipRequest->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendshipRequest(FriendshipRequest $friendshipRequest): static
+    {
+        if ($this->friendshipRequests->removeElement($friendshipRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($friendshipRequest->getSender() === $this) {
+                $friendshipRequest->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Friendship>
+     */
+    public function getFriendships(): Collection
+    {
+        return $this->friendships;
+    }
+
+    public function addFriendship(Friendship $friendship): static
+    {
+        if (!$this->friendships->contains($friendship)) {
+            $this->friendships->add($friendship);
+            $friendship->setUser1($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendship(Friendship $friendship): static
+    {
+        if ($this->friendships->removeElement($friendship)) {
+            // set the owning side to null (unless already changed)
+            if ($friendship->getUser1() === $this) {
+                $friendship->setUser1(null);
+            }
+        }
 
         return $this;
     }

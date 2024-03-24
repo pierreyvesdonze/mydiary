@@ -5,6 +5,8 @@
   --alert-bg: rgba(0, 0, 0, 0.589);
   --primary-color: #6f6767;
   --link-color: #5181a3;
+  --link-hover-color: #3d92cf;
+  --disabled-color: rgb(141, 139, 139);
   --danger-color: #a3515c;
   --nav-color: #ffffffe8;
   --flash-alert: rgb(49, 114, 49);
@@ -71,4 +73,8 @@ MATERIALIZE
  */
 .collapsible-header {
   justify-content: center;
+}
+
+.secondary-content {
+  margin-left: 15px;
 }

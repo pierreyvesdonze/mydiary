@@ -9,6 +9,8 @@ MEDIA QUERIES
   --alert-bg: rgba(0, 0, 0, 0.589);
   --primary-color: #6f6767;
   --link-color: #5181a3;
+  --link-hover-color: #3d92cf;
+  --disabled-color: rgb(141, 139, 139);
   --danger-color: #a3515c;
   --nav-color: #ffffffe8;
   --flash-alert: rgb(49, 114, 49);
@@ -77,6 +79,10 @@ MATERIALIZE
   justify-content: center;
 }
 
+.secondary-content {
+  margin-left: 15px;
+}
+
 /*
 *******************************
 GENERAL
@@ -86,6 +92,10 @@ a {
   text-decoration: none;
   color: var(--link-color) !important;
   font-weight: bold;
+}
+
+a:not(.custom-btn):hover {
+  color: var(--link-hover-color) !important;
 }
 
 p,
@@ -103,6 +113,17 @@ label {
   h1 {
     font-size: 2.4em !important;
     text-align: center;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  h5 {
+    font-size: 1.8em !important;
+  }
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  h5 {
+    font-size: 1.6em !important;
   }
 }
 
@@ -232,6 +253,11 @@ BUTTONS
   background-color: #fff;
 }
 
+.disabled {
+  cursor: not-allowed;
+  color: var(--disabled-color) !important;
+}
+
 form button.custom-btn {
   height: 47px;
 }
@@ -249,6 +275,11 @@ form button.custom-btn {
   color: var(--link-color);
   font-weight: bold;
   cursor: pointer;
+}
+
+.link-btn-danger {
+  color: var(--danger-color) !important;
+  margin-left: 20px;
 }
 
 /*

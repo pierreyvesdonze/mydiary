@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block body %}
+
+<h1>Contacts</h1>
+
+<ul class="collapsible">
+    {# Invitations #}
+    {% include "contacts/invitations.html.twig" %}
+
+    {# Contacts #}
+    {% include "contacts/contacts.html.twig" %}
+
+    {# Utilisateurs du site #}
+    {% include "contacts/users.html.twig" %}
+
+</ul>
+{% endblock %}

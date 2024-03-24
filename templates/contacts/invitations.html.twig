@@ -1,0 +1,20 @@
+<li>
+    {% if friendRequests %}
+    <div class="collapsible-header">
+        <h4>Invitations en cours ({{ friendRequests|length }})</h4>
+    </div>
+    <div class="collapsible-body">
+        {% for sender in friendRequests %}
+        <div>
+            <strong>{{ sender.pseudo }}</strong>
+            <a href="{{ path('delete_friendship_request', {"user2":sender.id}) }}" class="secondary-content">Refuser</a>
+            <a href="{{ path('create_friendship', {'sender': sender.id}) }}" class="secondary-content">Accepter</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="collapsible-header">
+        <h5>Vous n'avez pas d'invitation pour le moment</h5>
+    </div>
+    {% endif %}
+</li>

@@ -12,6 +12,12 @@ a {
     font-weight: bold;
 }
 
+a:not(.custom-btn) {
+    &:hover {
+        color: var(--link-hover-color) !important;
+    }
+}
+
 p,
 label {
     font-weight: 400;
@@ -26,6 +32,16 @@ h1 {
     @include xs {
         font-size: 2.4em !important;
         text-align: center;
+    }
+}
+
+h5 {
+    @include sm {
+        font-size: 1.8em !important;
+    }
+
+    @include xs {
+        font-size: 1.6em !important;
     }
 }
 
@@ -156,6 +172,11 @@ BUTTONS
     }
 }
 
+.disabled {
+    cursor: not-allowed;;
+    color: var(--disabled-color) !important;
+}
+
 form button.custom-btn {
     height: 47px;
 }
@@ -173,6 +194,11 @@ form button.custom-btn {
     color: var(--link-color);
     font-weight: bold;
     cursor: pointer;
+}
+
+.link-btn-danger {
+    color: var(--danger-color) !important;
+    margin-left: 20px;
 }
 
 /*

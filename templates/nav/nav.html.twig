@@ -21,7 +21,7 @@
       <li><a href="#">Idées</a></li>
       <li><a href="#">Projets</a></li>
       <li><a href="{{ path('file_index') }}">Fichiers</a></li>
-      <li><a href="#">Contacts</a></li>
+      <li><a href="{{ path('contacts') }}">Contacts</a></li>
       {% endif %}
 
       <!-- Dropdown Trigger -->
@@ -39,6 +39,7 @@
       <li><a href="{{ path('date_index') }}">Dates</a></li>
       <li><a href="#">Idées</a></li>
       <li><a href="#">Projets</a></li>
+      <li><a href="{{ path('contacts') }}">Contacts</a></li>
   <li><a href="{{ path('logout') }}">Logout</a></li>
   {% else %}
   <li><a href="{{ path('login') }}">Login</a></li>

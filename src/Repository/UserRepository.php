@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\FriendshipRequest;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,7 +12,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
-* @implements PasswordUpgraderInterface<User>
+ * @implements PasswordUpgraderInterface<User>
  *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
@@ -39,28 +40,46 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return User[] Returns an array of User objects
+     */
+    public function findContacts($userId): array
+    {
+        return $this->createQueryBuilder('u')
+            ->innerJoin('u.friendships', 'f1', 'WITH', 'f1.user1 = :userId')
+            ->andWhere('u.id != :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+    /**
+     * @return User[] Returns an array of User objects
+     */
+    public function findUserRequests($recipientId): array
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin(FriendshipRequest::class, 'fr', 'WITH', 'fr.sender = u.id')
+            ->andWhere('fr.recipient = :recipientId')
+            ->setParameter('recipientId', $recipientId)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return User[] Returns an array of User objects
+     */
+    public function findUnrelatedContacts($userId): array
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.friendships', 'f')
+            ->andWhere('u.id != :userId')
+            ->andWhere(':userId NOT MEMBER OF u.friendships')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
 }
