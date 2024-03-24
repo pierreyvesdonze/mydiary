@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}friendProfile{% endblock %}
+{% block title %}{{ friendProfile.pseudo }}{% endblock %}
 
 {% block body %}
 
@@ -21,7 +21,7 @@
             </div>
             <div class="card-action">
                 {% if friendProfile.book.visibility == true %}
-                <a href="#" class="">Visiter</a>
+                <a href="{{ path('book_friend', {'friend':friendProfile.id}) }}" class="">Visiter</a>
                 {% else %}
                 
                 {% endif %}
@@ -34,14 +34,14 @@
         <div class="card white">
             <div class="card-content dark-text">
                 <span class="card-title">Dates</span>
-                {% if friendProfile.book.visibility == true %}
+                {% if friendProfile.datesContainer.visibility == true %}
                 <p>Dates des évènements clés de {{ friendProfile.pseudo }}.
                 {% else %}
                 <p>La visibilité des dates de {{ friendProfile.pseudo }} est privée.</p>
                 {% endif %}
             </div>
             <div class="card-action">
-                {% if friendProfile.book.visibility == true %}
+                {% if friendProfile.datesContainer.visibility == true %}
                 <a href="{{ path('dates_friend', {'friend':friendProfile.id}) }}" class="">Visiter</a>
                 {% else %}
                 

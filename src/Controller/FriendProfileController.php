@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\BookContentRepository;
+use App\Repository\BookRepository;
 use App\Repository\DateRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +26,31 @@ class FriendProfileController extends AbstractController
 
         return $this->render('friend_profile/index.html.twig', [
             'friendProfile' => $friendProfile,
+        ]);
+    }
+
+    #[Route('/contact/journal/{friend}', name: 'book_friend', methods: ['GET'])]
+    public function book(
+        $friend,
+        BookRepository $bookRepository,
+        BookContentRepository $bookContentRepository,
+        UserRepository $userRepository
+    )
+    {
+        $friendUser = $userRepository->findOneBy([
+            'id' => $friend
+        ]);
+
+        $book = $bookRepository->findBy([
+            'user' => $friendUser
+        ]);
+
+        $bookContents = $bookContentRepository->findBookContentByDesc($book);
+
+        return $this->render('friend_profile/book.html.twig', [
+            'book'         => $book,
+            'bookContents' => $bookContents,
+            'friendUser'   => $friendUser
         ]);
     }
 

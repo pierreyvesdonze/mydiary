@@ -119,6 +119,10 @@ h1 {
   }
 }
 
+h4 {
+  text-align: center;
+}
+
 @media (min-width: 576px) and (max-width: 768px) {
   h5 {
     font-size: 1.8em !important;
