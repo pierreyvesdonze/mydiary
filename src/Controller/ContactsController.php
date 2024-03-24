@@ -10,6 +10,7 @@ use App\Repository\UserRepository;
 use App\Service\FriendService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,8 +21,8 @@ class ContactsController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em
-    )
-    {}
+    ) {
+    }
 
     #[Route('/', name: 'contacts')]
     public function index(
@@ -43,7 +44,7 @@ class ContactsController extends AbstractController
         $isFriendshipRequested = [];
         $isFriend              = [];
 
-        foreach ($unrelatedContacts as $contact) {       
+        foreach ($unrelatedContacts as $contact) {
             $isRequested = $friendService->isFriendshipRequested($user, $contact);
             $isFriendshipRequested[$contact->getId()] = $isRequested;
 
@@ -60,18 +61,17 @@ class ContactsController extends AbstractController
         ]);
     }
 
-    #[Route('/requete/contact', name: 'friendship_request', methods: ['GET'])]
-    public function setFriendshipRequest(
+    #[Route('/envoyer/invitation', name: 'create_invitation', options: ['expose' => true])]
+    public function setNewFriendshipRequest(
         Request $request,
-        UserRepository $userRepository,
-    ) {
+        UserRepository $userRepository
+    ): JsonResponse {
         $user = $this->getUser();
-        
         if (!$user) {
             return $this->redirectToRoute('login');
         }
 
-        $userTargetId = $request->query->get('userTargetId');
+        $userTargetId = $request->getContent();
         $userTarget   = $userRepository->findOneBy([
             'id' => $userTargetId
         ]);
@@ -84,20 +84,17 @@ class ContactsController extends AbstractController
             $this->em->persist($friendshipRequest);
             $this->em->flush();
 
-            $this->addFlash('success', 'Demande de connexion envoyée !');
+            return new JsonResponse("Invitation crée");
         } else {
-            $this->addFlash('error', 'Votre demande ne peut aboutir !');
+            return new JsonResponse("Requête non aboutie");
         }
-
-        return $this->redirectToRoute('contacts');
     }
 
     #[Route('/nouveau', name: 'create_friendship', methods: ['GET'])]
     public function createFriendship(
         Request $request,
         UserRepository $userRepository,
-    )
-    {
+    ) {
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('login');
@@ -108,7 +105,7 @@ class ContactsController extends AbstractController
         $user2 = $userRepository->findOneBy([
             'id' => $senderId
         ]);
-        
+
         $newFriendship = new Friendship();
         $newFriendship->setUser1($user);
         $newFriendship->setUser2($user2);
@@ -121,19 +118,17 @@ class ContactsController extends AbstractController
         return $this->redirectToRoute('delete_friendship_request', [
             'user2' => $user2->getId(),
         ]);
-
     }
-    
+
     #[Route('/requete/supprimer/{user2}', name: 'delete_friendship_request')]
     public function deleteFriendshipRequest(
         $user2,
         FriendshipRequestRepository $friendshipRequestRepository,
-        )
-    {
+    ) {
         $requestToDelete = $friendshipRequestRepository->findOneByUser($user2);
         $this->em->remove($requestToDelete[0]);
         $this->em->flush();
-        
+
         return $this->redirectToRoute('contacts');
     }
 
@@ -141,13 +136,12 @@ class ContactsController extends AbstractController
     public function deleteFriendship(
         $user2,
         FriendshipRepository $friendshipRepository
-    )
-    {
+    ) {
         $friendshipToDelete = $friendshipRepository->findOneByUser($user2);
 
         $this->em->remove($friendshipToDelete[0]);
         $this->em->flush();
-        
+
         $this->addFlash('success', 'Le contact a bien été supprimé !');
 
         return $this->redirectToRoute('contacts');

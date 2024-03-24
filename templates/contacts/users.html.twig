@@ -1,6 +1,6 @@
 <li>
     <div class="collapsible-header">
-        <h4>Utilisateurs du site  ({{ unrelatedContacts|length }})</h4>
+        <h4>Utilisateurs du site ({{ unrelatedContacts|length }})</h4>
     </div>
     <div class="collapsible-body">
         {% if unrelatedContacts %}
@@ -8,8 +8,7 @@
         <span>
             <strong>{{ unrelatedContact.pseudo }}</strong>
             {% if not isFriendshipRequested[unrelatedContact.id] and not isFriend[unrelatedContact.id] %}
-            <a href="{{ path('friendship_request', {'userTargetId': unrelatedContact.id}) }}"
-                class="secondary-content friend-request-btn friendship-requested">Envoyer une demande</a>
+            <a href="#" class="secondary-content friend-request-btn" data-targetId="{{ unrelatedContact.id }}">Envoyer une demande</a>
             {% elseif isFriend[unrelatedContact.id] %}
             <a href="#" class="secondary-content disabled">Ami(e)</a>
             {% else %}
