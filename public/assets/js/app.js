@@ -9,7 +9,8 @@ var app = {
         */
         //$('.custom-btn').on('click', app.loadingAnim);
         $('.btn-visibility').on('click', app.changeVisibility);
-        $('.friend-request-btn').on('click', app.sendFriendshipRequest)
+        $('.friend-request-btn').on('click', app.sendFriendshipRequest);
+        $('.search-input').on('keyup', app.searchContact);
 
         // Fade out flash messages
         setTimeout(() => {
@@ -87,7 +88,22 @@ var app = {
                 console.error('Erreur lors de la requête :', error);
             }
         });
-    }
+    },
+
+    searchContact: function (evt) {
+        evt.preventDefault();
+        let userInput = $('.search-input').val();
+
+        $('.custom-row').hide();
+        $('.custom-row:contains("' + userInput + '")').show();
+
+        $(window).keydown((event) => {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        })
+    },
 }
 
 document.addEventListener('DOMContentLoaded', app.init);

@@ -27,12 +27,11 @@ class FriendshipRepository extends ServiceEntityRepository
     public function findFriendships($user): array
     {
         return $this->createQueryBuilder('f')
-            ->andWhere('f.user1 = :val')
+            ->andWhere('(f.user1 = :val OR f.user2 = :val) AND (f.user1 != :val OR f.user2 != :val)')
             ->setParameter('val', $user)
             ->orderBy('f.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function hasFriendship($user1, $user2): bool
@@ -44,18 +43,19 @@ class FriendshipRepository extends ServiceEntityRepository
             ->setParameter('user2', $user2)
             ->getQuery()
             ->getResult();
-    
+
         return !empty($result);
     }
 
     /**
      * @return Friendship
      */
-    public function findOneByUser($user2): array
+    public function findOneByUsers($user, $friend): array
     {
         return $this->createQueryBuilder('f')
-            ->andWhere('f.user2 = :val')
-            ->setParameter('val', $user2)
+            ->andWhere('(f.user1 = :user AND f.user2 = :friend) OR (f.user1 = :friend AND f.user2 = :user)')
+            ->setParameter('user', $user)
+            ->setParameter('friend', $friend)
             ->getQuery()
             ->getResult();
     }

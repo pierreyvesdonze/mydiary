@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dates{% endblock %}
+
+{% block body %}
+
+<h4>Dates de {{ friendUser.pseudo }}</h4>
+
+<hr>
+<br>
+
+{% if dates %}
+
+{% include "common/dates.guest.index.html.twig" %}
+
+{% else %}
+    
+<h6>{{ friendUser.pseudo }} n'a pas encore publié de date. </h6>
+
+{% endif %}
+
+<br><br>
+
+<a href="{{ path('friend_profile_index', {'user2':friendUser.id}) }}" class="custom-btn">Revenir au profil</a>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}friendProfile{% endblock %}
+
+{% block body %}
+
+<h1>Profil de {{ friendProfile.pseudo }}</h1>
+
+<div class="row">
+
+    {# Journal #}
+    <div class="col s12 m6">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">Journal</span>
+                {% if friendProfile.book.visibility == true %}
+                <p>Ceci est le journal publique de {{ friendProfile.pseudo }}.</p>
+                {% else %}
+                <p>La visibilité du journal de {{ friendProfile.pseudo }} est privée.</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                {% if friendProfile.book.visibility == true %}
+                <a href="#" class="">Visiter</a>
+                {% else %}
+                
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {# Dates #}
+    <div class="col s12 m6">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">Dates</span>
+                {% if friendProfile.book.visibility == true %}
+                <p>Dates des évènements clés de {{ friendProfile.pseudo }}.
+                {% else %}
+                <p>La visibilité des dates de {{ friendProfile.pseudo }} est privée.</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                {% if friendProfile.book.visibility == true %}
+                <a href="{{ path('dates_friend', {'friend':friendProfile.id}) }}" class="">Visiter</a>
+                {% else %}
+                
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

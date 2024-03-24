@@ -10,6 +10,7 @@
             <a href="{{ path('delete_friendship_request', {"user2":sender.id}) }}" class="secondary-content">Refuser</a>
             <a href="{{ path('create_friendship', {'sender': sender.id}) }}" class="secondary-content">Accepter</a>
         </div>
+        <br>
         {% endfor %}
     </div>
     {% else %}

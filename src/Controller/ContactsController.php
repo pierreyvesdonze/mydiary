@@ -28,7 +28,6 @@ class ContactsController extends AbstractController
     public function index(
         UserRepository $userRepository,
         FriendshipRepository $friendshipRepository,
-        FriendshipRequestRepository $friendshipRequestRepository,
         FriendService $friendService,
     ): Response {
 
@@ -132,12 +131,14 @@ class ContactsController extends AbstractController
         return $this->redirectToRoute('contacts');
     }
 
-    #[Route('/contact/supprimer/{user2}', name: 'delete_friendship')]
+    #[Route('/contact/supprimer/{friend}', name: 'delete_friendship')]
     public function deleteFriendship(
-        $user2,
+        $friend,
         FriendshipRepository $friendshipRepository
     ) {
-        $friendshipToDelete = $friendshipRepository->findOneByUser($user2);
+        $user = $this->getUser();
+
+        $friendshipToDelete = $friendshipRepository->findOneByUsers($user, $friend);
 
         $this->em->remove($friendshipToDelete[0]);
         $this->em->flush();

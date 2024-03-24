@@ -10,7 +10,7 @@
             {% if not isFriendshipRequested[unrelatedContact.id] and not isFriend[unrelatedContact.id] %}
             <a href="#" class="secondary-content friend-request-btn" data-targetId="{{ unrelatedContact.id }}">Envoyer une demande</a>
             {% elseif isFriend[unrelatedContact.id] %}
-            <a href="#" class="secondary-content disabled">Ami(e)</a>
+            <a href="#" class="secondary-content disabled">Contact</a>
             {% else %}
             <a href="#" class="secondary-content disabled">Demande envoyée</a>
             {% endif %}

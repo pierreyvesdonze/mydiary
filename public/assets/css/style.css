@@ -4,7 +4,7 @@ MEDIA QUERIES
 ***********************************
 */
 :root {
-  --body-bg: radial-gradient(circle, rgba(230,235,238,1) 0%, rgba(144,175,194,1) 100%);
+  --body-bg: radial-gradient(circle, rgba(230, 235, 238, 1) 0%, rgba(144, 175, 194, 1) 100%);
   --dark-text: rgb(80, 82, 83);
   --alert-bg: rgba(0, 0, 0, 0.589);
   --primary-color: #6f6767;
@@ -14,6 +14,8 @@ MEDIA QUERIES
   --danger-color: #a3515c;
   --nav-color: #ffffffe8;
   --flash-alert: rgb(49, 114, 49);
+  --active-color: #ebebeba1;
+  --indicator-color: #213c85a1;
 }
 
 body {
@@ -103,16 +105,17 @@ label {
   font-weight: 400;
 }
 
+h1 {
+  text-align: center;
+}
 @media (min-width: 576px) and (max-width: 768px) {
   h1 {
     font-size: 2.4em !important;
-    text-align: center;
   }
 }
 @media (min-width: 300px) and (max-width: 576px) {
   h1 {
     font-size: 2.4em !important;
-    text-align: center;
   }
 }
 

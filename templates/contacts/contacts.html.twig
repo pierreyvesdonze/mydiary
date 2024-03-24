@@ -4,20 +4,43 @@
         <h4>Mes contacts ({{ contacts|length }})</h4>
     </div>
     <div class="collapsible-body">
+        {# Moteur de recherche de fortune #}
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete search-input">
+                        <label for="autocomplete-input">Rechercher</label>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% for contact in contacts %}
-        <div>
-            <strong>{{ contact.user2.pseudo }}</strong>
-            <a href="{{ path('delete_friendship', {'user2':contact.user2.id}) }}"
+        
+        {% set friend = null %}
+        {% if app.user.id == contact.user1.id %}
+        {% set friend = contact.user2 %}
+        {% else %}
+            {% set friend = contact.user1 %}        
+        {% endif %}
+
+        {% dump(app.user.id) %}
+        {% dump(friend) %}
+
+        <div class="custom-row">
+            <strong>{{ friend.pseudo }}</strong>
+            <a href="{{ path('delete_friendship', {'friend':friend.id}) }}"
                 class="secondary-content link-btn-danger"
                 onclick="return confirm('Supprimer ce contact ?');">Supprimer</a>
-            <a href="#!" class="secondary-content">Voir</a>
+            <a href="{{ path('friend_profile_index', {'user2':friend.id}) }}" class="secondary-content">Voir</a>
         </div>
         <br>
         {% endfor %}
     </div>
 
     {% else %}
-    
+
     <div class="collapsible-header">
         <h5>Vous n'avez pas de contacts pour le moment.</h5>
     </div>

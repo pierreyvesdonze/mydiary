@@ -24,14 +24,13 @@ label {
 }
 
 h1 {
+    text-align: center;
     @include sm {
         font-size: 2.4em !important;
-        text-align: center;
     }
 
     @include xs {
         font-size: 2.4em !important;
-        text-align: center;
     }
 }
 
