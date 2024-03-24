@@ -53,8 +53,6 @@ var app = {
             success: function (response) {
                 console.log('Réponse du serveur :', response);
 
-                console.log(process.env.ENV_VARIABLE)
-
                 let clickedSpan = $(e.target);
                 let currentText = clickedSpan.text();
 
