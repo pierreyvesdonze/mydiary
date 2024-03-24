@@ -27,7 +27,8 @@
     </div>
 
     {# NAV #}
-    {% include "nav/nav.html.twig" %}
+    {# {% include "nav/nav.html.twig" %} #}
+    {{ render(controller('App\\Controller\\HomeController::navbar')) }}
 
     {# Flash messages #}
     <div class="flash-container">

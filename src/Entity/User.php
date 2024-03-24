@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 64)]
     private ?string $pseudo = null;
 
-    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: FriendshipRequest::class)]
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: FriendshipRequest::class, fetch: 'EAGER')]
     private Collection $friendshipRequests;
 
     #[ORM\OneToMany(mappedBy: 'user1', targetEntity: Friendship::class)]

@@ -35,6 +35,19 @@ class FriendshipRequestRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return FriendshipRequest[] Returns an array of FriendshipRequest objects
+     */
+    public function findInvitations($user): array
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.recipient = :val')
+            ->setParameter('val', $user)
+            ->orderBy('f.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @return FriendshipRequest
      */
     public function findOneByUser($user): array

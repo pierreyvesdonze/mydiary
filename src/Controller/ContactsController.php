@@ -27,11 +27,11 @@ class ContactsController extends AbstractController
     public function index(
         UserRepository $userRepository,
         FriendshipRepository $friendshipRepository,
+        FriendshipRequestRepository $friendshipRequestRepository,
         FriendService $friendService,
     ): Response {
 
         $user = $this->getUser();
-
         if (!$user) {
             return $this->redirectToRoute('login');
         }
@@ -56,7 +56,7 @@ class ContactsController extends AbstractController
             'unrelatedContacts'     => $unrelatedContacts,
             'contacts'              => $contacts,
             'isFriendshipRequested' => $isFriendshipRequested,
-            'isFriend'              => $isFriend,
+            'isFriend'              => $isFriend
         ]);
     }
 
