@@ -224,6 +224,10 @@ nav .nav-wrapper a {
   color: var(--dark-text) !important;
 }
 
+#dropdown1 {
+  width: 150px !important;
+}
+
 .sidenav {
   background-color: var(--nav-color) !important;
 }
@@ -300,6 +304,37 @@ form button.custom-btn {
 .link-btn-danger {
   color: var(--danger-color) !important;
   margin-left: 20px;
+}
+
+label {
+  pointer-events: none;
+}
+label .input-visibility-setting {
+  display: none;
+}
+label .input-visibility-setting:checked + .toggle-wrapper > .selector {
+  background-color: #2fbb52;
+}
+label .toggle-wrapper {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  background-color: #eaeaea;
+  border-radius: 999px;
+  margin: auto;
+  cursor: pointer;
+  pointer-events: all;
+}
+label .toggle-wrapper .selector {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 42%;
+  left: 7px;
+  transform: translateY(-50%);
+  background-color: #912a2a;
+  transition: left 0.25s ease;
+  border-radius: 50%;
 }
 
 /*

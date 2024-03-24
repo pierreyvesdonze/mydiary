@@ -30,6 +30,10 @@ class Date
     #[ORM\Column]
     private ?bool $visibility = null;
 
+    #[ORM\ManyToOne(inversedBy: 'dateContent')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?DatesContainer $datesContainer = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +95,18 @@ class Date
     public function setVisibility(bool $visibility): static
     {
         $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    public function getDatesContainer(): ?DatesContainer
+    {
+        return $this->datesContainer;
+    }
+
+    public function setDatesContainer(?DatesContainer $datesContainer): static
+    {
+        $this->datesContainer = $datesContainer;
 
         return $this;
     }

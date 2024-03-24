@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Dates;
+use App\Entity\DatesContainer;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,6 +31,13 @@ class RegistrationController extends AbstractController
         $book = new Book;
         $book->setVisibility(0);
         $user->setBook($book);
+        $this->em->persist($book);
+
+        // Create Dates object (parent of Date object)
+        $datesContainer = new DatesContainer();
+        $datesContainer->setVisibility(0);
+        $user->setDatesContainer($datesContainer);
+        $this->em->persist($datesContainer);
         
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

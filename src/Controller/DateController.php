@@ -52,6 +52,7 @@ class DateController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $date->setUser($user);
+            $date->setDatesContainer($user->getDatesContainer());
             $date->setVisibility(0);
  
             $entityManager->persist($date);

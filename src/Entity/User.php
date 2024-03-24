@@ -38,11 +38,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 64)]
     private ?string $pseudo = null;
 
-    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: FriendshipRequest::class, fetch: 'EAGER')]
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: FriendshipRequest::class)]
     private Collection $friendshipRequests;
 
     #[ORM\OneToMany(mappedBy: 'user1', targetEntity: Friendship::class)]
     private Collection $friendships;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?DatesContainer $datesContainer = null;
 
     public function __construct()
     {
@@ -236,6 +239,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $friendship->setUser1(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDatesContainer(): ?DatesContainer
+    {
+        return $this->datesContainer;
+    }
+
+    public function setDatesContainer(DatesContainer $datesContainer): static
+    {
+        // set the owning side of the relation if necessary
+        if ($datesContainer->getUser() !== $this) {
+            $datesContainer->setUser($this);
+        }
+
+        $this->datesContainer = $datesContainer;
 
         return $this;
     }
