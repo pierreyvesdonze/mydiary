@@ -25,9 +25,6 @@
             {% set friend = contact.user1 %}        
         {% endif %}
 
-        {% dump(app.user.id) %}
-        {% dump(friend) %}
-
         <div class="custom-row">
             <strong>{{ friend.pseudo }}</strong>
             <a href="{{ path('delete_friendship', {'friend':friend.id}) }}"
