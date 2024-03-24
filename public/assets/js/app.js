@@ -46,11 +46,14 @@ var app = {
         let objectToChange = e.currentTarget.dataset.type;
 
         $.ajax({
-            url: '/visibilite',
+            url: '/mydiary/public/visibilite',
+            /* url: '/visibilite', */
             type: 'POST',
             data: objectToChange,
             success: function (response) {
                 console.log('Réponse du serveur :', response);
+
+                console.log(process.env.ENV_VARIABLE)
 
                 let clickedSpan = $(e.target);
                 let currentText = clickedSpan.text();
