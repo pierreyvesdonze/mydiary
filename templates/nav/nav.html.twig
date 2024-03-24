@@ -22,7 +22,7 @@
       <li><a href="#">Projets</a></li>
       <li><a href="{{ path('file_index') }}">Fichiers</a></li>
       <li><a href="{{ path('contacts') }}">Contacts</a></li>
-      {% if app.user.friendshipRequests %}
+      {% if app.user.friendshipRequests|length > 0 %}
       <div class="friendRequest"></div>
       {% endif %}
       {% endif %}
@@ -43,7 +43,7 @@
       <li><a href="#">Idées</a></li>
       <li><a href="#">Projets</a></li>
       <li><a href="{{ path('contacts') }}">Contacts</a></li>
-      {% if app.user.friendshipRequests %}
+      {% if app.user.friendshipRequests|length > 0 %}
       <div class="friendRequest--mobile"></div>
       {% endif %}
   <li><a href="{{ path('logout') }}">Logout</a></li>
