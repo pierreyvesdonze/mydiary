@@ -38,7 +38,7 @@
                 <br>
 
                 <div class="btn-control-flex">
-                    <a href="{{ path('date_edit', {'id':date.id}) }}" class="custom-btn">Modifier</a>
+                    <a href="{{ path('date_edit', {'dateId':date.id}) }}" class="custom-btn">Modifier</a>
                     <br>
                     <br>
                     <form action="{{ path('date_delete', {'id': date.id}) }}" method="post"

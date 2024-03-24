@@ -19,8 +19,7 @@ class DateController extends AbstractController
     public function index(
         DateRepository $dateRepository,
         Request $request
-        ): Response
-    {
+    ): Response {
         $dates = $dateRepository->findBy(['user' => $this->getUser()]);
 
         // Trier les dates par année
@@ -54,7 +53,7 @@ class DateController extends AbstractController
             $date->setUser($user);
             $date->setDatesContainer($user->getDatesContainer());
             $date->setVisibility(0);
- 
+
             $entityManager->persist($date);
             $entityManager->flush();
 
@@ -77,23 +76,37 @@ class DateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'date_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Date $date, EntityManagerInterface $entityManager): Response
-    {
+    #[Route('/modifier/{dateId}', name: 'date_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        $dateId,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        DateRepository $dateRepository,
+    ): Response {
+
+        $user = $this->getUser();
+        if(!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $date = $dateRepository->findOneBy([
+            'id' => $dateId
+        ]);
+        
         $form = $this->createForm(DateType::class, $date);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Date modifiée !');
+
             return $this->redirectToRoute('date_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        $this->addFlash('success', 'Date modifiée !');
-
         return $this->render('date/edit.html.twig', [
             'date' => $date,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
