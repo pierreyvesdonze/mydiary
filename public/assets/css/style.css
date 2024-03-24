@@ -396,5 +396,7 @@ DATE
 }
 
 .date-guest-container {
-  margin-left: 50px;
+  padding-left: 50px;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
 }/*# sourceMappingURL=style.css.map */

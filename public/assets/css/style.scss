@@ -314,5 +314,6 @@ DATE
 }
 
 .date-guest-container {
-    margin-left: 50px;
+    padding-left: 50px;
+    backdrop-filter: blur(3px);
 }
