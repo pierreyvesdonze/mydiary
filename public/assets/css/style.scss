@@ -12,7 +12,7 @@ a {
     font-weight: bold;
 }
 
-a:not(.custom-btn) {
+a:not(.custom-btn, .disabled) {
     &:hover {
         color: var(--link-hover-color) !important;
     }
