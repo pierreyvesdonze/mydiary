@@ -7,16 +7,19 @@
         {% for contact in contacts %}
         <div>
             <strong>{{ contact.user2.pseudo }}</strong>
-            <a href="{{ path('delete_friendship', {'user2':contact.user2.id}) }}" class="secondary-content link-btn-danger" onclick="return confirm('Supprimer ce contact ?');">Supprimer</a>
+            <a href="{{ path('delete_friendship', {'user2':contact.user2.id}) }}"
+                class="secondary-content link-btn-danger"
+                onclick="return confirm('Supprimer ce contact ?');">Supprimer</a>
             <a href="#!" class="secondary-content">Voir</a>
         </div>
         <br>
         {% endfor %}
-
-        {% else %}
-        <div class="collapsible-body">
-            <h5>Vous n'avez pas de contacts pour le moment.</h5>
-        </div>
-        {% endif %}
     </div>
+
+    {% else %}
+    
+    <div class="collapsible-header">
+        <h5>Vous n'avez pas de contacts pour le moment.</h5>
+    </div>
+    {% endif %}
 </li>
