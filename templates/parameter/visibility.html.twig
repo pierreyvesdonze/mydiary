@@ -5,16 +5,26 @@
     <li class="collection-item">
         <div>
             <strong>Journal</strong>
-            <a href="#!" class="secondary-content">
-                <label for="toggle">
-                    <input class="input-visibility-setting" type="checkbox" id="toggle" />
-                    <div class="toggle-wrapper"><span class="selector"></span></div>
-                </label>
+            <a href="#!" class="secondary-content btn-visibility" data-type="book">
+                {% if true == bookVisibility %}
+                <span class="public-btn">Publique</span>
+                {% else %}
+                <span class="private-btn">Privé</span>
+                {% endif %}
             </a>
         </div>
     </li>
     <li class="collection-item">
-        <div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
+        <div>
+            <strong>Dates</strong>
+            <a href="#!" class="secondary-content btn-visibility" data-type="date">
+                {% if true == datesVisibility %}
+                <span class="public-btn">Publique</span>
+                {% else %}
+                <span class="private-btn">Privé</span>
+                {% endif %}
+            </a>
+        </div>
     </li>
     <li class="collection-item">
         <div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>

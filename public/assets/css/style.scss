@@ -227,40 +227,6 @@ form button.custom-btn {
     margin-left: 20px;
 }
 
-label {
-    pointer-events: none;
-
-    .input-visibility-setting {
-        display: none;
-        &:checked+.toggle-wrapper>.selector {
-            //left: calc(100% - 50px);
-            background-color: #2fbb52;
-        }
-    }
-
-    .toggle-wrapper {
-        position: relative;
-        width: 34px;
-        height: 20px;
-        background-color: #eaeaea;
-        border-radius: 999px;
-        margin: auto;
-        cursor: pointer;
-        pointer-events: all;
-
-        .selector {
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            top: 42%;
-            left: 7px;
-            transform: translateY(-50%);
-            background-color: #912a2a;
-            transition: left 0.25s ease;
-            border-radius: 50%;
-        }
-    }
-}
 
 /*
  ***************************

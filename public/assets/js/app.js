@@ -8,6 +8,7 @@ var app = {
         * *****************************
         */
         //$('.custom-btn').on('click', app.loadingAnim);
+        $('.btn-visibility').on('click', app.changeVisibility);
 
         // Fade out flash messages
         setTimeout(() => {
@@ -40,6 +41,31 @@ var app = {
             $('.animation-loading-container').fadeIn().css('display', 'none');
         }, 2000);
     },
+
+    changeVisibility: (e) => {
+        let objectToChange = e.currentTarget.dataset.type;
+
+        $.ajax({
+            url: '/visibilite',
+            type: 'POST',
+            data: objectToChange,
+            success: function (response) {
+                console.log('Réponse du serveur :', response);
+
+                let clickedSpan = $(e.target);
+                let currentText = clickedSpan.text();
+
+                if (currentText === 'Publique') {
+                    clickedSpan.text('Privé');
+                } else {
+                    clickedSpan.text('Publique');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Erreur lors de la requête :', error);
+            }
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', app.init);
