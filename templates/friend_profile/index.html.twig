@@ -21,8 +21,6 @@
             <div class="card-action">
                 {% if friendUser.book.visibility == true %}
                 <a href="{{ path('book_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
-                {% else %}
-
                 {% endif %}
             </div>
         </div>
@@ -42,8 +40,6 @@
             <div class="card-action">
                 {% if friendUser.datesContainer.visibility == true %}
                 <a href="{{ path('dates_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
-                {% else %}
-
                 {% endif %}
             </div>
         </div>
@@ -65,8 +61,6 @@
             <div class="card-action">
                 {% if friendUser.moodContainer.visibility == true %}
                 <a href="{{ path('mood_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
-                {% else %}
-
                 {% endif %}
             </div>
         </div>
@@ -88,19 +82,17 @@
             </div>
             <div class="card-action">
                 {% if friendUser.moodContainer.visibility == true %}
-                <a href="{{ path('mood_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
-                {% else %}
-
+                <a href="#" class="">Visiter</a>
                 {% endif %}
             </div>
         </div>
     </div>
 
-    {# Humeur #}
+    {# Idéees #}
     <div class="col s4">
         <div class="card white">
             <div class="card-content dark-text">
-                <span class="card-title">Humeur</span>
+                <span class="card-title">Idées</span>
                 {% if friendUser.moodContainer.visibility == true %}
                 <p>Carnet d'humeur de {{ friendUser.pseudo }}.
                     {% else %}
@@ -109,19 +101,17 @@
             </div>
             <div class="card-action">
                 {% if friendUser.moodContainer.visibility == true %}
-                <a href="{{ path('mood_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
-                {% else %}
-
+                <a href="#" class="">Visiter</a>
                 {% endif %}
             </div>
         </div>
     </div>
 
-    {# Humeur #}
+    {# Projets #}
     <div class="col s4">
         <div class="card white">
             <div class="card-content dark-text">
-                <span class="card-title">Humeur</span>
+                <span class="card-title">Projets</span>
                 {% if friendUser.moodContainer.visibility == true %}
                 <p>Carnet d'humeur de {{ friendUser.pseudo }}.
                     {% else %}
@@ -130,9 +120,7 @@
             </div>
             <div class="card-action">
                 {% if friendUser.moodContainer.visibility == true %}
-                <a href="{{ path('mood_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
-                {% else %}
-
+                <a href="#" class="">Visiter</a>
                 {% endif %}
             </div>
         </div>

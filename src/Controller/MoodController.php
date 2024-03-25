@@ -90,10 +90,9 @@ class MoodController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
 
+            $this->addFlash('success', 'Humeur modifiée');
             return $this->redirectToRoute('mood_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        $this->addFlash('success', 'Humeur modifiée');
 
         return $this->render('mood/edit.html.twig', [
             'mood' => $mood,
