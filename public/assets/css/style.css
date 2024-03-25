@@ -82,7 +82,7 @@ MATERIALIZE
 }
 
 .secondary-content {
-  margin-left: 15px;
+  margin-left: 20px !important;
 }
 
 /*
@@ -196,7 +196,8 @@ ALERT / FLASH MESSAGE
  */
 .alert,
 .alert-success {
-  width: 80%;
+  width: 100%;
+  transform: translate(-50%);
   color: var(--flash-alert);
   border: none;
   position: absolute;

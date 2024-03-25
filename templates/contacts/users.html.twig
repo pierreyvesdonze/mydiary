@@ -8,10 +8,11 @@
         <span>
             <strong>{{ unrelatedContact.pseudo }}</strong>
             {% if not isFriendshipRequested[unrelatedContact.id] and not isFriend[unrelatedContact.id] %}
-            <a href="#" class="secondary-content friend-request-btn" data-targetId="{{ unrelatedContact.id }}">Envoyer une demande</a>
+            <a href="#" class="secondary-content friend-request-btn" data-targetId="{{ unrelatedContact.id }}">Ajouter</a>
             {% elseif isFriend[unrelatedContact.id] %}
             <a href="#" class="secondary-content disabled">Contact</a>
             {% else %}
+            <a href="{{ path('delete_friendship_request', {'user2': unrelatedContact.id}) }}" class="secondary-content link-btn-danger" data-targetId="{{ unrelatedContact.id }}">Annuler</a>
             <a href="#" class="secondary-content disabled">Demande envoyée</a>
             {% endif %}
         </span>

@@ -124,7 +124,8 @@ class ContactsController extends AbstractController
         $user2,
         FriendshipRequestRepository $friendshipRequestRepository,
     ) {
-        $requestToDelete = $friendshipRequestRepository->findOneByUser($user2);
+        $requestToDelete = $friendshipRequestRepository->findByUser($user2);
+        dump($user2);
         $this->em->remove($requestToDelete[0]);
         $this->em->flush();
 

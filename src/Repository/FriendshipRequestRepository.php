@@ -27,7 +27,7 @@ class FriendshipRequestRepository extends ServiceEntityRepository
     public function findByUser($user): array
     {
         return $this->createQueryBuilder('f')
-            ->andWhere('f.sender = :val')
+            ->andWhere('f.sender = :val OR f.recipient = :val')
             ->setParameter('val', $user)
             ->orderBy('f.id', 'ASC')
             ->getQuery()
@@ -41,19 +41,6 @@ class FriendshipRequestRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.recipient = :val')
-            ->setParameter('val', $user)
-            ->orderBy('f.id', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    /**
-     * @return FriendshipRequest
-     */
-    public function findOneByUser($user): array
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.sender = :val')
             ->setParameter('val', $user)
             ->orderBy('f.id', 'ASC')
             ->getQuery()
