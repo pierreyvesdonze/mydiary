@@ -28,6 +28,11 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
 
+        if($this->getUser()) {
+            $this->addFlash('error', 'Vous êtes déjà enregistré et connecté.');
+            return $this->redirectToRoute('home');
+        }
+
         // Create book for User
         $book = new Book;
         $book->setVisibility(0);

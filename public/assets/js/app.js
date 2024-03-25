@@ -23,6 +23,7 @@ var app = {
             $(".dropdown-trigger").dropdown();
             $('.collapsible').collapsible();
             $('select').formSelect();
+            $('.parallax').parallax();
         });
     },
 

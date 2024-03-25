@@ -25,6 +25,8 @@ label {
 
 h1 {
     text-align: center;
+    font-size: 3em !important;
+
     @include sm {
         font-size: 2.4em !important;
     }
@@ -109,11 +111,12 @@ SPINNER LOADING ANIMATION
 ALERT / FLASH MESSAGE
  ***************************
  */
- .flash-container {
+.flash-container {
     height: 50px;
     position: sticky;
     width: 100%;
- }
+}
+
 .alert,
 .alert-success {
     width: 100%;
@@ -247,11 +250,18 @@ CONTAINERS
 .container-flex-between {
     align-items: center;
 }
+
 .container-flex-between-bottom {
     align-items: flex-end;
+
     h1 {
         margin-bottom: 0;
     }
+}
+
+.container-flex-center {
+    display: flex;
+    justify-content: center;
 }
 
 /*
@@ -325,10 +335,10 @@ DATE
 MOOD
  ***************************
  */
- .span-mood-txt {
+.span-mood-txt {
     line-height: 30px;
- }
+}
 
- .mood-emoticon {
+.mood-emoticon {
     width: 35px;
- }
+}
