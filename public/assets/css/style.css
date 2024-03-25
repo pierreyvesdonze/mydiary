@@ -292,12 +292,13 @@ BUTTONS
  */
 .btn-control-flex {
   display: flex;
+  align-items: center;
 }
 
 .custom-btn {
   padding: 7px;
   border: solid 1px var(--link-color);
-  border-radius: 0 10px 0 10px;
+  border-radius: 10px;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.521);
 }
 .custom-btn:hover {
@@ -312,10 +313,6 @@ BUTTONS
   color: var(--disabled-color) !important;
 }
 
-form button.custom-btn {
-  height: 47px;
-}
-
 .btn-danger {
   border: solid 1px var(--danger-color);
   color: var(--danger-color) !important;
@@ -323,7 +320,8 @@ form button.custom-btn {
 }
 
 form button.custom-btn {
-  padding: 10px;
+  height: 40px;
+  padding: 7px;
   font-family: "Montserrat", sans-serif;
   background-color: transparent !important;
   color: var(--link-color);
