@@ -109,13 +109,16 @@ SPINNER LOADING ANIMATION
 ALERT / FLASH MESSAGE
  ***************************
  */
+ .flash-container {
+    height: 50px;
+    position: sticky;
+    width: 100%;
+ }
 .alert,
 .alert-success {
     width: 100%;
-    transform: translate(-50%);
     color: var(--flash-alert);
     border: none;
-    position: absolute;
     text-align: center;
     z-index: 1200;
     font-size: 2.5em;
