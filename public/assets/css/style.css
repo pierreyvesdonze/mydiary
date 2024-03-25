@@ -4,10 +4,10 @@ MEDIA QUERIES
 ***********************************
 */
 :root {
-  --body-bg: radial-gradient(circle, rgba(230, 235, 238, 1) 0%, rgba(144, 175, 194, 1) 100%);
+  --body-bg: white;
   --dark-text: rgb(80, 82, 83);
   --alert-bg: rgba(0, 0, 0, 0.589);
-  --primary-color: #6f6767;
+  --primary-color: #676a6f;
   --link-color: #5181a3;
   --link-hover-color: #3d92cf;
   --disabled-color: rgb(141, 139, 139);
@@ -83,6 +83,24 @@ MATERIALIZE
 
 .secondary-content {
   margin-left: 20px !important;
+}
+
+.select-dropdown > li > span {
+  color: var(--primary-color) !important;
+  font-weight: bold;
+}
+
+textarea {
+  height: 150px !important;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: var(--primary-color) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--primary-color) !important;
 }
 
 /*
@@ -404,4 +422,13 @@ DATE
   padding-left: 50px;
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
+}
+
+/*
+ ***************************
+MOOD
+ ***************************
+ */
+.span-mood-txt {
+  line-height: 30px;
 }/*# sourceMappingURL=style.css.map */

@@ -47,6 +47,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?DatesContainer $datesContainer = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?MoodContainer $moodContainer = null;
+
     public function __construct()
     {
         $this->dates = new ArrayCollection();
@@ -256,6 +259,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->datesContainer = $datesContainer;
+
+        return $this;
+    }
+
+    public function getMoodContainer(): ?MoodContainer
+    {
+        return $this->moodContainer;
+    }
+
+    public function setMoodContainer(MoodContainer $moodContainer): static
+    {
+        // set the owning side of the relation if necessary
+        if ($moodContainer->getUser() !== $this) {
+            $moodContainer->setUser($this);
+        }
+
+        $this->moodContainer = $moodContainer;
 
         return $this;
     }

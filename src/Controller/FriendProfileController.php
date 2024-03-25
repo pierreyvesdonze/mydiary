@@ -20,6 +20,11 @@ class FriendProfileController extends AbstractController
     #[Route('/contact/profile/index/{user2}', name: 'friend_profile_index')]
     public function index($user2): Response
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
         $friendProfile = $this->userRepository->findOneBy([
             'id' => $user2
         ]);
@@ -37,6 +42,11 @@ class FriendProfileController extends AbstractController
         UserRepository $userRepository
     )
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
         $friendUser = $userRepository->findOneBy([
             'id' => $friend
         ]);
@@ -60,6 +70,11 @@ class FriendProfileController extends AbstractController
         DateRepository $dateRepository,
         UserRepository $userRepository,
     ): Response {
+
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
 
         $friendUser = $userRepository->findOneBy([
             'id' => $friend

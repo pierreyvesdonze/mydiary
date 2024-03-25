@@ -306,7 +306,6 @@ FILES / IMG
 DATE
  ***************************
  */
-
 .span-txt {
     color: var(--dark-text);
     font-weight: 400;
@@ -321,3 +320,12 @@ DATE
     padding-left: 50px;
     backdrop-filter: blur(3px);
 }
+
+/*
+ ***************************
+MOOD
+ ***************************
+ */
+ .span-mood-txt {
+    line-height: 30px;
+ }

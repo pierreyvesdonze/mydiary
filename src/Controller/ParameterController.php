@@ -23,12 +23,14 @@ class ParameterController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
+        $MoodVisibility  = $user->getMoodContainer()->isVisibility();
         $bookVisibility  = $user->getBook()->isVisibility();
         $datesVisibility = $user->getDatesContainer()->isVisibility();
 
         return $this->render('parameter/index.html.twig', [
-            'bookVisibility' => $bookVisibility,
+            'bookVisibility'  => $bookVisibility,
             'datesVisibility' => $datesVisibility,
+            'moodVisibility'  => $MoodVisibility
         ]);
     }
 
@@ -48,6 +50,9 @@ class ParameterController extends AbstractController
         } elseif ($requestData === 'book') {
             $book = $user->getBook();
             $book->isVisibility(true) ? $book->setVisibility(false) : $book->setVisibility(true);
+        } elseif ($requestData == 'mood') {
+            $moodContainer = $user->getMoodContainer();
+            $moodContainer->isVisibility(true) ? $moodContainer->setVisibility(false) : $moodContainer->setVisibility(true);
         }
 
         $this->em->flush();

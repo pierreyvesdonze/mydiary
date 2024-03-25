@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+<div class="form-group">
+    {{ form_label(form.date) }}
+    {{ form_widget(form.date) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.fallingAsleep) }}
+    {{ form_widget(form.fallingAsleep) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.sleep) }}
+    {{ form_widget(form.sleep) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.morningMood) }}
+    {{ form_widget(form.morningMood) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.dayProgram) }}
+    {{ form_widget(form.dayProgram) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.dayFeeling) }}
+    {{ form_widget(form.dayFeeling) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.dayMood) }}
+    {{ form_widget(form.dayMood) }}
+</div>
+
+<br><br>
+{{ form_widget(form.submit) }}
+{{ form_end(form) }}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier humeur{% endblock %}
+
+{% block body %}
+<h4>Modifier cette humeur</h4>
+
+{{ include('mood/_form.html.twig', {'button_label': 'Update'}) }}
+<br>
+<a href="{{ path('mood_index') }}">Retour à la liste</a>
+
+{% endblock %}

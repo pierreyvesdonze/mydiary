@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle humeur{% endblock %}
+
+{% block body %}
+    <h1>Crée une nouvelle humeur</h1>
+
+    {{ include('mood/_form.html.twig') }}
+
+    <br>
+
+    <a href="{{ path('mood_index') }}" class="custom-btn">Retour à la liste</a>
+
+    <br><br><br>
+{% endblock %}

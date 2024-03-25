@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Entity\Dates;
 use App\Entity\DatesContainer;
+use App\Entity\MoodContainer;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,6 +39,12 @@ class RegistrationController extends AbstractController
         $datesContainer->setVisibility(0);
         $user->setDatesContainer($datesContainer);
         $this->em->persist($datesContainer);
+
+        // Create MoodContainer object (Mood's parent)
+        $moodContainer = new MoodContainer();
+        $moodContainer->setVisibility(0);
+        $user->setMoodContainer($moodContainer);
+        $this->em->persist($moodContainer);
         
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

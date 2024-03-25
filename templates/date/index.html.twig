@@ -7,7 +7,8 @@
     <h1>Dates</h1>
 
     <div>
-        <a href="{{ path('date_index_guest') }}">Vue invité</a>
+        <a href="{{ path('date_new') }}" class="custom-btn">Créer une date</a>
+        <a href="{{ path('date_index_guest') }}" class="custom-btn">Vue invité</a>
     </div>
 </div>
 
@@ -64,10 +65,6 @@
 <h2>Vous n'avez aucune date enregistrée.</h2>
 
 {% endif %}
-
-<br>
-
-<a href="{{ path('date_new') }}" class="custom-btn">Créer une nouvelle date</a>
 
 <br><br>
 

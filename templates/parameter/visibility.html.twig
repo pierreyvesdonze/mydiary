@@ -16,6 +16,18 @@
     </li>
     <li class="collection-item">
         <div>
+            <strong>Humeur</strong>
+            <a href="#!" class="secondary-content btn-visibility" data-type="mood">
+                {% if true == moodVisibility %}
+                <span class="public-btn">Publique</span>
+                {% else %}
+                <span class="private-btn">Privé</span>
+                {% endif %}
+            </a>
+        </div>
+    </li>
+    <li class="collection-item">
+        <div>
             <strong>Dates</strong>
             <a href="#!" class="secondary-content btn-visibility" data-type="date">
                 {% if true == datesVisibility %}

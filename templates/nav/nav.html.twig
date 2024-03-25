@@ -16,7 +16,7 @@
     <ul class="right hide-on-med-and-down">
       {% if app.user %}
       <li><a href="{{ path('book_show', {id:app.user.book.id}) }}">Journal</a></li>
-      <li><a href="#">Humeur</a></li>
+      <li><a href="{{ path('mood_index') }}">Humeur</a></li>
       <li><a href="#">Santé</a></li>
       <li><a href="{{ path('date_index') }}">Dates</a></li>
       <li><a href="#">Idées</a></li>
@@ -39,7 +39,7 @@
 <ul class="sidenav" id="mobile-demo">
   {% if app.user %}
   <li><a href="{{ path('book_show', {id:app.user.book.id}) }}">Journal</a></li>
-  <li><a href="#">Humeur</a></li>
+  <li><a href="{{ path('mood_index') }}">Humeur</a></li>
   <li><a href="#">Santé</a></li>
   <li><a href="{{ path('date_index') }}">Dates</a></li>
   <li><a href="#">Idées</a></li>

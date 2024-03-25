@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Humeurs{% endblock %}
+
+{% block body %}
+<div class="container-flex-between">
+    <h1>Carnet d'humeurs</h1>
+    <a href="{{ path('mood_new') }}" class="custom-btn">Créer une humeur</a>
+</div>
+
+{% if moods %}
+
+<ul class="collapsible moods-container">
+    {% for mood in moods %}
+    <li>
+        <div class="collapsible-header">
+            <h4>{{ mood.date|date('d-m-Y') }}</h4>
+        </div>
+        <div class="collapsible-body">
+            <span>
+                <strong class="more-strong-txt">Qualité du sommeil : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.sleep }}</span>
+                <br>
+                <strong class="more-strong-txt">Humeur au réveil : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.morningMood }}</span>
+                <br>
+                <strong class="more-strong-txt">Programme du jour : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.dayProgram }}</span>
+                <br>
+                <strong class="more-strong-txt">Ressenti sur la journée : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.dayFeeling }}</span>
+                <br>
+                <strong class="more-strong-txt">Qualité de l'endormissement : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.dayMood }}</span>
+                <br>
+                <strong class="more-strong-txt">Humeur pendant la journée : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.dayMood }}</span>
+                <br>
+                <br>
+                <div class="btn-control-flex">
+                    <a href="{{ path('mood_edit', {'id':mood.id}) }}" class="custom-btn">Modifier</a>
+                    <br>
+                    <br>
+                    <form action="{{ path('mood_delete', {'id': mood.id}) }}" method="post"
+                        onsubmit="return confirm('Supprimer cet élément ?');">
+                        <button type="submit" class="custom-btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </span>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<h4>Vous n'avez pas d'humeur enregistrée.</h4>
+
+<br>
+
+{% endif %}
+{% endblock %}

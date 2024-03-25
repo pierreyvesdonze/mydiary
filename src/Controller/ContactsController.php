@@ -124,8 +124,12 @@ class ContactsController extends AbstractController
         $user2,
         FriendshipRequestRepository $friendshipRequestRepository,
     ) {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
         $requestToDelete = $friendshipRequestRepository->findByUser($user2);
-        dump($user2);
         $this->em->remove($requestToDelete[0]);
         $this->em->flush();
 
@@ -138,6 +142,9 @@ class ContactsController extends AbstractController
         FriendshipRepository $friendshipRepository
     ) {
         $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
 
         $friendshipToDelete = $friendshipRepository->findOneByUsers($user, $friend);
 
