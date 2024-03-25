@@ -15,10 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/book/content')]
 class BookContentController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $em)
+    {}
+
     #[Route('/new', name: 'book_content_new', methods: ['GET', 'POST'])]
     public function new(
-        Request $request,
-        EntityManagerInterface $entityManager
+        Request $request
         ): Response
     {
         $book        = $this->getUser()->getBook();
@@ -31,8 +33,8 @@ class BookContentController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($bookContent);
-            $entityManager->flush();
+            $this->em->persist($bookContent);
+            $this->em->flush();
 
             $this->addFlash('success', 'Nouvelle entrée créée avec succès !');
 
@@ -59,8 +61,7 @@ class BookContentController extends AbstractController
     #[Route('/{id}/edit', name: 'book_content_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
-        BookContent $bookContent,
-        EntityManagerInterface $entityManager
+        BookContent $bookContent
         ): Response
     {
         $book = $bookContent->getBook();
@@ -70,7 +71,7 @@ class BookContentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->em->flush();
 
             $this->addFlash('success', 'Contenu modifié avec succès');
 
@@ -89,13 +90,12 @@ class BookContentController extends AbstractController
     #[Route('/delete{id}', name: 'book_content_delete', methods: ['POST'])]
     public function delete(
         Request $request,
-        BookContent $bookContent,
-        EntityManagerInterface $entityManager
+        BookContent $bookContent
         ): Response
     {
         if ($this->isCsrfTokenValid('delete'.$bookContent->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($bookContent);
-            $entityManager->flush();
+            $this->em->remove($bookContent);
+            $this->em->flush();
 
             $this->addFlash('success', 'Contenu supprimé !');
         }

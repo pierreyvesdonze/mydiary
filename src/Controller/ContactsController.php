@@ -20,7 +20,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class ContactsController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private UserRepository $userRepository
     ) {
     }
 
@@ -63,7 +64,6 @@ class ContactsController extends AbstractController
     #[Route('/envoyer/invitation', name: 'create_invitation', options: ['expose' => true])]
     public function setNewFriendshipRequest(
         Request $request,
-        UserRepository $userRepository
     ): JsonResponse {
         $user = $this->getUser();
         if (!$user) {
@@ -71,7 +71,7 @@ class ContactsController extends AbstractController
         }
 
         $userTargetId = $request->getContent();
-        $userTarget   = $userRepository->findOneBy([
+        $userTarget   = $this->userRepository->findOneBy([
             'id' => $userTargetId
         ]);
 
@@ -92,7 +92,6 @@ class ContactsController extends AbstractController
     #[Route('/nouveau', name: 'create_friendship', methods: ['GET'])]
     public function createFriendship(
         Request $request,
-        UserRepository $userRepository,
     ) {
         $user = $this->getUser();
         if (!$user) {
@@ -101,7 +100,7 @@ class ContactsController extends AbstractController
 
         $senderId = $request->get('sender');
 
-        $user2 = $userRepository->findOneBy([
+        $user2 = $this->userRepository->findOneBy([
             'id' => $senderId
         ]);
 

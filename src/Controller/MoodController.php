@@ -14,6 +14,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/humeur')]
 class MoodController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $em)
+    {
+        
+    }
     #[Route('/', name: 'mood_index', methods: ['GET'])]
     public function index(MoodRepository $moodRepository): Response
     {
@@ -31,7 +35,7 @@ class MoodController extends AbstractController
     }
 
     #[Route('/nouveau', name: 'mood_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $user = $this->getUser();
         if (!$user) {
@@ -45,8 +49,8 @@ class MoodController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $mood->setMoodContainer($user->getMoodContainer());
 
-            $entityManager->persist($mood);
-            $entityManager->flush();
+            $this->em->persist($mood);
+            $this->em->flush();
 
             $this->addFlash('success', 'Humeur créée');
 
@@ -73,7 +77,7 @@ class MoodController extends AbstractController
     }
 
     #[Route('/modifier/{id}/', name: 'mood_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Mood $mood, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Mood $mood): Response
     {
         $user = $this->getUser();
         if (!$user) {
@@ -84,7 +88,7 @@ class MoodController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->em->flush();
 
             return $this->redirectToRoute('mood_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -98,15 +102,15 @@ class MoodController extends AbstractController
     }
 
     #[Route('/{id}', name: 'mood_delete', methods: ['POST'])]
-    public function delete(Mood $mood, EntityManagerInterface $entityManager): Response
+    public function delete(Mood $mood): Response
     {
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('login');
         }
 
-        $entityManager->remove($mood);
-        $entityManager->flush();
+        $this->em->remove($mood);
+        $this->em->flush();
 
         $this->addFlash('success', 'Humeur supprimée');
 

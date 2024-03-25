@@ -14,6 +14,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/date')]
 class DateController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $em)
+    {
+    }
+
     #[Route('/', name: 'date_index', methods: ['GET'])]
     #[Route('/index/guest', name: 'date_index_guest', methods: ['GET'])]
     public function index(
@@ -42,7 +46,7 @@ class DateController extends AbstractController
     }
 
     #[Route('/new', name: 'date_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $date = new Date();
         $user = $this->getUser();
@@ -54,8 +58,8 @@ class DateController extends AbstractController
             $date->setDatesContainer($user->getDatesContainer());
             $date->setVisibility(0);
 
-            $entityManager->persist($date);
-            $entityManager->flush();
+            $this->em->persist($date);
+            $this->em->flush();
 
             $this->addFlash('success', 'Date créée !');
 
@@ -80,7 +84,6 @@ class DateController extends AbstractController
     public function edit(
         $dateId,
         Request $request,
-        EntityManagerInterface $entityManager,
         DateRepository $dateRepository,
     ): Response {
 
@@ -97,7 +100,7 @@ class DateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->em->flush();
 
             $this->addFlash('success', 'Date modifiée !');
 
@@ -111,10 +114,10 @@ class DateController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'date_delete', methods: ['POST'])]
-    public function delete(Request $request, Date $date, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Date $date): Response
     {
-        $entityManager->remove($date);
-        $entityManager->flush();
+        $this->em->remove($date);
+        $this->em->flush();
 
         $this->addFlash('success', 'Date supprimée !');
 

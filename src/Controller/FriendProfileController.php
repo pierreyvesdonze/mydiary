@@ -8,7 +8,6 @@ use App\Repository\DateRepository;
 use App\Repository\MoodRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -40,8 +39,7 @@ class FriendProfileController extends AbstractController
     public function book(
         $friend,
         BookRepository $bookRepository,
-        BookContentRepository $bookContentRepository,
-        UserRepository $userRepository
+        BookContentRepository $bookContentRepository
     )
     {
         $user = $this->getUser();
@@ -49,7 +47,7 @@ class FriendProfileController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $friendUser = $userRepository->findOneBy([
+        $friendUser = $this->userRepository->findOneBy([
             'id' => $friend
         ]);
 
@@ -69,8 +67,7 @@ class FriendProfileController extends AbstractController
     #[Route('/dates/{friend}', name: 'dates_friend', methods: ['GET'])]
     public function dates(
         $friend,
-        DateRepository $dateRepository,
-        UserRepository $userRepository,
+        DateRepository $dateRepository
     ): Response {
 
         $user = $this->getUser();
@@ -78,7 +75,7 @@ class FriendProfileController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $friendUser = $userRepository->findOneBy([
+        $friendUser = $this->userRepository->findOneBy([
             'id' => $friend
         ]);
         $dates = $dateRepository->findBy(['user' => $friendUser]);
@@ -97,11 +94,10 @@ class FriendProfileController extends AbstractController
     #[Route('/humeur/{friend}', name: 'mood_friend', methods: ['GET'])]
     public function mood(
         $friend,
-        UserRepository $userRepository,
         MoodRepository $moodRepository,
     ): Response
     {
-        $friendUser    = $userRepository->findOneBy(['id' => $friend]);
+        $friendUser    = $this->userRepository->findOneBy(['id' => $friend]);
         $moodContainer = $friendUser->getMoodContainer();
         $moods         = $moodRepository->findByMoodContainer($moodContainer);
 
