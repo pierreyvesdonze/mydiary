@@ -8,7 +8,7 @@
         <span>
             <strong>{{ unrelatedContact.pseudo }}</strong>
             {% if not isFriendshipRequested[unrelatedContact.id] and not isFriend[unrelatedContact.id] %}
-            <a href="#" class="friend-request-btn" data-targetId="{{ unrelatedContact.id }}">Ajouter</a>
+            <a href="#" class="secondary-content friend-request-btn" data-targetId="{{ unrelatedContact.id }}">Ajouter</a>
             {% elseif isFriend[unrelatedContact.id] %}
             <a href="#" class="secondary-content disabled">Contact</a>
             {% else %}

@@ -51,7 +51,7 @@ var app = {
         let targetId = currentTarget.data('targetid');
         $.ajax({
             url: '/mydiary/public/contacts/envoyer/invitation',
-        /*     url: '/contacts/envoyer/invitation', */
+            /* url: '/contacts/envoyer/invitation', */
             type: 'POST',
             data: JSON.stringify(targetId),
             success: function (response) {
