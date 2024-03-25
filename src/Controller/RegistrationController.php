@@ -64,8 +64,17 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $this->em->persist($user);
-            $this->em->flush();
+            try {
+                $this->em->persist($user);
+                $this->em->flush();
+            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
+                // Capturer l'exception de violation de contrainte d'unicité
+                // Afficher un message d'erreur approprié à l'utilisateur
+                $this->addFlash('error', 'Un compte existe déjà avec cet email');
+                return $this->render('registration/register.html.twig', [
+                    'registrationForm' => $form->createView()
+                ]);
+            }
 
             return $this->redirectToRoute('login');
         }

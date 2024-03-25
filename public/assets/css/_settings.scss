@@ -12,6 +12,7 @@
   --flash-alert: rgb(49, 114, 49);
   --active-color: #ebebeba1;
   --indicator-color: #213c85a1;
+  --divider-color: #c4c5c5;
 
 }
 
@@ -99,4 +100,8 @@ textarea::placeholder {
 
 .parallax-container {
   height: 370px !important;
+}
+
+.divider {
+  background-color: var(--divider-color) !important;
 }

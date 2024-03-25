@@ -19,7 +19,7 @@ var app = {
         // nav sticky au scroll
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('.nav');
-            if (window.scrollY > 200) { // Changez 200 à la hauteur souhaitée pour activer la navigation collante
+            if (window.scrollY > 200) { // Changez 200 à la hauteur souhaitée pour activer la nav sticky
                 nav.classList.add('sticky');
             } else {
                 nav.classList.remove('sticky');

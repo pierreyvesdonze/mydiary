@@ -44,11 +44,14 @@
   <li><a href="{{ path('date_index') }}">Dates</a></li>
   <li><a href="#">Idées</a></li>
   <li><a href="#">Projets</a></li>
+  <div class="divider"></div>
   <li><a href="{{ path('contacts') }}">Contacts</a></li>
   {% if invitations %}
   <div class="friendRequest--mobile"></div>
   {% endif %}
+  <div class="divider"></div>
   <li><a href="{{ path('parameters') }}">Paramètres</a></li>
+  <div class="divider"></div>
   <li><a href="{{ path('logout') }}">Déconnexion</a></li>
   {% else %}
   <li><a href="{{ path('login') }}">Connexion</a></li>
