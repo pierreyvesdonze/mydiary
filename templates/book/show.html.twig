@@ -6,18 +6,28 @@
 <div class="book">
     <h1>Journal de bord</h1>
 
-    <hr class="hr">
+    <div class="divider"></div>
 
     <div class="container-inline">
         <a href="{{ path('book_content_new')}}" class="custom-btn">Ajouter du contenu</a>
-        {% if bookContents|length <= 1 %}
-        <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length }}</span> document rédigé.</p>
-        {% else %}
-        <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length }}</span> documents rédigés.</p>
-        {% endif %}
+        {% if bookContents|length <= 1 %} <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length
+                }}</span> document rédigé.</p>
+            {% else %}
+            <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length }}</span> documents rédigés.</p>
+            {% endif %}
     </div>
-        
-    <hr class="hr">
+
+    <div class="divider"></div>
+
+    <br><br>
+
+    <div class="parallax-container">
+        <div class="parallax"><img src="{{ asset('assets/images/livre-ouvert.png') }}"></div>
+    </div>
+
+    <br>
+
+    <h3>Vos dernières entrées</h3>
 
     {% for content in bookContents %}
 
@@ -27,17 +37,17 @@
         {% else %}
         <h5>Le {{ content.createdAt|date("d/m/Y") }}</h5>
         {% endif %}
-
-        <div class="btn-control-flex">
-            <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
-            
-            {% include "book_content/_delete_form.html.twig" %}
-        </div>
     </div>
 
     <div class="content">
         <p>{{ content.content }}</p>
+        <div class="btn-control-flex">
+            <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
+            {% include "book_content/_delete_form.html.twig" %}
+        </div>
     </div>
+
+    <br><br>
 
     {% endfor %}
 </div>
