@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ friendUser.pseudo }}{% endblock %}
+
+{% block body %}
+
+<div class="book">
+    <h4>Humeur de {{ friendUser.pseudo }}</h4>
+
+    <hr class="hr">
+
+    <div class="container-inline">
+        {% if moods|length <= 1 %} 
+        <p id="counter-documents"><span>{{ moods|length }}</span> humeur rédigée.</p>
+        {% else %}
+        <p id="counter-documents"><span>{{ moods|length }}</span> humeurs rédigées.</p>
+        {% endif %}
+    </div> 
+
+    <hr class="hr">
+
+    <ul class="collapsible moods-container">
+        {% for mood in moods %}
+        <li>
+            <div class="collapsible-header container-flex-between">
+                <h5>
+                    {{ mood.date|date('d-m-Y') }}
+                </h5>
+    
+                {# Emoticones #}
+                {% if 'Joyeux' == mood.dayMood %}
+                <img src="{{ asset('assets/icons/joy.png') }}" alt="emoticon" class="mood-emoticon">
+                {% elseif 'Neutre' == mood.dayMood %}
+                <img src="{{ asset('assets/icons/neutral.png') }}" alt="emoticon" class="mood-emoticon">
+                {% elseif 'Anxieux' == mood.dayMood %}
+                <img src="{{ asset('assets/icons/anxious.png') }}" alt="emoticon" class="mood-emoticon">
+                {% elseif 'Déprimé' == mood.dayMood %}
+                <img src="{{ asset('assets/icons/depressed.png') }}" alt="emoticon" class="mood-emoticon">
+                {% endif %}
+                
+            </div>
+            <div class="collapsible-body">
+                <span>
+                    <strong class="more-strong-txt">Qualité du sommeil : </strong>
+                    <span class="span-txt span-mood-txt">{{ mood.sleep }}</span>
+                    <br>
+                    <strong class="more-strong-txt">Humeur au réveil : </strong>
+                    <span class="span-txt span-mood-txt">{{ mood.morningMood }}</span>
+                    <br>
+                    <strong class="more-strong-txt">Programme du jour : </strong>
+                    <span class="span-txt span-mood-txt">{{ mood.dayProgram }}</span>
+                    <br>
+                    <strong class="more-strong-txt">Ressenti sur la journée : </strong>
+                    <span class="span-txt span-mood-txt">{{ mood.dayFeeling }}</span>
+                    <br>
+                    <strong class="more-strong-txt">Qualité de l'endormissement : </strong>
+                    <span class="span-txt span-mood-txt">{{ mood.fallingAsleep }}</span>
+                    <br>
+                    <strong class="more-strong-txt">Humeur pendant la journée : </strong>
+                    <span class="span-txt span-mood-txt">{{ mood.dayMood }}</span>
+                    <br>
+                    <br>
+                </span>
+            </div>
+        </li>
+
+        {% endfor %}
+    </ul>
+</div>
+
+<br><br>
+
+<a href="{{ path('friend_profile_index', {'user2':friendUser.id}) }}" class="custom-btn">Revenir au profil</a>
+
+{% endblock %}

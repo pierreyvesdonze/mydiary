@@ -10,7 +10,15 @@
     <hr class="hr">
 
     <div class="container-inline">
+        {% if bookContents|length <= 1 %}
+
+        <p id="counter-documents"><span>{{ bookContents|length }}</span> document rédigé.</p>
+        {% else %}
+
         <p id="counter-documents"><span>{{ bookContents|length }}</span> documents rédigés.</p>
+        
+        {% endif %}
+        
     </div>
 
     <hr class="hr">

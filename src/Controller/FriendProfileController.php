@@ -5,19 +5,21 @@ namespace App\Controller;
 use App\Repository\BookContentRepository;
 use App\Repository\BookRepository;
 use App\Repository\DateRepository;
+use App\Repository\MoodRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/contact')]
 class FriendProfileController extends AbstractController
 {
     public function __construct(private UserRepository $userRepository)
     {
     }
 
-    #[Route('/contact/profile/index/{user2}', name: 'friend_profile_index')]
+    #[Route('/profile/index/{user2}', name: 'friend_profile_index')]
     public function index($user2): Response
     {
         $user = $this->getUser();
@@ -25,16 +27,16 @@ class FriendProfileController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $friendProfile = $this->userRepository->findOneBy([
+        $friendUser = $this->userRepository->findOneBy([
             'id' => $user2
         ]);
 
         return $this->render('friend_profile/index.html.twig', [
-            'friendProfile' => $friendProfile,
+            'friendUser' => $friendUser,
         ]);
     }
 
-    #[Route('/contact/journal/{friend}', name: 'book_friend', methods: ['GET'])]
+    #[Route('/journal/{friend}', name: 'book_friend', methods: ['GET'])]
     public function book(
         $friend,
         BookRepository $bookRepository,
@@ -64,7 +66,7 @@ class FriendProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/contact/dates/{friend}', name: 'dates_friend', methods: ['GET'])]
+    #[Route('/dates/{friend}', name: 'dates_friend', methods: ['GET'])]
     public function dates(
         $friend,
         DateRepository $dateRepository,
@@ -88,6 +90,23 @@ class FriendProfileController extends AbstractController
 
         return $this->render('friend_profile/dates.html.twig', [
             'dates'      => $dates,
+            'friendUser' => $friendUser
+        ]);
+    }
+
+    #[Route('/humeur/{friend}', name: 'mood_friend', methods: ['GET'])]
+    public function mood(
+        $friend,
+        UserRepository $userRepository,
+        MoodRepository $moodRepository,
+    ): Response
+    {
+        $friendUser    = $userRepository->findOneBy(['id' => $friend]);
+        $moodContainer = $friendUser->getMoodContainer();
+        $moods         = $moodRepository->findByMoodContainer($moodContainer);
+
+        return $this->render('friend_profile/mood.html.twig', [
+            'moods'      => $moods,
             'friendUser' => $friendUser
         ]);
     }

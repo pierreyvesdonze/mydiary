@@ -10,7 +10,11 @@
 
     <div class="container-inline">
         <a href="{{ path('book_content_new')}}" class="custom-btn">Ajouter du contenu</a>
+        {% if bookContents|length <= 1 %}
+        <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length }}</span> document rédigé.</p>
+        {% else %}
         <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length }}</span> documents rédigés.</p>
+        {% endif %}
     </div>
         
     <hr class="hr">

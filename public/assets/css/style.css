@@ -67,9 +67,8 @@ textarea {
   height: 1px;
   border: 0;
   width: 90%;
-  margin: 40px auto;
+  margin: 23px auto;
   background: rgb(42, 61, 82);
-  background: radial-gradient(circle, rgb(41, 54, 83) 0%, rgba(255, 255, 255, 0.144) 50%, rgba(253, 253, 253, 0) 100%);
 }
 
 /*

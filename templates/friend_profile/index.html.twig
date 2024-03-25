@@ -1,29 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ friendProfile.pseudo }}{% endblock %}
+{% block title %}{{ friendUser.pseudo }}{% endblock %}
 
 {% block body %}
 
-<h1>Profil de {{ friendProfile.pseudo }}</h1>
+<h1>Profil de {{ friendUser.pseudo }}</h1>
 
 <div class="row">
-
     {# Journal #}
     <div class="col s12 m6">
         <div class="card white">
             <div class="card-content dark-text">
                 <span class="card-title">Journal</span>
-                {% if friendProfile.book.visibility == true %}
-                <p>Ceci est le journal publique de {{ friendProfile.pseudo }}.</p>
+                {% if friendUser.book.visibility == true %}
+                <p>Ceci est le journal publique de {{ friendUser.pseudo }}.</p>
                 {% else %}
-                <p>La visibilité du journal de {{ friendProfile.pseudo }} est privée.</p>
+                <p>La visibilité du journal de {{ friendUser.pseudo }} est privée.</p>
                 {% endif %}
             </div>
             <div class="card-action">
-                {% if friendProfile.book.visibility == true %}
-                <a href="{{ path('book_friend', {'friend':friendProfile.id}) }}" class="">Visiter</a>
+                {% if friendUser.book.visibility == true %}
+                <a href="{{ path('book_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
                 {% else %}
-                
+
                 {% endif %}
             </div>
         </div>
@@ -34,24 +33,110 @@
         <div class="card white">
             <div class="card-content dark-text">
                 <span class="card-title">Dates</span>
-                {% if friendProfile.datesContainer.visibility == true %}
-                <p>Dates des évènements clés de {{ friendProfile.pseudo }}.
-                {% else %}
-                <p>La visibilité des dates de {{ friendProfile.pseudo }} est privée.</p>
+                {% if friendUser.datesContainer.visibility == true %}
+                <p>Dates des évènements clés de {{ friendUser.pseudo }}.
+                    {% else %}
+                <p>La visibilité des dates de {{ friendUser.pseudo }} est privée.</p>
                 {% endif %}
             </div>
             <div class="card-action">
-                {% if friendProfile.datesContainer.visibility == true %}
-                <a href="{{ path('dates_friend', {'friend':friendProfile.id}) }}" class="">Visiter</a>
+                {% if friendUser.datesContainer.visibility == true %}
+                <a href="{{ path('dates_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
                 {% else %}
-                
+
                 {% endif %}
             </div>
         </div>
     </div>
 </div>
 
+{# Humeur #}
+<div class="row">
+    <div class="col s12 m12">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">Humeur</span>
+                {% if friendUser.moodContainer.visibility == true %}
+                <p>Carnet d'humeur de {{ friendUser.pseudo }}.
+                    {% else %}
+                <p>La visibilité du carnet d'humeur de {{ friendUser.pseudo }} est privée.</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                {% if friendUser.moodContainer.visibility == true %}
+                <a href="{{ path('mood_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
+                {% else %}
 
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="row">
+
+    {# Santé #}
+    <div class="col s4">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">Santé</span>
+                {% if friendUser.moodContainer.visibility == true %}
+                <p>Carnet d'humeur de {{ friendUser.pseudo }}.
+                    {% else %}
+                <p>La visibilité du carnet d'humeur de {{ friendUser.pseudo }} est privée.</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                {% if friendUser.moodContainer.visibility == true %}
+                <a href="{{ path('mood_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
+                {% else %}
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {# Humeur #}
+    <div class="col s4">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">Humeur</span>
+                {% if friendUser.moodContainer.visibility == true %}
+                <p>Carnet d'humeur de {{ friendUser.pseudo }}.
+                    {% else %}
+                <p>La visibilité du carnet d'humeur de {{ friendUser.pseudo }} est privée.</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                {% if friendUser.moodContainer.visibility == true %}
+                <a href="{{ path('mood_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
+                {% else %}
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {# Humeur #}
+    <div class="col s4">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">Humeur</span>
+                {% if friendUser.moodContainer.visibility == true %}
+                <p>Carnet d'humeur de {{ friendUser.pseudo }}.
+                    {% else %}
+                <p>La visibilité du carnet d'humeur de {{ friendUser.pseudo }} est privée.</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                {% if friendUser.moodContainer.visibility == true %}
+                <a href="{{ path('mood_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
+                {% else %}
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
