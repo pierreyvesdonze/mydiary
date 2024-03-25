@@ -240,18 +240,19 @@ form button.custom-btn {
 CONTAINERS
  ***************************
  */
-.container-flex-between {
-    height: 110px;
+.container-flex-between,
+.container-flex-between-bottom {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+}
 
-    @include xs {
-        height: 80px;
-    }
-
-    @include sm {
-        height: 80px;
+.container-flex-between {
+    align-items: center;
+}
+.container-flex-between-bottom {
+    align-items: flex-end;
+    h1 {
+        margin-bottom: 0;
     }
 }
 
@@ -328,4 +329,8 @@ MOOD
  */
  .span-mood-txt {
     line-height: 30px;
+ }
+
+ .mood-emoticon {
+    width: 35px;
  }

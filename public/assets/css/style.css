@@ -341,21 +341,21 @@ form button.custom-btn {
 CONTAINERS
  ***************************
  */
-.container-flex-between {
-  height: 110px;
+.container-flex-between,
+.container-flex-between-bottom {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
 }
-@media (min-width: 300px) and (max-width: 576px) {
-  .container-flex-between {
-    height: 80px;
-  }
+
+.container-flex-between {
+  align-items: center;
 }
-@media (min-width: 576px) and (max-width: 768px) {
-  .container-flex-between {
-    height: 80px;
-  }
+
+.container-flex-between-bottom {
+  align-items: flex-end;
+}
+.container-flex-between-bottom h1 {
+  margin-bottom: 0;
 }
 
 /*
@@ -431,4 +431,8 @@ MOOD
  */
 .span-mood-txt {
   line-height: 30px;
+}
+
+.mood-emoticon {
+  width: 35px;
 }/*# sourceMappingURL=style.css.map */

@@ -3,7 +3,7 @@
 {% block title %}Humeurs{% endblock %}
 
 {% block body %}
-<div class="container-flex-between">
+<div class="container-flex-between-bottom">
     <h1>Carnet d'humeurs</h1>
     <a href="{{ path('mood_new') }}" class="custom-btn">Créer une humeur</a>
 </div>
@@ -13,8 +13,22 @@
 <ul class="collapsible moods-container">
     {% for mood in moods %}
     <li>
-        <div class="collapsible-header">
-            <h4>{{ mood.date|date('d-m-Y') }}</h4>
+        <div class="collapsible-header container-flex-between">
+            <h5>
+                {{ mood.date|date('d-m-Y') }}
+            </h5>
+
+            {# Emoticones #}
+            {% if 'Joyeux' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/joy.png') }}" alt="emoticon" class="mood-emoticon">
+            {% elseif 'Neutre' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/neutral.png') }}" alt="emoticon" class="mood-emoticon">
+            {% elseif 'Anxieux' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/anxious.png') }}" alt="emoticon" class="mood-emoticon">
+            {% elseif 'Déprimé' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/depressed.png') }}" alt="emoticon" class="mood-emoticon">
+            {% endif %}
+            
         </div>
         <div class="collapsible-body">
             <span>
@@ -31,7 +45,7 @@
                 <span class="span-txt span-mood-txt">{{ mood.dayFeeling }}</span>
                 <br>
                 <strong class="more-strong-txt">Qualité de l'endormissement : </strong>
-                <span class="span-txt span-mood-txt">{{ mood.dayMood }}</span>
+                <span class="span-txt span-mood-txt">{{ mood.fallingAsleep }}</span>
                 <br>
                 <strong class="more-strong-txt">Humeur pendant la journée : </strong>
                 <span class="span-txt span-mood-txt">{{ mood.dayMood }}</span>
@@ -54,7 +68,7 @@
 
 {% else %}
 
-<h4>Vous n'avez pas d'humeur enregistrée.</h4>
+<h6>Vous n'avez pas d'humeur enregistrée.</h6>
 
 <br>
 
