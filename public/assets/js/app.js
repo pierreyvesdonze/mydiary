@@ -14,8 +14,17 @@ var app = {
             $('.alert').fadeOut('fast')
         }, 1000);
 
-        // If Spinner anim, disabled it onload
         app.closeLoadingAnim();
+
+        // nav sticky au scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 200) { // Changez 200 à la hauteur souhaitée pour activer la navigation collante
+                nav.classList.add('sticky');
+            } else {
+                nav.classList.remove('sticky');
+            }
+        });
 
         // MATERIALIZE INIT 
         $(document).ready(function () {

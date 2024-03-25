@@ -150,6 +150,13 @@ nav {
     }
 }
 
+.sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
 #dropdown1 {
     width: 150px !important;
 }
