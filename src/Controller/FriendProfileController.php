@@ -7,6 +7,7 @@ use App\Repository\BookRepository;
 use App\Repository\DateRepository;
 use App\Repository\MoodRepository;
 use App\Repository\UserRepository;
+use App\Repository\WeightRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -103,6 +104,24 @@ class FriendProfileController extends AbstractController
 
         return $this->render('friend_profile/mood.html.twig', [
             'moods'      => $moods,
+            'friendUser' => $friendUser
+        ]);
+    }
+
+    #[Route('/sante/{friend}', name: 'health_friend', methods: ['GET'])]
+    public function health(
+        $friend,
+        WeightRepository $weightRepository,
+    ): Response
+    {
+        $friendUser      = $this->userRepository->findOneBy(['id' => $friend]);
+        $healthContainer = $friendUser->getHealthContainer();
+        $weights         = $weightRepository->findByHealthContainer($healthContainer);
+
+        dump($weights);
+
+        return $this->render('friend_profile/health.html.twig', [
+            'weights'    => $weights,
             'friendUser' => $friendUser
         ]);
     }

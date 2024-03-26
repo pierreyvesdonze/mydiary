@@ -51,6 +51,8 @@ class HealthController extends AbstractController
                 $previousWeight = null;
                 $isHigher       = null;
             }
+        } else {
+            $isHigher = null;
         }
 
         return $this->render('health/index.html.twig', [
