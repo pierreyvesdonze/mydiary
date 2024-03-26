@@ -224,6 +224,7 @@ BUTTONS
 
 .disabled {
     cursor: not-allowed;
+    pointer-events: none
     ;
     color: var(--disabled-color) !important;
 }

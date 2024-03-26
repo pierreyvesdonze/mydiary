@@ -32,6 +32,12 @@ var appContact = {
                 currentTarget.addClass('disabled');
                 currentTarget.text('Demande envoyée')
                 console.log(response)
+
+                M.toast({
+                    html: 'Demande envoyée !',
+                    classes: 'rounded',
+                    displayLength: 2000
+                });
             },
             error: function (xhr, status, error) {
                 console.error('Erreur lors de la requête :', error);

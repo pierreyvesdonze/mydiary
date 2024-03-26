@@ -2,14 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\HealthContainer;
 use App\Entity\Weight;
-use App\Form\HealthWeightType;
-use App\Repository\HealthContainerRepository;
+use App\Service\HealthService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -22,7 +18,7 @@ class HealthController extends AbstractController
     }
 
     #[Route('/index', name: 'health_index')]
-    public function index(): Response
+    public function index(HealthService $healthService): Response
     {
         $user = $this->getUser();
         if (!$user) {
@@ -55,12 +51,21 @@ class HealthController extends AbstractController
             $isHigher = null;
         }
 
+        // Formate la taille
+        if ($height) {
+            $formatedHeight = $healthService->formatHeight($height->getValue());
+        } else {
+            $formatedHeight = null;
+        }
+
         return $this->render('health/index.html.twig', [
-            'cares'    => $cares,
-            'vaccines' => $vaccines,
-            'height'   => $height,
-            'weights'  => $weights,
-            'isHigher' => $isHigher,
+            'cares'          => $cares,
+            'vaccines'       => $vaccines,
+            'height'         => $height,
+            'weights'        => $weights,
+            'isHigher'       => $isHigher,
+            'height'         => $height,
+            'formatedHeight' => $formatedHeight
         ]);
     }
 }

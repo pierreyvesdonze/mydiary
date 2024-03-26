@@ -20,8 +20,8 @@ var appParam = {
         let objectToChange = e.currentTarget.dataset.type;
 
         $.ajax({
-            url: '/mydiary/public/visibilite',
-            //url: '/visibilite',
+            //url: '/mydiary/public/visibilite',
+            url: '/visibilite',
             type: 'POST',
             data: objectToChange,
             success: function (response) {
@@ -30,8 +30,18 @@ var appParam = {
 
                 if (currentText === 'Publique') {
                     clickedSpan.text('Privé');
+                    M.toast({
+                        html: 'Visibilité privée !',
+                        classes: 'rounded',
+                        displayLength: 2000
+                    });
                 } else {
                     clickedSpan.text('Publique');
+                    M.toast({
+                        html: 'Visibilité publique !',
+                        classes: 'rounded',
+                        displayLength: 2000
+                    });
                 }
             },
             error: function (xhr, status, error) {

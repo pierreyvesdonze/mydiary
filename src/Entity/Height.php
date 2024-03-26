@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\HeightRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HeightRepository::class)]
@@ -15,21 +16,36 @@ class Height
 
     #[ORM\OneToOne(inversedBy: 'height', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?healthContainer $height = null;
+    private ?HealthContainer $healthContainer = null;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $value = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getHeight(): ?healthContainer
+    public function getHealthContainer(): ?HealthContainer
     {
-        return $this->height;
+        return $this->healthContainer;
     }
 
-    public function setHeight(healthContainer $height): static
+    public function setHealthContainer(HealthContainer $healthContainer): static
     {
-        $this->height = $height;
+        $this->healthContainer = $healthContainer;
+
+        return $this;
+    }
+
+    public function getValue(): ?int
+    {
+        return $this->value;
+    }
+
+    public function setValue(int $value): static
+    {
+        $this->value = $value;
 
         return $this;
     }

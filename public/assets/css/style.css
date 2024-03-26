@@ -127,6 +127,28 @@ textarea::placeholder {
   margin-right: 10px;
 }
 
+@media (min-width: 300px) and (max-width: 576px) {
+  .toast {
+    top: -780px !important;
+    width: 200px !important;
+    margin: auto !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .toast {
+    top: -780px !important;
+    width: 200px !important;
+    margin: auto !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .toast {
+    top: -780px !important;
+    width: 200px !important;
+    margin: auto !important;
+  }
+}
+
 /*
 *******************************
 GENERAL
@@ -349,6 +371,7 @@ BUTTONS
 
 .disabled {
   cursor: not-allowed;
+  pointer-events: none;
   color: var(--disabled-color) !important;
 }
 

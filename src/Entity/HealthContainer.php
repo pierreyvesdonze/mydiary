@@ -31,7 +31,7 @@ class HealthContainer
     #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Weight::class)]
     private Collection $weights;
 
-    #[ORM\OneToOne(mappedBy: 'height', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist', 'remove'])]
     private ?Height $height = null;
 
     public function __construct()
@@ -168,8 +168,8 @@ class HealthContainer
     public function setHeight(Height $height): static
     {
         // set the owning side of the relation if necessary
-        if ($height->getHeight() !== $this) {
-            $height->setHeight($this);
+        if ($height->getHealthContainer() !== $this) {
+            $height->setHealthContainer($this);
         }
 
         $this->height = $height;

@@ -55,6 +55,35 @@
             </div>
         </div>
     </div>
+
+
+    {# Taille #}
+    <div class="col s5 m5 l5">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Taille</span>
+                </div>
+                {% if height %}
+                <div class="container-flex-center">
+                    <span class="more-strong-txt">{{ formatedHeight }}</span>
+                </div>
+                {% else %}
+                Non renseignée
+                {% endif %}
+            </div>
+            <div class="card-action">
+                <div class="container-flex-between">
+                    {% if height  %}
+                    <a href="{{ path('health_height_delete', {'id':height.id}) }}" class="disabled">Supprimer</a>
+                    {% else %}
+                    <a href="{{ path('health_height_new') }}">Ajouter</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

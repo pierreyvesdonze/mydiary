@@ -101,7 +101,7 @@ textarea::placeholder {
 }
 
 .section-white {
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2) !important;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
   border-radius: 30px;
 }
 
@@ -116,4 +116,24 @@ textarea::placeholder {
 
 .margin-right-m1 {
   margin-right: 10px;
+}
+
+.toast {
+  @include xs {
+    top: -780px !important;
+    width: 200px !important;
+    margin: auto !important;
+  }
+
+  @include sm {
+    top: -780px !important;
+    width: 200px !important;
+    margin: auto !important;
+  }
+
+  @include md {
+    top: -780px !important;
+    width: 200px !important;
+    margin: auto !important;
+  }
 }

@@ -24,6 +24,11 @@ class DateController extends AbstractController
         DateRepository $dateRepository,
         Request $request
     ): Response {
+        $user = $this->getUser();
+        if(!$user) {
+            return $this->redirectToRoute('login');
+        }
+
         $dates = $dateRepository->findBy(['user' => $this->getUser()]);
 
         // Trier les dates par année
@@ -47,8 +52,12 @@ class DateController extends AbstractController
     #[Route('/new', name: 'date_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        $date = new Date();
         $user = $this->getUser();
+        if(!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $date = new Date();
         $form = $this->createForm(DateType::class, $date);
         $form->handleRequest($request);
 
@@ -113,7 +122,7 @@ class DateController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'date_delete', methods: ['POST'])]
-    public function delete(Request $request, Date $date): Response
+    public function delete(Date $date): Response
     {
         $this->em->remove($date);
         $this->em->flush();

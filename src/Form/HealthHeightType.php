@@ -2,26 +2,31 @@
 
 namespace App\Form;
 
-use App\Entity\Weight;
+use App\Entity\Height;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
-class HealthWeightType extends AbstractType
+class HealthHeightType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('weight', NumberType::class, [
-                'scale' => 2,
+            ->add('value', NumberType::class, [
+                'html5' => true,
                 'attr' => [
-                    'placeholder' => 'Ajoutez ici votre poids'
+                    'placeholder' => 'Ajoutez ici votre taille (en cm)',
+                    'min' => 10,
+                    'max' => 300
+                ],
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min' => 2, 'max' => 3])
                 ]
-            ])
-            ->add('date', null, [
-                'widget' => 'single_text',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
@@ -34,7 +39,7 @@ class HealthWeightType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Weight::class,
+            'data_class' => Height::class,
         ]);
     }
 }

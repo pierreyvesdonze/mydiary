@@ -25,7 +25,7 @@ class Date
 
     #[ORM\ManyToOne(inversedBy: 'dates')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $user = null;
+    private ?User $user = null;
 
     #[ORM\Column]
     private ?bool $visibility = null;

@@ -21,28 +21,13 @@ class HeightRepository extends ServiceEntityRepository
         parent::__construct($registry, Height::class);
     }
 
-    //    /**
-    //     * @return Height[] Returns an array of Height objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('h')
-    //            ->andWhere('h.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('h.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Height
-    //    {
-    //        return $this->createQueryBuilder('h')
-    //            ->andWhere('h.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findByHealthContainer($healthContainer): array
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.healthContainer = :val')
+            ->setParameter('val', $healthContainer)
+            ->orderBy('h.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

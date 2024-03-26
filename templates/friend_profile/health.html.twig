@@ -6,13 +6,13 @@
 
 <h1>Profil santé de {{ friendUser.pseudo }}</h1>
 
-{# Poids #}
 <div class="row">
-    <div class="col s12 m8 l6">
+    {# Poids #}
+    <div class="col s7 m8 l6">
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
-                    <span class="card-title">Son poids</span>
+                    <span class="card-title">Poids</span>
                 </div>
                 <p>
                     {% if weights|length > 0 %}
@@ -38,6 +38,24 @@
                 Aucune donnée enregistrée pour le moment
                 {% endif %}
                 </p>
+            </div>
+        </div>
+    </div>
+
+    {# Taille #}
+    <div class="col s5 m8 l6">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Taille</span>
+                </div>
+                    {% if height  %}
+                <div class="container-flex-center">
+                    <span class="more-strong-txt">{{ formatedHeight }}</span>
+                </div>
+                {% else %}
+                Non renseignée
+                {% endif %}
             </div>
         </div>
     </div>
