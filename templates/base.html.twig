@@ -27,25 +27,31 @@
     </div>
 
     {# NAV #}
-    {# {% include "nav/nav.html.twig" %} #}
-    {{ render(controller('App\\Controller\\HomeController::navbar')) }}
+    <section class="main">
+        {{ render(controller('App\\Controller\\HomeController::navbar')) }}
 
-    {# Flash messages #}
-    <div class="flash-container">
-        {% for label, messages in app.flashes %}
-        {% for message in messages %}
+        {# Flash messages #}
+        <div class="flash-container">
+            {% for label, messages in app.flashes %}
+            {% for message in messages %}
 
-        <div class="alert alert-{{ label }}">
-            {{ message }}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endfor %}
         </div>
-        {% endfor %}
-        {% endfor %}
-    </div>
 
-    {% block body %}{% endblock %}
+        {% block body %}{% endblock %}
+
+    </section>
+
+    <section class="footer-section">
+        {# Footer #}
+        {% include "footer/footer.html.twig" %}
+    </section>
 
     {% block javascripts %}
-
     <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

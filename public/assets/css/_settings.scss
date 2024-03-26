@@ -17,7 +17,9 @@
 }
 
 body {
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: var(--body-bg);
   background-image: url('../images/always-grey.png');
   background-repeat: repeat;
@@ -36,12 +38,16 @@ body {
   }
 
   @include sm {
-    padding: 20px;
+    padding: 0 20px;
   }
 
   @include xs {
-    padding: 20px;
+    padding: 0 20px;
   }
+}
+
+.main {
+  flex: 1;
 }
 
 textarea {

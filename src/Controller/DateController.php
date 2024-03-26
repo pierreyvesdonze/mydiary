@@ -32,7 +32,6 @@ class DateController extends AbstractController
         });
 
         // Récupérer le nom de la route pour orienter la vue
-
         $routeName = $request->get('_route');
         if ($routeName === 'date_index') {
             return $this->render('date/index.html.twig', [

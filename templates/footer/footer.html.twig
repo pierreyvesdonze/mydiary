@@ -1,0 +1,25 @@
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="dark-text">Restez informés</h5>
+                <p class="grey-text">MyDiary est une application en constante évolution, suivez-nous sur les réseaux sociaux pour découvrir les nouveautés et nous soutenir.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="dark-text">Réseaux</h5>
+                <ul>
+                    <li><a class="purple-text" href="#!" target="_blank">Insta</a></li>
+                    <li><a class="indigo-text darken-2" href="#!" target="_blank">Facebook</a></li>
+                    <li><a class="black-text" href="#!" target="_blank">Github</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            {% set currentYear = date().format('Y') %}
+            © {{ currentYear }} Copyright MyDiary
+            <a class="grey-text right" href="#!">Contacter le dev</a>
+        </div>
+    </div>
+</footer>

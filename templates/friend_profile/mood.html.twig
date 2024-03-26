@@ -10,12 +10,11 @@
     <hr class="hr">
 
     <div class="container-inline">
-        {% if moods|length <= 1 %} 
-        <p id="counter-documents"><span>{{ moods|length }}</span> humeur rédigée.</p>
-        {% else %}
-        <p id="counter-documents"><span>{{ moods|length }}</span> humeurs rédigées.</p>
-        {% endif %}
-    </div> 
+        {% if moods|length <= 1 %} <p id="counter-documents"><span>{{ moods|length }}</span> humeur rédigée.</p>
+            {% else %}
+            <p id="counter-documents"><span>{{ moods|length }}</span> humeurs rédigées.</p>
+            {% endif %}
+    </div>
 
     <hr class="hr">
 
@@ -26,7 +25,7 @@
                 <h5>
                     {{ mood.date|date('d-m-Y') }}
                 </h5>
-    
+
                 {# Emoticones #}
                 {% if 'Joyeux' == mood.dayMood %}
                 <img src="{{ asset('assets/icons/joy.png') }}" alt="emoticon" class="mood-emoticon">
@@ -37,7 +36,7 @@
                 {% elseif 'Déprimé' == mood.dayMood %}
                 <img src="{{ asset('assets/icons/depressed.png') }}" alt="emoticon" class="mood-emoticon">
                 {% endif %}
-                
+
             </div>
             <div class="collapsible-body">
                 <span>
