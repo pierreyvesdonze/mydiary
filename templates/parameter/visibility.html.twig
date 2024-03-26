@@ -38,4 +38,16 @@
             </a>
         </div>
     </li>
+    <li class="collection-item">
+        <div>
+            <strong>Santé</strong>
+            <a href="#!" class="secondary-content btn-visibility" data-type="health">
+                {% if true == healthVisibility %}
+                <span class="public-btn">Publique</span>
+                {% else %}
+                <span class="private-btn">Privé</span>
+                {% endif %}
+            </a>
+        </div>
+    </li>
 </ul>

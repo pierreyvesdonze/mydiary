@@ -18,7 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class HealthController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $em)
-    {}
+    {
+    }
 
     #[Route('/index', name: 'health_index')]
     public function index(): Response
@@ -40,15 +41,18 @@ class HealthController extends AbstractController
             usort($weights, function (Weight $a, Weight $b) {
                 return $b->getDate() <=> $a->getDate();
             });
-            
-            $latestWeight = $weights[0]->getWeight();
-            $previousWeight = $weights[1]->getWeight();
-            
-            $isHigher = $latestWeight > $previousWeight;
-        } else {
-            $isHigher = null;
+
+            if (count($weights) > 1) {
+                $latestWeight   = $weights[0]->getWeight();
+                $previousWeight = $weights[1]->getWeight();
+                $isHigher       = $latestWeight > $previousWeight;
+            } else {
+                $latestWeight   = null;
+                $previousWeight = null;
+                $isHigher       = null;
+            }
         }
-        
+
         return $this->render('health/index.html.twig', [
             'cares'    => $cares,
             'vaccines' => $vaccines,
@@ -57,5 +61,4 @@ class HealthController extends AbstractController
             'isHigher' => $isHigher,
         ]);
     }
-
 }

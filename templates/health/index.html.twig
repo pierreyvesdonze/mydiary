@@ -13,15 +13,15 @@
             <div class="card-content dark-text">
                 <div class="container-flex-between">
                     <span class="card-title">Mon poids</span>
+                    {% if isHigher %}
                     <span>
                         {% if weights %}
-                        {% if isHigher %}
                         <i class="material-icons red-text">arrow_upward</i>
                         {% else %}
                         <i class="material-icons green-text">arrow_downward</i>
                         {% endif %}
-                        {% endif %}
                     </span>
+                    {% endif %}
                 </div>
                 <p>
                     {% if weights|length > 0 %}
