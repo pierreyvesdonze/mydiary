@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ma santé{% endblock %}
+
+{% block body %}
+
+<h1>Mon profil santé</h1>
+
+{# Poids #}
+<div class="row">
+    <div class="col s12 m8 l6">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Mon poids</span>
+                    <span>
+                        {% if isHigher %}
+                        <i class="material-icons red-text">arrow_upward</i>
+                        {% else %}
+                        <i class="material-icons green-text">arrow_downward</i>
+                        {% endif %}
+                    </span>
+                </div>
+                <p>
+                    {% if weights|length > 0 %}
+                <ul class="ul-weight-container">
+                    {% for weight in weights %}
+                    <div class="container-flex-between">
+                        <li class="dark-text">
+                            Le {{ weight.date|date('d-m-Y') }} :
+                        </li>
+                        <span class="more-strong-txt">
+                            {% if weight.weight|round(2, 'floor') == weight.weight|round(0,
+                            'floor') %}
+                            {{ weight.weight|round(0, 'floor') }} kg
+                            {% else %}
+                            {{ weight.weight }} kg
+                            {% endif %}
+                        </span>
+                        <a href="{{ path('health_weight_delete', {'id':weight.id}) }}"
+                            class="link-btn-danger margin-right-m1">Supprimer</a>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                Aucune donnée enregistrée pour le moment
+                {% endif %}
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="{{ path('health_weight_new') }}">Ajouter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

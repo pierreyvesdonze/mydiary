@@ -43,6 +43,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @return User[] Returns an array of User objects
      */
+    public function findAllExceptMe($userId): array
+    {
+        return $this->createQueryBuilder('u')
+        ->andWhere('u.id != :userId')
+        ->setParameter('userId', $userId)
+        ->getQuery()
+        ->getResult();
+    }
+
+    /**
+     * @return User[] Returns an array of User objects
+     */
     public function findContacts($userId): array
     {
         return $this->createQueryBuilder('u')
@@ -56,7 +68,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @return User[] Returns an array of User objects
      */
-    public function findUserRequests($recipientId): array
+    public function findFriendRequests($recipientId): array
     {
         return $this->createQueryBuilder('u')
             ->leftJoin(FriendshipRequest::class, 'fr', 'WITH', 'fr.sender = u.id')

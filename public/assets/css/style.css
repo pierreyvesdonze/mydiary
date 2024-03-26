@@ -123,6 +123,10 @@ textarea::placeholder {
   background-color: var(--divider-color) !important;
 }
 
+.margin-right-m1 {
+  margin-right: 10px;
+}
+
 /*
 *******************************
 GENERAL
@@ -477,4 +481,14 @@ MOOD
 
 .mood-emoticon {
   width: 35px;
+}
+
+/*
+ ***************************
+HEALTH
+ ***************************
+ */
+.ul-weight-container {
+  height: 200px;
+  overflow-y: auto;
 }/*# sourceMappingURL=style.css.map */

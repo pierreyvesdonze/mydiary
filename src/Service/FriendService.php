@@ -25,11 +25,11 @@ class FriendService
     }
 
     public function isFriendshipRequested(
-        User $user1,
-        User $user2,
-        
+        User $user,
+        User $recipient,
     ): bool {
-        $isRequested = $this->friendshipRequestRepository->isRequested($user1, $user2);
+        
+        $isRequested = $this->friendshipRequestRepository->isRequested($user, $recipient);
 
         if ($isRequested) {
             return $isRequested;

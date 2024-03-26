@@ -4,11 +4,11 @@
         <h4>Invitations en cours ({{ friendRequests|length }})</h4>
     </div>
     <div class="collapsible-body">
-        {% for sender in friendRequests %}
+        {% for friendRequest in friendRequests %}
         <div>
-            <strong>{{ sender.pseudo }}</strong>
-            <a href="{{ path('delete_friendship_request', {"user2":sender.id}) }}" class="secondary-content">Refuser</a>
-            <a href="{{ path('create_friendship', {'sender': sender.id}) }}" class="secondary-content">Accepter</a>
+            <strong>{{ friendRequest.sender.pseudo }}</strong>
+            <a href="{{ path('delete_friendship_request', {"user2":friendRequest.sender.id}) }}" class="secondary-content">Refuser</a>
+            <a href="{{ path('create_friendship', {'sender':friendRequest.sender.id}) }}" class="secondary-content">Accepter</a>
         </div>
         <br>
         {% endfor %}

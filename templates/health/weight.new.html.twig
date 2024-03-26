@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter poids{% endblock %}
+
+{% block body %}
+
+<h1>Ajouter un nouveau poids</h1>
+
+<div class="row">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          {% include "health/weight.form.html.twig" %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

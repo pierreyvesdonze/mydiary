@@ -50,26 +50,15 @@ class FriendshipRequestRepository extends ServiceEntityRepository
     /**
      * @return Bool
      */
-    public function isRequested($user1, $user2): bool
+    public function isRequested($user, $recipient): bool
     {
         $result = $this->createQueryBuilder('r')
-            ->andWhere('(r.sender = :user1 AND r.recipient = :user2)')
-            ->orWhere('(r.sender = :user2 AND r.recipient = :user1)')
-            ->setParameter('user1', $user1)
-            ->setParameter('user2', $user2)
+            ->andWhere('(r.sender = :user AND r.recipient = :recipient)')
+            ->setParameter('user', $user)
+            ->setParameter('recipient', $recipient)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
 
-        return !empty($result);
+        return $result !== null;
     }
-
-    //    public function findOneBySomeField($value): ?FriendshipRequest
-    //    {
-    //        return $this->createQueryBuilder('f')
-    //            ->andWhere('f.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

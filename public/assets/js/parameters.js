@@ -21,7 +21,7 @@ var appParam = {
 
         $.ajax({
             url: '/mydiary/public/visibilite',
-            /* url: '/visibilite', */
+            //url: '/visibilite',
             type: 'POST',
             data: objectToChange,
             success: function (response) {

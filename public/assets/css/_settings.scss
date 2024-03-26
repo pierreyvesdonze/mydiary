@@ -29,7 +29,7 @@ body {
   overflow-y: auto;
   padding: 0 250px;
 
-  
+
   @include lg {
     padding: 0 130px;
   }
@@ -112,4 +112,8 @@ textarea::placeholder {
 
 .divider {
   background-color: var(--divider-color) !important;
+}
+
+.margin-right-m1 {
+  margin-right: 10px;
 }

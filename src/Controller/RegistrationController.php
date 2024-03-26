@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Entity\Dates;
 use App\Entity\DatesContainer;
+use App\Entity\HealthContainer;
 use App\Entity\MoodContainer;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
@@ -50,6 +51,12 @@ class RegistrationController extends AbstractController
         $moodContainer->setVisibility(0);
         $user->setMoodContainer($moodContainer);
         $this->em->persist($moodContainer);
+
+        // Create HealthContainer object
+        $healthContainer = new HealthContainer();
+        $healthContainer->setVisibility(0);
+        $user->setHealthContainer($healthContainer);
+        $this->em->persist($healthContainer);
         
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

@@ -5,23 +5,27 @@
     <div class="collapsible-body">
         {% if unrelatedContacts %}
         {% for unrelatedContact in unrelatedContacts %}
-        <span>
-            <strong>{{ unrelatedContact.pseudo }}</strong>
-            {% if not isFriendshipRequested[unrelatedContact.id] and not isFriend[unrelatedContact.id] %}
-            <a href="#" class="secondary-content friend-request-btn" data-targetId="{{ unrelatedContact.id }}">Ajouter</a>
-            {% elseif isFriend[unrelatedContact.id] %}
-            <a href="#" class="secondary-content disabled">Contact</a>
-            {% else %}
-            <a href="{{ path('delete_friendship_request', {'user2': unrelatedContact.id}) }}" class="secondary-content link-btn-danger" data-targetId="{{ unrelatedContact.id }}">Annuler</a>
-            <a href="#" class="secondary-content disabled">Demande envoyée</a>
-            {% endif %}
-        </span>
-        <br>
-        <br>
+            <span>
+                {% if unrelatedContact.id == app.user.id %}
+                    <strong>{{ app.user.pseudo }}</strong>
+                    <a href="#" class="secondary-content disabled">Vous</a>
+                {% else %}
+                    <strong>{{ unrelatedContact.pseudo }}</strong>
+                    {% if not isFriendshipRequested[unrelatedContact.id] and not isFriend[unrelatedContact.id] %}
+                        <a href="#" class="secondary-content friend-request-btn" data-targetId="{{ unrelatedContact.id }}">Ajouter</a>
+                    {% elseif isFriend[unrelatedContact.id] %}
+                        <a href="#" class="secondary-content disabled">Contact</a>
+                    {% else %}
+                        <a href="{{ path('delete_friendship_request', {'user2': unrelatedContact.id}) }}" class="secondary-content link-btn-danger" data-targetId="{{ unrelatedContact.id }}">Annuler</a>
+                        <a href="#" class="secondary-content disabled">Demande envoyée</a>
+                    {% endif %}
+                {% endif %}
+            </span>
+            <br><br>
         {% endfor %}
         {% else %}
         <div>
-            <h5>Vous n'avez pas de contacts pour le moment.</h5>
+            <h5>Il n'y a pas d'autres utilisateurs pour le moment pour le moment.</h5>
         </div>
         {% endif %}
     </div>
