@@ -36,15 +36,18 @@ class HealthController extends AbstractController
 
         // Effectue un tri sur la collection pour déterminer si le poids actuel est en hausse
         $weights  = $healthContainer->getWeights()->toArray();
-
-        usort($weights, function (Weight $a, Weight $b) {
-            return $b->getDate() <=> $a->getDate();
-        });
-        
-        $latestWeight = $weights[0]->getWeight();
-        $previousWeight = $weights[1]->getWeight();
-        
-        $isHigher = $latestWeight > $previousWeight;
+        if ($weights) {
+            usort($weights, function (Weight $a, Weight $b) {
+                return $b->getDate() <=> $a->getDate();
+            });
+            
+            $latestWeight = $weights[0]->getWeight();
+            $previousWeight = $weights[1]->getWeight();
+            
+            $isHigher = $latestWeight > $previousWeight;
+        } else {
+            $isHigher = null;
+        }
         
         return $this->render('health/index.html.twig', [
             'cares'    => $cares,

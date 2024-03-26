@@ -14,10 +14,12 @@
                 <div class="container-flex-between">
                     <span class="card-title">Mon poids</span>
                     <span>
+                        {% if weights %}
                         {% if isHigher %}
                         <i class="material-icons red-text">arrow_upward</i>
                         {% else %}
                         <i class="material-icons green-text">arrow_downward</i>
+                        {% endif %}
                         {% endif %}
                     </span>
                 </div>
