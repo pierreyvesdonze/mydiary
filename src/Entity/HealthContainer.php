@@ -34,6 +34,9 @@ class HealthContainer
     #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist', 'remove'])]
     private ?Height $height = null;
 
+    #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist', 'remove'])]
+    private ?BloodType $bloodType = null;
+
     public function __construct()
     {
         $this->vaccines = new ArrayCollection();
@@ -173,6 +176,23 @@ class HealthContainer
         }
 
         $this->height = $height;
+
+        return $this;
+    }
+
+    public function getBloodType(): ?BloodType
+    {
+        return $this->bloodType;
+    }
+
+    public function setBloodType(BloodType $bloodType): static
+    {
+        // set the owning side of the relation if necessary
+        if ($bloodType->getHealthContainer() !== $this) {
+            $bloodType->setHealthContainer($this);
+        }
+
+        $this->bloodType = $bloodType;
 
         return $this;
     }

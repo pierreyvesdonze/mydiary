@@ -49,7 +49,7 @@
                 <div class="container-flex-between">
                     <span class="card-title">Taille</span>
                 </div>
-                    {% if height  %}
+                {% if height %}
                 <div class="container-flex-center">
                     <span class="more-strong-txt">{{ formatedHeight }}</span>
                 </div>
@@ -62,7 +62,26 @@
 
     {# IMC #}
     {% include "common/imc.html.twig" %}
+</div>
 
+<div class="row">
+    {# Groupe sanguin #}
+    <div class="col s6 m4 l3">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Groupe sanguin</span>
+                </div>
+                {% if bloodType %}
+                <div class="container-flex-center">
+                    <h5 class="more-strong-txt">{{ bloodType.value }}</h5>
+                </div>
+                {% else %}
+                Non disponible
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 
 

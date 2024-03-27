@@ -514,4 +514,8 @@ HEALTH
 .ul-weight-container {
   max-height: 200px;
   overflow-y: auto;
+}
+
+.health-small-form {
+  width: 50%;
 }/*# sourceMappingURL=style.css.map */

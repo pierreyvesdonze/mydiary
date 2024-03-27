@@ -87,44 +87,6 @@
             </div>
         </div>
     </div>
-
-    {# Idéees #}
-    <div class="col s6 m6">
-        <div class="card white">
-            <div class="card-content dark-text">
-                <span class="card-title">Idées</span>
-                {% if friendUser.moodContainer.visibility == true %}
-                <p>Carnet d'humeur de {{ friendUser.pseudo }}.
-                    {% else %}
-                <p>La visibilité du carnet d'humeur de {{ friendUser.pseudo }} est privée.</p>
-                {% endif %}
-            </div>
-            <div class="card-action">
-                {% if friendUser.moodContainer.visibility == true %}
-                <a href="#" class="">Visiter</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-    {# Projets #}
-    <div class="col s12">
-        <div class="card white">
-            <div class="card-content dark-text">
-                <span class="card-title">Projets</span>
-                {% if friendUser.moodContainer.visibility == true %}
-                <p>Carnet d'humeur de {{ friendUser.pseudo }}.
-                    {% else %}
-                <p>La visibilité du carnet d'humeur de {{ friendUser.pseudo }} est privée.</p>
-                {% endif %}
-            </div>
-            <div class="card-action">
-                {% if friendUser.moodContainer.visibility == true %}
-                <a href="#" class="">Visiter</a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
 </div>
 
 {% endblock %}

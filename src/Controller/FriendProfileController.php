@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\BloodTypeRepository;
 use App\Repository\BookContentRepository;
 use App\Repository\BookRepository;
 use App\Repository\DateRepository;
@@ -115,6 +116,7 @@ class FriendProfileController extends AbstractController
         $friend,
         WeightRepository $weightRepository,
         HeightRepository $heightRepository,
+        BloodTypeRepository $bloodTypeRepository,
         HealthService $healthService,
     ): Response
     {
@@ -122,6 +124,7 @@ class FriendProfileController extends AbstractController
         $healthContainer = $friendUser->getHealthContainer();
         $weights         = $weightRepository->findByHealthContainer($healthContainer);
         $height          = $heightRepository->findByHealthContainer($healthContainer);
+        $bloodType       = $bloodTypeRepository->findByHealthContainer($healthContainer);
 
         if($height) {
             $formatedHeight = $healthService->formatHeight($height[0]->getValue());
@@ -139,6 +142,10 @@ class FriendProfileController extends AbstractController
             $imcCategory = $imcArray[1];
         }
 
+        if (!$bloodType) {
+            $bloodType = null;
+        }
+
         return $this->render('friend_profile/health.html.twig', [
             'weights'        => $weights,
             'friendUser'     => $friendUser,
@@ -146,6 +153,7 @@ class FriendProfileController extends AbstractController
             'height'         => $height,
             "imc"            => $imc,
             'imcCategory'    => $imcCategory,
+            'bloodType'      => $bloodType,
         ]);
     }
 }

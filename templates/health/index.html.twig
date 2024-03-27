@@ -85,7 +85,32 @@
 
     {# IMC #}
     {% include "common/imc.html.twig" %}
+</div>
 
+<div class="row">
+    {# Groupe sanguin #}
+    <div class="col s6 m4 l3">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Groupe sanguin</span>
+                </div>
+                {% if bloodType %}
+                <div class="container-flex-center">
+                    <h5 class="more-strong-txt">{{ bloodType.value }}</h5>
+                </div>
+                <div class="card-action">
+                    <a href="{{ path('health_blood_type_delete', {'id':bloodType.id}) }}" class="disabled">Supprimer</a>
+                </div>
+                {% else %}
+                Non disponible
+                <div class="card-action">
+                    <a href="{{ path('health_blood_type_new') }}">Ajouter</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
