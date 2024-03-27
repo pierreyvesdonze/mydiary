@@ -30,10 +30,11 @@ class HealthController extends AbstractController
          */
         $healthContainer = $user->getHealthContainer();
 
-        $cares     = $healthContainer->getCares();
-        $height    = $healthContainer->getHeight();
-        $bloodType = $healthContainer->getBloodType();
-        $vaccines  = $healthContainer->getVaccines()->toArray();
+        $cares       = $healthContainer->getCares();
+        $height      = $healthContainer->getHeight();
+        $bloodType   = $healthContainer->getBloodType();
+        $vaccines    = $healthContainer->getVaccines()->toArray();
+        $medications = $healthContainer->getMedications();
 
         // Effectue un tri sur la collection pour déterminer si le poids actuel est en hausse
         $weights  = $healthContainer->getWeights()->toArray();
@@ -91,6 +92,7 @@ class HealthController extends AbstractController
             'imc'            => $imc,
             'imcCategory'    => $imcCategory,
             'bloodType'      => $bloodType,
+            'medications'    => $medications,
         ]);
     }
 }

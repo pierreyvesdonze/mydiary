@@ -115,7 +115,9 @@
                             <td>{{ vaccine.deadlineDate|date('m/Y') }}
                             </td>
                             <td>
-                                <a href="{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"  onclick="return confirm('Supprimer ce vaccin ?');"><i class="material-icons red-text">delete_forever</i></a>
+                                <a href="{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"
+                                    onclick="return confirm('Supprimer ce vaccin ?');"><i
+                                        class="material-icons red-text">delete_forever</i></a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -157,6 +159,45 @@
                     <a href="{{ path('health_blood_type_new') }}">Ajouter</a>
                 </div>
                 {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {# Traitement #}
+    <div class="col s6 m6 l9">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Traitements</span>
+                </div>
+                {% if medications is not empty %}
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Psologie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medication in medications %}
+                        <tr>
+                            <td>{{ medication.name }}</td>
+                            <td>{{ medication.dosage }}</td>
+                            <td>
+                                <a href="{{ path('health_medication_delete', {'id':medication.id}) }}" class=""
+                                    onclick="return confirm('Supprimer ce traitement ?');"><i
+                                        class="material-icons red-text">delete_forever</i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                Aucun traitement enregistré
+                {% endif %}
+                <div class="card-action">
+                    <a href="{{ path('health_medication_new') }}">Ajouter</a>
+                </div>
             </div>
         </div>
     </div>

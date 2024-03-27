@@ -7,6 +7,7 @@ use App\Repository\BookContentRepository;
 use App\Repository\BookRepository;
 use App\Repository\DateRepository;
 use App\Repository\HeightRepository;
+use App\Repository\MedicationRepository;
 use App\Repository\MoodRepository;
 use App\Repository\UserRepository;
 use App\Repository\VaccineRepository;
@@ -119,6 +120,7 @@ class FriendProfileController extends AbstractController
         HeightRepository $heightRepository,
         BloodTypeRepository $bloodTypeRepository,
         VaccineRepository $vaccineRepository,
+        MedicationRepository $medicationRepository,
         HealthService $healthService,
     ): Response
     {
@@ -127,7 +129,8 @@ class FriendProfileController extends AbstractController
         $weights         = $weightRepository->findByHealthContainer($healthContainer);
         $height          = $heightRepository->findByHealthContainer($healthContainer);
         $bloodType       = $bloodTypeRepository->findByHealthContainer($healthContainer);
-        $vaccines         = $vaccineRepository->findByHealthContainer($healthContainer);
+        $vaccines        = $vaccineRepository->findByHealthContainer($healthContainer);
+        $medications     = $medicationRepository->findByHealthContainer($healthContainer);
 
         // Formate le poids
         if($height) {
@@ -161,6 +164,7 @@ class FriendProfileController extends AbstractController
             'imcCategory'    => $imcCategory,
             'bloodType'      => $bloodType[0],
             'vaccines'       => $vaccines,
+            'medications'    => $medications,
         ]);
     }
 }

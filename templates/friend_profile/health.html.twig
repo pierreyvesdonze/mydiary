@@ -64,7 +64,6 @@
     {% include "common/imc.html.twig" %}
 </div>
 
-
 <div class="row">
     {# Vaccins #}
     <div class="col s12 m12 l12">
@@ -97,28 +96,6 @@
                 {% else %}
                 Aucune donnée enregistrée pour le moment
                 {% endif %}
-                {# <p>
-                    {% if vaccines|length > 0 %}
-                <ul class="ul-vaccine-container">
-                    {% for vaccine in vaccines %}
-                    <div class="container-flex-between">
-                        <li class="dark-text">
-                            {{ vaccine.injectionDate|date('m/Y') }} :
-                        </li>
-                        <li class="more-strong-txt">
-                            {{ vaccine.title }}
-                        </li>
-                        <li class="dark-text">
-                            Rappel : {{ vaccine.deadlineDate|date('m/Y') }}
-                        </li>
-                    </div>
-                    <br>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                Aucune donnée enregistrée pour le moment
-                {% endif %}
-                </p> #}
             </div>
         </div>
     </div>
@@ -142,6 +119,38 @@
             </div>
         </div>
     </div>
+    
+    {# Traitement #}
+<div class="col s6 m6 l9">
+    <div class="card white">
+        <div class="card-content dark-text">
+            <div class="container-flex-between">
+                <span class="card-title">Traitements</span>
+            </div>
+            {% if medications is not empty %}
+            <table class="centered">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Psologie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for medication in medications %}
+                    <tr>
+                        <td>{{ medication.name }}</td>
+                        <td>{{ medication.dosage }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            Aucun traitement enregistré
+            {% endif %}
+        </div>
+    </div>
+</div>
+
 </div>
 
 {% endblock %}

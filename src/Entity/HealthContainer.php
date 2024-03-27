@@ -37,11 +37,15 @@ class HealthContainer
     #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist', 'remove'])]
     private ?BloodType $bloodType = null;
 
+    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Medication::class)]
+    private Collection $medications;
+
     public function __construct()
     {
         $this->vaccines = new ArrayCollection();
         $this->cares = new ArrayCollection();
         $this->weights = new ArrayCollection();
+        $this->medications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,6 +197,36 @@ class HealthContainer
         }
 
         $this->bloodType = $bloodType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Medication>
+     */
+    public function getMedications(): Collection
+    {
+        return $this->medications;
+    }
+
+    public function addMedication(Medication $medication): static
+    {
+        if (!$this->medications->contains($medication)) {
+            $this->medications->add($medication);
+            $medication->setHealthContainer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedication(Medication $medication): static
+    {
+        if ($this->medications->removeElement($medication)) {
+            // set the owning side to null (unless already changed)
+            if ($medication->getHealthContainer() === $this) {
+                $medication->setHealthContainer(null);
+            }
+        }
 
         return $this;
     }
