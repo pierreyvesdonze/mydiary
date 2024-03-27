@@ -35,7 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Date::class)]
     private Collection $dates;
 
-    #[ORM\Column(length: 64)]
+    #[ORM\Column(length: 64, unique: true)]
     private ?string $pseudo = null;
 
     #[ORM\OneToMany(mappedBy: 'sender', targetEntity: FriendshipRequest::class)]

@@ -77,7 +77,7 @@ class RegistrationController extends AbstractController
             } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
                 // Capturer l'exception de violation de contrainte d'unicité
                 // Afficher un message d'erreur approprié à l'utilisateur
-                $this->addFlash('error', 'Un compte existe déjà avec cet email');
+                $this->addFlash('error', 'Un compte existe déjà avec cet email et/ou ce pseudo');
                 return $this->render('registration/register.html.twig', [
                     'registrationForm' => $form->createView()
                 ]);
