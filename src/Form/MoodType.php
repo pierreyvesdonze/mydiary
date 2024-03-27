@@ -25,6 +25,7 @@ class MoodType extends AbstractType
                 'choices' => [
                     'Joyeux'  => 'Joyeux',
                     'Neutre'  => 'Neutre',
+                    'Fatigué' => 'Fatigué',
                     'Anxieux' => 'Anxieux',
                     'Déprimé' => 'Déprimé'
                 ],

@@ -26,6 +26,8 @@
             <img src="{{ asset('assets/icons/joy.png') }}" alt="emoticon" class="mood-emoticon">
             {% elseif 'Neutre' == mood.dayMood %}
             <img src="{{ asset('assets/icons/neutral.png') }}" alt="emoticon" class="mood-emoticon">
+            {% elseif 'Fatigué' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/tired.png') }}" alt="emoticon" class="mood-emoticon">
             {% elseif 'Anxieux' == mood.dayMood %}
             <img src="{{ asset('assets/icons/anxious.png') }}" alt="emoticon" class="mood-emoticon">
             {% elseif 'Déprimé' == mood.dayMood %}
