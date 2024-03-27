@@ -3,6 +3,9 @@
 {% block title %}Humeur{% endblock %}
 
 {% block body %}
+<blockquote>
+    Voici votre carnet d'humeur personnel. Faites savoir à vos amis ou à vous-même combien la vie est rude au réveil !
+</blockquote>
 <div class="container-flex-between-bottom">
     <h1>Carnet d'humeur</h1>
     <a href="{{ path('mood_new') }}" class="custom-btn">Créer une humeur</a>
@@ -28,7 +31,7 @@
             {% elseif 'Déprimé' == mood.dayMood %}
             <img src="{{ asset('assets/icons/depressed.png') }}" alt="emoticon" class="mood-emoticon">
             {% endif %}
-            
+
         </div>
         <div class="collapsible-body">
             <span>

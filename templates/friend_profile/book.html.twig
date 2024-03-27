@@ -3,22 +3,24 @@
 {% block title %}{{ friendUser.pseudo }}{% endblock %}
 
 {% block body %}
-
+<blockquote>
+    Entrez dans le monde tumultueux et parfois dramatique de le journal de {{ friendUser.pseudo }}, où les péripéties de la vie quotidienne
+    sont exposées avec une sincérité désarmante
+</blockquote>
 <div class="book">
     <h4>Journal de {{ friendUser.pseudo }}</h4>
 
     <hr class="hr">
 
     <div class="container-inline">
-        {% if bookContents|length <= 1 %}
+        {% if bookContents|length <= 1 %} <p id="counter-documents"><span>{{ bookContents|length }}</span> document
+            rédigé.</p>
+            {% else %}
 
-        <p id="counter-documents"><span>{{ bookContents|length }}</span> document rédigé.</p>
-        {% else %}
+            <p id="counter-documents"><span>{{ bookContents|length }}</span> documents rédigés.</p>
 
-        <p id="counter-documents"><span>{{ bookContents|length }}</span> documents rédigés.</p>
-        
-        {% endif %}
-        
+            {% endif %}
+
     </div>
 
     <hr class="hr">

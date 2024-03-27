@@ -3,7 +3,10 @@
 {% block title %}Santé de {{ friendUser.pseudo }}{% endblock %}
 
 {% block body %}
-
+<blockquote>
+    Explorez les détails de sa santé avec sérieux et minutie, où chaque symptôme est consigné avec précision pour mieux
+    comprendre son état de bien-être.
+</blockquote>
 <h1>Profil santé de {{ friendUser.pseudo }}</h1>
 
 <div class="row">
@@ -119,37 +122,37 @@
             </div>
         </div>
     </div>
-    
+
     {# Traitement #}
-<div class="col s6 m6 l9">
-    <div class="card white">
-        <div class="card-content dark-text">
-            <div class="container-flex-between">
-                <span class="card-title">Traitements</span>
+    <div class="col s6 m6 l9">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Traitements</span>
+                </div>
+                {% if medications is not empty %}
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Psologie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medication in medications %}
+                        <tr>
+                            <td>{{ medication.name }}</td>
+                            <td>{{ medication.dosage }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                Aucun traitement enregistré
+                {% endif %}
             </div>
-            {% if medications is not empty %}
-            <table class="centered">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Psologie</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for medication in medications %}
-                    <tr>
-                        <td>{{ medication.name }}</td>
-                        <td>{{ medication.dosage }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-            Aucun traitement enregistré
-            {% endif %}
         </div>
     </div>
-</div>
 
 </div>
 

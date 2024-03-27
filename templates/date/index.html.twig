@@ -3,6 +3,9 @@
 {% block title %}Dates index{% endblock %}
 
 {% block body %}
+<blockquote>
+    Ah, les dates clés, ces moments où la vie vous frappe avec la subtilité d'un camion. Grâce à cette section, vous pourrez revivre chaque instant marquant de votre existence, du premier baiser à la chute libre dans l'abîme de l'ennui quotidien.
+</blockquote>
 <div class="container-flex-between-bottom">
     <h1>Dates</h1>
     <div>
@@ -28,7 +31,8 @@
         <div class="collapsible-body">
             <span>
                 {% endif %}
-                <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|date('d-m-Y') }}</span>
+                <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|date('d-m-Y')
+                    }}</span>
                 <br>
                 <strong class="more-strong-txt">Événement :</strong><span class="span-txt"> {{ date.event }}</span>
                 <br>
