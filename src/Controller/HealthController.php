@@ -58,6 +58,16 @@ class HealthController extends AbstractController
             $formatedHeight = null;
         }
 
+        // Calcule l'IMC
+        $imc         = null;
+        $imcCategory = null;
+
+        if ($height && $weights) {
+            $imcArray    = $healthService->getImc($height, $weights[0]);
+            $imc         = $imcArray[0];
+            $imcCategory = $imcArray[1];
+        }
+
         return $this->render('health/index.html.twig', [
             'cares'          => $cares,
             'vaccines'       => $vaccines,
@@ -65,7 +75,9 @@ class HealthController extends AbstractController
             'weights'        => $weights,
             'isHigher'       => $isHigher,
             'height'         => $height,
-            'formatedHeight' => $formatedHeight
+            'formatedHeight' => $formatedHeight,
+            'imc'            => $imc,
+            'imcCategory'    => $imcCategory,
         ]);
     }
 }

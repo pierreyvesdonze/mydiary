@@ -124,9 +124,19 @@ class FriendProfileController extends AbstractController
         $height          = $heightRepository->findByHealthContainer($healthContainer);
 
         if($height) {
-            $formatedHeight = $healthService->formatHeight($height->getValue());
+            $formatedHeight = $healthService->formatHeight($height[0]->getValue());
         } else {
             $formatedHeight = null;
+        }
+
+        // Calcule l'IMC
+        $imc         = null;
+        $imcCategory = null;
+
+        if ($height && $weights) {
+            $imcArray    = $healthService->getImc($height[0], $weights[0]);
+            $imc         = $imcArray[0];
+            $imcCategory = $imcArray[1];
         }
 
         return $this->render('friend_profile/health.html.twig', [
@@ -134,6 +144,8 @@ class FriendProfileController extends AbstractController
             'friendUser'     => $friendUser,
             'formatedHeight' => $formatedHeight,
             'height'         => $height,
+            "imc"            => $imc,
+            'imcCategory'    => $imcCategory,
         ]);
     }
 }

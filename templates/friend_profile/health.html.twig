@@ -8,7 +8,7 @@
 
 <div class="row">
     {# Poids #}
-    <div class="col s7 m8 l6">
+    <div class="col s12 m8 l5">
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
@@ -43,7 +43,7 @@
     </div>
 
     {# Taille #}
-    <div class="col s5 m8 l6">
+    <div class="col s6 m4 l4">
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
@@ -59,6 +59,11 @@
             </div>
         </div>
     </div>
+
+    {# IMC #}
+    {% include "common/imc.html.twig" %}
+
 </div>
+
 
 {% endblock %}

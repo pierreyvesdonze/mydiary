@@ -8,7 +8,7 @@
 
 {# Poids #}
 <div class="row">
-    <div class="col s12 m8 l7">
+    <div class="col s12 m8 l5">
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
@@ -56,9 +56,8 @@
         </div>
     </div>
 
-
     {# Taille #}
-    <div class="col s5 m4 l5">
+    <div class="col s6 m4 l4">
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
@@ -66,7 +65,7 @@
                 </div>
                 {% if height %}
                 <div class="container-flex-center">
-                    <span class="more-strong-txt">{{ formatedHeight }}</span>
+                    <h5 class="more-strong-txt">{{ formatedHeight }}</h5>
                 </div>
                 {% else %}
                 Non renseignée
@@ -74,7 +73,7 @@
             </div>
             <div class="card-action">
                 <div class="container-flex-between">
-                    {% if height  %}
+                    {% if height %}
                     <a href="{{ path('health_height_delete', {'id':height.id}) }}" class="disabled">Supprimer</a>
                     {% else %}
                     <a href="{{ path('health_height_new') }}">Ajouter</a>
@@ -83,6 +82,9 @@
             </div>
         </div>
     </div>
+
+    {# IMC #}
+    {% include "common/imc.html.twig" %}
 
 </div>
 

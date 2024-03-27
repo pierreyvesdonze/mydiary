@@ -39,7 +39,6 @@ class MoodType extends AbstractType
                     'Excellent' => 'Excellent',
                     'Bon'       => 'Bon',
                     'Moyen'     => 'Moyen',
-                    'Long'      => 'Long',
                     'Mauvais'   => 'Mauvais'
                 ]
             ])
