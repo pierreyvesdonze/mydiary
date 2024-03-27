@@ -17,13 +17,14 @@ class HealthVaccineType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Nom de votre vaccin'
             ])
-            ->add('vaccineDate', null, [
-                'label' => 'Date du vaccin',
-                'widget' => 'single_text',
+            ->add('injectionDate', null, [
+                'required' => false,
+                'label'    => "Date d'injection du vaccin",
+                'widget'   => 'single_text'
             ])
-            ->add('deadline', null, [
-                'label' => 'Date de rappel',
-                'widget' => 'single_text',
+            ->add('deadlineDate', null, [
+                'label'  => 'Date de rappel',
+                'widget' => 'single_text'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",

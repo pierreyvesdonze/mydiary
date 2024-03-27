@@ -139,11 +139,17 @@ class FriendProfileController extends AbstractController
         // Calcule l'IMC
         $imc         = null;
         $imcCategory = null;
-
         if ($height && $weights) {
             $imcArray    = $healthService->getImc($height[0], $weights[0]);
             $imc         = $imcArray[0];
             $imcCategory = $imcArray[1];
+        }
+
+        // Tri les vaccins par date décroissante
+        if($vaccines) {
+            usort($vaccines, function($a, $b) {
+                return $b->getInjectionDate() <=> $a->getInjectionDate();
+            });
         }
 
         return $this->render('friend_profile/health.html.twig', [

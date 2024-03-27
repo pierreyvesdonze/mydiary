@@ -33,7 +33,7 @@ class HealthController extends AbstractController
         $cares     = $healthContainer->getCares();
         $height    = $healthContainer->getHeight();
         $bloodType = $healthContainer->getBloodType();
-        $vaccines  = $healthContainer->getVaccines();
+        $vaccines  = $healthContainer->getVaccines()->toArray();
 
         // Effectue un tri sur la collection pour déterminer si le poids actuel est en hausse
         $weights  = $healthContainer->getWeights()->toArray();
@@ -66,10 +66,18 @@ class HealthController extends AbstractController
             $formatedHeight = null;
         }
 
+        // Calcule l'imc
         if ($height && $weights) {
             $imcArray    = $healthService->getImc($height, $weights[0]);
             $imc         = $imcArray[0];
             $imcCategory = $imcArray[1];
+        }
+
+        // Tri les vaccins par date décroissante
+        if($vaccines) {
+            usort($vaccines, function($a, $b) {
+                return $b->getInjectionDate() <=> $a->getInjectionDate();
+            });
         }
 
         return $this->render('health/index.html.twig', [

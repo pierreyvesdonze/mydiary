@@ -32,6 +32,7 @@ class HealthService
         return $isHigher;
     } */
 
+    
     // Formate la taille pour afficher par ex. 1m80
     public function formatHeight($height)
     {

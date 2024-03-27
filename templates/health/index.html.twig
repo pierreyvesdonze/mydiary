@@ -103,18 +103,18 @@
                     {% for vaccine in vaccines %}
                     <div class="container-flex-between">
                         <li class="dark-text">
-                            {{ vaccine.vaccineDate|date('m/Y') }} :
+                            {{ vaccine.injectionDate|date('m/Y') }} :
                         </li>
                         <li class="more-strong-txt">
                             {{ vaccine.title }}
                         </li>
                         <li class="dark-text">
-                            Rappel : {{ vaccine.deadline|date('m/Y') }}
+                            Rappel : {{ vaccine.deadlineDate|date('m/Y') }}
                         </li>
-                        <a href    = "{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"
-                           class   = "link-btn-danger"
-                           onclick = "return confirm('Supprimer ce vaccin ?');"><i
-                           class   = "material-icons red-text">delete_forever</i></a>
+                        <a href="{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"
+                            class="link-btn-danger no-margin-btn" onclick="return confirm('Supprimer ce vaccin ?');">
+                            <i class="material-icons red-text">delete_forever</i>
+                        </a>
                     </div>
                     <br>
                     {% endfor %}
@@ -160,6 +160,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock %}

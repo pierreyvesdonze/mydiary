@@ -79,13 +79,13 @@
                     {% for vaccine in vaccines %}
                     <div class="container-flex-between">
                         <li class="dark-text">
-                            {{ vaccine.vaccineDate|date('m/Y') }} :
+                            {{ vaccine.injectionDate|date('m/Y') }} :
                         </li>
                         <li class="more-strong-txt">
                             {{ vaccine.title }}
                         </li>
                         <li class="dark-text">
-                            Rappel : {{ vaccine.deadline|date('m/Y') }}
+                            Rappel : {{ vaccine.deadlineDate|date('m/Y') }}
                         </li>
                     </div>
                     <br>
