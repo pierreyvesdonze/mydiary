@@ -25,12 +25,15 @@ class HealthController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
+        /**
+         * @var HealthContainer|null $healthContainer
+         */
         $healthContainer = $user->getHealthContainer();
 
         $cares     = $healthContainer->getCares();
-        $vaccines  = $healthContainer->getVaccines();
         $height    = $healthContainer->getHeight();
         $bloodType = $healthContainer->getBloodType();
+        $vaccines  = $healthContainer->getVaccines();
 
         // Effectue un tri sur la collection pour déterminer si le poids actuel est en hausse
         $weights  = $healthContainer->getWeights()->toArray();
@@ -52,7 +55,7 @@ class HealthController extends AbstractController
             $isHigher = null;
         }
 
-        // Initialisation des variables pour calcul l'IMC
+        // Initialisation des variables pour calcul de l'IMC
         $imc         = null;
         $imcCategory = null;
 
@@ -67,10 +70,6 @@ class HealthController extends AbstractController
             $imcArray    = $healthService->getImc($height, $weights[0]);
             $imc         = $imcArray[0];
             $imcCategory = $imcArray[1];
-        }
-
-        if (!$bloodType) {
-            $bloodType = null;
         }
 
         return $this->render('health/index.html.twig', [

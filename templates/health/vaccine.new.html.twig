@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un vaccin{% endblock %}
+
+{% block body %}
+
+<h1>Ajouter un vaccin</h1>
+
+<div class="row health-small-form">
+  <div class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        {{ form_start(form) }}
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_label(form.vaccineDate) }}
+        {{ form_widget(form.vaccineDate) }}
+        {{ form_label(form.deadline) }}
+        {{ form_widget(form.deadline) }}
+        <br>
+        <br>
+        {{ form_widget(form.submit) }}
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

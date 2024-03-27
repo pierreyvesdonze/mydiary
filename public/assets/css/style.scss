@@ -368,7 +368,8 @@ MOOD
 HEALTH
  ***************************
  */
-.ul-weight-container {
+.ul-weight-container,
+.ul-vaccine-container {
     max-height: 200px;
     overflow-y: auto;
 }

@@ -51,7 +51,7 @@
                 </div>
                 {% if height %}
                 <div class="container-flex-center">
-                    <span class="more-strong-txt">{{ formatedHeight }}</span>
+                    <h5 class="more-strong-txt">{{ formatedHeight }}</h5>
                 </div>
                 {% else %}
                 Non renseignée
@@ -62,6 +62,42 @@
 
     {# IMC #}
     {% include "common/imc.html.twig" %}
+</div>
+
+
+<div class="row">
+    {# Vaccins #}
+    <div class="col s12 m12 l12">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Vaccins</span>
+                </div>
+                <p>
+                    {% if vaccines|length > 0 %}
+                <ul class="ul-vaccine-container">
+                    {% for vaccine in vaccines %}
+                    <div class="container-flex-between">
+                        <li class="dark-text">
+                            {{ vaccine.vaccineDate|date('m/Y') }} :
+                        </li>
+                        <li class="more-strong-txt">
+                            {{ vaccine.title }}
+                        </li>
+                        <li class="dark-text">
+                            Rappel : {{ vaccine.deadline|date('m/Y') }}
+                        </li>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                Aucune donnée enregistrée pour le moment
+                {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -83,6 +119,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock %}

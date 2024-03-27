@@ -40,7 +40,8 @@
                             {% endif %}
                         </span>
                         <a href="{{ path('health_weight_delete', {'id':weight.id}) }}"
-                            class="link-btn-danger margin-right-m1">Supprimer</a>
+                            class="link-btn-danger margin-right-m1"><i
+                                class="material-icons red-text">delete_forever</i></a>
                     </div>
                     <br>
                     {% endfor %}
@@ -72,9 +73,10 @@
                 {% endif %}
             </div>
             <div class="card-action">
-                <div class="container-flex-between">
+                <div class="container-flex-center">
                     {% if height %}
-                    <a href="{{ path('health_height_delete', {'id':height.id}) }}" class="disabled">Supprimer</a>
+                    <a href="{{ path('health_height_delete', {'id':height.id}) }}" class="disabled"><i
+                            class="material-icons red-text">delete_forever</i></a>
                     {% else %}
                     <a href="{{ path('health_height_new') }}">Ajouter</a>
                     {% endif %}
@@ -88,8 +90,51 @@
 </div>
 
 <div class="row">
+    {# Vaccins #}
+    <div class="col s12 m12 l12">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title">Vaccins</span>
+                </div>
+                <p>
+                    {% if vaccines|length > 0 %}
+                <ul class="ul-vaccine-container">
+                    {% for vaccine in vaccines %}
+                    <div class="container-flex-between">
+                        <li class="dark-text">
+                            {{ vaccine.vaccineDate|date('m/Y') }} :
+                        </li>
+                        <li class="more-strong-txt">
+                            {{ vaccine.title }}
+                        </li>
+                        <li class="dark-text">
+                            Rappel : {{ vaccine.deadline|date('m/Y') }}
+                        </li>
+                        <a href    = "{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"
+                           class   = "link-btn-danger"
+                           onclick = "return confirm('Supprimer ce vaccin ?');"><i
+                           class   = "material-icons red-text">delete_forever</i></a>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                Aucune donnée enregistrée pour le moment
+                {% endif %}
+                </p>
+            </div>
+            <div class="card-action">
+                <a href="{{ path('health_vaccine_new') }}">Ajouter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
     {# Groupe sanguin #}
-    <div class="col s6 m4 l3">
+    <div class="col s6 m6 l3">
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
@@ -99,9 +144,12 @@
                 <div class="container-flex-center">
                     <h5 class="more-strong-txt">{{ bloodType.value }}</h5>
                 </div>
-                <div class="card-action">
-                    <a href="{{ path('health_blood_type_delete', {'id':bloodType.id}) }}" class="disabled">Supprimer</a>
-                </div>
+                {# <div class="card-action">
+                    <div class="container-flex-center">
+                        <a href="{{ path('health_blood_type_delete', {'id':bloodType.id}) }}" class="disabled"><i
+                                class="material-icons red-text">delete_forever</i></a>
+                    </div>
+                </div> #}
                 {% else %}
                 Non disponible
                 <div class="card-action">
@@ -112,5 +160,6 @@
         </div>
     </div>
 </div>
+
 
 {% endblock %}

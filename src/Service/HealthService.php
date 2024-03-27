@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Weight;
 use Doctrine\ORM\EntityManagerInterface;
 
 class HealthService
@@ -11,6 +12,25 @@ class HealthService
         private EntityManagerInterface $entityManager,
     ) {
     }
+
+    // Détermine si le poids actuel est en hausse ou en baisse par rapport au précédent
+/*     public function isHigher($weights) {
+
+        $isHigher = usort($weights, function (Weight $a, Weight $b) {
+            return $b->getDate() <=> $a->getDate();
+        });
+
+        if (count($weights) > 1) {
+            $latestWeight   = $weights[0]->getWeight();
+            $previousWeight = $weights[1]->getWeight();
+            $isHigher       = $latestWeight > $previousWeight;
+        } else {
+            $latestWeight   = null;
+            $previousWeight = null;
+            $isHigher       = null;
+        }
+        return $isHigher;
+    } */
 
     // Formate la taille pour afficher par ex. 1m80
     public function formatHeight($height)

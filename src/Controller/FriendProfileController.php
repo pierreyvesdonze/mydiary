@@ -9,6 +9,7 @@ use App\Repository\DateRepository;
 use App\Repository\HeightRepository;
 use App\Repository\MoodRepository;
 use App\Repository\UserRepository;
+use App\Repository\VaccineRepository;
 use App\Repository\WeightRepository;
 use App\Service\HealthService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -117,6 +118,7 @@ class FriendProfileController extends AbstractController
         WeightRepository $weightRepository,
         HeightRepository $heightRepository,
         BloodTypeRepository $bloodTypeRepository,
+        VaccineRepository $vaccineRepository,
         HealthService $healthService,
     ): Response
     {
@@ -125,7 +127,9 @@ class FriendProfileController extends AbstractController
         $weights         = $weightRepository->findByHealthContainer($healthContainer);
         $height          = $heightRepository->findByHealthContainer($healthContainer);
         $bloodType       = $bloodTypeRepository->findByHealthContainer($healthContainer);
+        $vaccines         = $vaccineRepository->findByHealthContainer($healthContainer);
 
+        // Formate le poids
         if($height) {
             $formatedHeight = $healthService->formatHeight($height[0]->getValue());
         } else {
@@ -142,10 +146,6 @@ class FriendProfileController extends AbstractController
             $imcCategory = $imcArray[1];
         }
 
-        if (!$bloodType) {
-            $bloodType = null;
-        }
-
         return $this->render('friend_profile/health.html.twig', [
             'weights'        => $weights,
             'friendUser'     => $friendUser,
@@ -153,7 +153,8 @@ class FriendProfileController extends AbstractController
             'height'         => $height,
             "imc"            => $imc,
             'imcCategory'    => $imcCategory,
-            'bloodType'      => $bloodType,
+            'bloodType'      => $bloodType[0],
+            'vaccines'       => $vaccines,
         ]);
     }
 }
