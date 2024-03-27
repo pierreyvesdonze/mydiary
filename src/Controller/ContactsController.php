@@ -57,7 +57,8 @@ class ContactsController extends AbstractController
             'unrelatedContacts'     => $unrelatedContacts,
             'contacts'              => $contacts,
             'isFriendshipRequested' => $isFriendshipRequested,
-            'isFriend'              => $isFriend
+            'isFriend'              => $isFriend,
+            'env'                   => $_ENV['APP_ENV'],
         ]);
     }
 

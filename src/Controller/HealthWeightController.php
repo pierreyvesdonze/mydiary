@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -51,6 +52,12 @@ class HealthWeightController extends AbstractController
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('login');
+        }
+
+        if ($weight->getHealthContainer()->getUser() !== $user) {
+            $this->addFlash('error', 'Je ne sais pas ce que vous essayez de faire, mais ça ne marche pas...');
+
+            return $this->redirectToRoute('home');
         }
 
         $this->em->remove($weight);

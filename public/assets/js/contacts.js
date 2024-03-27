@@ -19,12 +19,18 @@ var appContact = {
     */
     sendFriendshipRequest: (e) => {
 
-        let currentTarget = $(e.currentTarget);
+        let   currentTarget = $(e.currentTarget);
+        let   targetId      = currentTarget.data('targetid');
+        
+        const envType       = $('.env').data('envtype');
 
-        let targetId = currentTarget.data('targetid');
+        if (envType === "prod") {
+            envUrl = '/mydiary/public/contacts/envoyer/invitation';
+        } else {
+            envUrl = '/contacts/envoyer/invitation'
+        }
         $.ajax({
-            url: '/mydiary/public/contacts/envoyer/invitation',
-            //url: '/contacts/envoyer/invitation', 
+            url: envUrl,
             type: 'POST',
             data: JSON.stringify(targetId),
             success: function (response) {

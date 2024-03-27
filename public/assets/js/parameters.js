@@ -12,16 +12,22 @@ var appParam = {
     },
 
     /**
-    * *****************************
-    * F U N C T I O N S
-    * *****************************
+     * *****************************
+     * F U N C T I O N S
+     * *****************************
     */
     changeVisibility: (e) => {
         let objectToChange = e.currentTarget.dataset.type;
 
+        const envType = $('.env').data('envtype');
+        if (envType === "prod") {
+            envUrl = '/mydiary/public/visibilite';
+        } else {
+            envUrl = '/visibilite'
+        }
+
         $.ajax({
-            url: '/mydiary/public/visibilite',
-            //url: '/visibilite',
+            url: envUrl,
             type: 'POST',
             data: objectToChange,
             success: function (response) {

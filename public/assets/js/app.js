@@ -12,7 +12,7 @@ var app = {
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')
-        }, 1000);
+        }, 1500);
 
         app.closeLoadingAnim();
 

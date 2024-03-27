@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/book')]
+#[Route('/journal')]
 class BookController extends AbstractController
 {
     
-    #[Route('/new', name: 'book_new', methods: ['GET', 'POST'])]
+    #[Route('/nouveau', name: 'book_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {   
         $user = $this->getUser();
@@ -61,12 +61,19 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'book_edit', methods: ['GET', 'POST'])]
+    #[Route('/modifier/{id}', name: 'book_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Book $book, EntityManagerInterface $entityManager): Response
     {
-        if (!$this->getUser()) {
+        $user = $this->getUser();
+        if (!$user) {
             return $this->redirectToRoute('login');
         }
+
+        if ($book->getUser() !== $user) {
+            $this->addFlash('error', "Vous ne pouvez pas écrire dans le journal d'un autre");
+            return $this->redirectToRoute('home');
+        }
+
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
@@ -84,11 +91,18 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'book_delete', methods: ['POST'])]
+    #[Route('/supprimer/{id}', name: 'book_delete', methods: ['POST'])]
     public function delete(Request $request, Book $book, EntityManagerInterface $entityManager): Response
     {
-        if (!$this->getUser()) {
+        $user = $this->getUser();
+        if (!$user) {
             return $this->redirectToRoute('login');
+        }
+
+        if ($book()->getUser() !== $user) {
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer ce journal.');
+
+            return $this->redirectToRoute('home');
         }
 
         if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token'))) {

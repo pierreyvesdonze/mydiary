@@ -121,9 +121,19 @@ class DateController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'date_delete', methods: ['POST'])]
+    #[Route('/supprimer/{id}', name: 'date_delete', methods: ['POST'])]
     public function delete(Date $date): Response
     {
+        $user = $this->getUser();
+        if(!$user) {
+            return $this->redirectToRoute('home');
+        }
+
+        if ($date->getUser() !== $user) {
+            $this->addFlash('error', 'Je ne sais pas ce que vous essayez de faire, mais ça ne marche pas...');
+            return $this->redirectToRoute('home');
+        }
+
         $this->em->remove($date);
         $this->em->flush();
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\EnvironnementService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,7 +13,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class ParameterController extends AbstractController
 {
 
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct
+    (
+        private EntityManagerInterface $em
+    )
     {}
 
     #[Route('/parametres', name: 'parameters')]
@@ -32,7 +36,8 @@ class ParameterController extends AbstractController
             'bookVisibility'   => $bookVisibility,
             'datesVisibility'  => $datesVisibility,
             'moodVisibility'   => $MoodVisibility,
-            'healthVisibility' => $healthVisibility
+            'healthVisibility' => $healthVisibility,
+            'env'              => $_ENV['APP_ENV'],
         ]);
     }
 
