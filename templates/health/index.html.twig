@@ -97,32 +97,33 @@
                 <div class="container-flex-between">
                     <span class="card-title">Vaccins</span>
                 </div>
-                <p>
-                    {% if vaccines|length > 0 %}
-                <ul class="ul-vaccine-container">
-                    {% for vaccine in vaccines %}
-                    <div class="container-flex-between">
-                        <li class="dark-text">
-                            {{ vaccine.injectionDate|date('m/Y') }} :
-                        </li>
-                        <li class="more-strong-txt">
-                            {{ vaccine.title }}
-                        </li>
-                        <li class="dark-text">
-                            Rappel : {{ vaccine.deadlineDate|date('m/Y') }}
-                        </li>
-                        <a href="{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"
-                            class="link-btn-danger no-margin-btn" onclick="return confirm('Supprimer ce vaccin ?');">
-                            <i class="material-icons red-text">delete_forever</i>
-                        </a>
-                    </div>
-                    <br>
-                    {% endfor %}
-                </ul>
+                {% if vaccines|length > 0 %}
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Rappel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vaccine in vaccines %}
+                        <tr>
+                            <td>{{ vaccine.injectionDate|date('m/Y') }}</td>
+                            <td>{{ vaccine.title }}
+                            </td>
+                            <td>{{ vaccine.deadlineDate|date('m/Y') }}
+                            </td>
+                            <td>
+                                <a href="{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"  onclick="return confirm('Supprimer ce vaccin ?');"><i class="material-icons red-text">delete_forever</i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
                 {% else %}
                 Aucune donnée enregistrée pour le moment
                 {% endif %}
-                </p>
             </div>
             <div class="card-action">
                 <a href="{{ path('health_vaccine_new') }}">Ajouter</a>
