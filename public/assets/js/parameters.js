@@ -20,8 +20,8 @@ var appParam = {
         let objectToChange = e.currentTarget.dataset.type;
 
         $.ajax({
-            //url: '/mydiary/public/visibilite',
-            url: '/visibilite',
+            url: '/mydiary/public/visibilite',
+            //url: '/visibilite',
             type: 'POST',
             data: objectToChange,
             success: function (response) {
