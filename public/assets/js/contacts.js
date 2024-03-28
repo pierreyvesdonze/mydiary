@@ -19,10 +19,10 @@ var appContact = {
     */
     sendFriendshipRequest: (e) => {
 
-        let   currentTarget = $(e.currentTarget);
-        let   targetId      = currentTarget.data('targetid');
-        
-        const envType       = $('.env').data('envtype');
+        let currentTarget = $(e.currentTarget);
+        let targetId = currentTarget.data('targetid');
+
+        const envType = $('.env').data('envtype');
 
         if (envType === "prod") {
             envUrl = '/mydiary/public/contacts/envoyer/invitation';
@@ -53,18 +53,32 @@ var appContact = {
 
     searchContact: function (evt) {
         evt.preventDefault();
-        let userInput = $('.search-input').val();
-
+        let userInput = $('.search-input').val().toLowerCase();
+    
+        // Fonction de normalisation Unicode pour traiter les caractères spéciaux
+        const normalize = (str) => {
+            return str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        };
+    
+        // Fonction pour comparer les chaînes de caractères normalisées
+        const containsNormalized = (str, term) => {
+            return normalize(str).includes(normalize(term));
+        };
+    
         $('.custom-row').hide();
-        $('.custom-row:contains("' + userInput + '")').show();
-
+        // Convertir le contenu en minuscules et comparer avec la version normalisée
+        $('.custom-row').filter(function() {
+            return containsNormalized($(this).text().toLowerCase(), userInput);
+        }).show();
+    
         $(window).keydown((event) => {
             if (event.keyCode == 13) {
                 event.preventDefault();
                 return false;
             }
-        })
-    },
+        });
+    }
+    
 }
 
 document.addEventListener('DOMContentLoaded', appContact.init);
