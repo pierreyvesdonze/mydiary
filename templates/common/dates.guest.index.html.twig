@@ -1,7 +1,9 @@
+{% if dates %}
 <div class="date-guest-container">
     <ul>
+        {% set sortedDates = dates|sort((a, b) => a.date.timestamp - b.date.timestamp) %}
         {% set previous_year = null %}
-        {% for date in dates %}
+        {% for date in sortedDates %}
         {% set year = date.date|date('Y') %}
         {% if previous_year is null or previous_year != year %}
         {% if previous_year is not null %}
@@ -14,18 +16,15 @@
     <div class="body">
         <span>
             {% endif %}
-            <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|format_datetime('full', 'none', locale='fr')
-                }}</span>
+            <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|date('d-m-Y') }}</span>
             <br>
             <strong class="more-strong-txt">Événement :</strong><span class="span-txt"> {{ date.event }}</span>
             <br>
             {% if date.comment %}
             <strong class="more-strong-txt">Commentaire :</strong><span class="span-txt"> {{ date.comment }}</span>
             {% endif %}
-
             <br>
             <br>
-
             {% set previous_year = year %}
             {% if loop.last %}
         </span>
@@ -35,3 +34,6 @@
 {% endfor %}
 </ul>
 </div>
+{% else %}
+    <p>Aucune date n'a été enregistrée pour le moment</p>
+{% endif %}
