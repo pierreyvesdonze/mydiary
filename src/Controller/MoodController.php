@@ -28,6 +28,8 @@ class MoodController extends AbstractController
 
         $moodContainer = $user->getMoodContainer();
         $moods = $moodRepository->findByMoodContainer($moodContainer);
+        
+        rsort($moods);
 
         return $this->render('mood/index.html.twig', [
             'moods' => $moods,

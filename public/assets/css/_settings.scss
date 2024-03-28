@@ -104,8 +104,7 @@ MATERIALIZE
 }
 
 .collection-header,
-.collection-item
-{
+.collection-item {
   border-bottom: 1px solid var(--border-color) !important;
 }
 
@@ -124,9 +123,12 @@ MATERIALIZE
 .collection-item,
 .collapsible-header,
 .collapsible-body,
-.card-action
- {
+.card-action {
   background-color: var(--main-content-color) !important;
+}
+
+.card-title-center {
+  margin: auto;
 }
 
 .collapsible-header {

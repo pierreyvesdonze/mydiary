@@ -402,10 +402,10 @@ MOOD
 HEALTH
  ***************************
  */
-.ul-weight-container,
+.flex-table,
 .ul-vaccine-container {
-    max-height: 200px;
-    overflow-y: auto;
+    max-height: 293px !important;
+    overflow-y: auto !important;
 }
 
 .health-small-form {
