@@ -7,14 +7,14 @@ var app = {
         * L I S T E N E R S
         * *****************************
         */
-        //$('.custom-btn').on('click', app.loadingAnim);
+        $('.custom-btn').on('click', app.loadingAnim);
 
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')
         }, 1500);
 
-        //app.closeLoadingAnim();
+        app.closeLoadingAnim();
 
         // nav sticky au scroll
         window.addEventListener('scroll', function() {

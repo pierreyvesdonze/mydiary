@@ -97,11 +97,10 @@ SPINNER LOADING ANIMATION
  */
 .animation-loading-container {
     display: none;
-    position: absolute;
-    left: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
     background-color: rgba(0, 0, 0, 0.411);
-    width: 100%;
-    height: 100vh;
     z-index: 2000;
 }
 
@@ -121,9 +120,9 @@ SPINNER LOADING ANIMATION
     height: 64px;
     margin: 8px;
     border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
+    border: 6px solid var(--dark-text);
+    border-color: var(--dark-text) transparent var(--dark-text) transparent;
+    animation: lds-dual-ring 1s linear infinite;
 }
 
 @keyframes lds-dual-ring {
@@ -318,6 +317,10 @@ CONTAINERS
     justify-content: center;
 }
 
+.custom-form .form-group .select-wrapper ul {
+    background-color: var(--nav-color) !important;
+}
+
 /*
  ***************************
 BOOK
@@ -386,6 +389,12 @@ DATE
 
 .date-guest-container {
     padding-left: 50px;
+}
+
+.dates-title-el {
+    &:hover {
+        color: var(--link-hover-color);
+    }
 }
 
 /*

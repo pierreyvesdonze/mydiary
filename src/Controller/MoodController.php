@@ -16,7 +16,6 @@ class MoodController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $em)
     {
-        
     }
     #[Route('/', name: 'mood_index', methods: ['GET'])]
     public function index(MoodRepository $moodRepository): Response
@@ -28,8 +27,18 @@ class MoodController extends AbstractController
 
         $moodContainer = $user->getMoodContainer();
         $moods = $moodRepository->findByMoodContainer($moodContainer);
-        
-        rsort($moods);
+
+        // Tri des humeurs par ordre décroissant
+        usort($moods, function ($a, $b) {
+            $dateA = $a->getDate()->getTimestamp();
+            $dateB = $b->getDate()->getTimestamp();
+
+            // Trier en ordre décroissant
+            if ($dateA == $dateB) {
+                return 0;
+            }
+            return ($dateA < $dateB) ? 1 : -1;
+        });
 
         return $this->render('mood/index.html.twig', [
             'moods' => $moods,
@@ -45,7 +54,9 @@ class MoodController extends AbstractController
         }
 
         $mood = new Mood();
-        $form = $this->createForm(MoodType::class, $mood);
+        $form = $this->createForm(MoodType::class, $mood, [
+            'attr' => ['class' => 'custom-form']
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
