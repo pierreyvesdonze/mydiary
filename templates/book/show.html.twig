@@ -38,9 +38,9 @@
 
     <div class="container-inline">
         {% if content.updatedAt %}
-        <h5>Le {{ content.updatedAt|date("d/m/Y") }}</h5>
+        <h5>{{ content.updatedAt|format_datetime('full', 'none', locale='fr') }}</h5>
         {% else %}
-        <h5>Le {{ content.createdAt|date("d/m/Y") }}</h5>
+        <h5>Le {{ content.createdAt|format_datetime('full', 'none', locale='fr') }}</h5>
         {% endif %}
     </div>
 

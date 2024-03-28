@@ -27,7 +27,7 @@
         <li>
             <div class="collapsible-header container-flex-between">
                 <h5>
-                    {{ mood.date|date('d-m-Y') }}
+                    {{ mood.date|format_datetime('full', 'none', locale='fr') }}
                 </h5>
 
                 {# Emoticones #}

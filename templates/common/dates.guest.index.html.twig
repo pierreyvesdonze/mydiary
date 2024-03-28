@@ -14,7 +14,7 @@
     <div class="body">
         <span>
             {% endif %}
-            <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|date('d-m-Y')
+            <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|format_datetime('full', 'none', locale='fr')
                 }}</span>
             <br>
             <strong class="more-strong-txt">Événement :</strong><span class="span-txt"> {{ date.event }}</span>

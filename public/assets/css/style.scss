@@ -246,10 +246,11 @@ BUTTONS
     padding: 7px;
     border: solid 1px var(--link-color);
     border-radius: 10px;
-    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.521);
+    transition: ease-in-out .12s;
 
     &:hover {
-        box-shadow: none;
+        background-color: var(--link-color);
+        color: var(--nav-color) !important;
     }
 
     &:focus {
@@ -267,6 +268,10 @@ BUTTONS
     border: solid 1px var(--danger-color);
     color: var(--danger-color) !important;
     margin-left: 10px;
+
+    &:hover {
+        background-color: var(--danger-color) !important;
+    }
 }
 
 form button.custom-btn {
@@ -342,10 +347,6 @@ BOOK
     }
 }
 
-.content {
-    backdrop-filter: blur(2px);
-}
-
 /*
  ***************************
 FILES / IMG
@@ -380,7 +381,6 @@ DATE
 
 .date-guest-container {
     padding-left: 50px;
-    backdrop-filter: blur(3px);
 }
 
 /*

@@ -23,7 +23,7 @@
                     {% for weight in weights %}
                     <div class="container-flex-between">
                         <li class="dark-text">
-                            Le {{ weight.date|date('d-m-Y') }} :
+                            {{ weight.date|format_datetime('full', 'none', locale='fr') }} :
                         </li>
                         <span class="more-strong-txt">
                             {% if weight.weight|round(2, 'floor') == weight.weight|round(0,
@@ -87,10 +87,10 @@
                     <tbody>
                         {% for vaccine in vaccines %}
                         <tr>
-                            <td>{{ vaccine.injectionDate|date('m/Y') }}</td>
+                            <td>{{ vaccine.injectionDate|format_datetime('full', 'none', locale='fr') }}</td>
                             <td>{{ vaccine.title }}
                             </td>
-                            <td>{{ vaccine.deadlineDate|date('m/Y') }}
+                            <td>{{ vaccine.deadlineDate|format_datetime('full', 'none', locale='fr') }}
                             </td>
                         </tr>
                         {% endfor %}

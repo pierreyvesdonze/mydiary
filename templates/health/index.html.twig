@@ -5,7 +5,8 @@
 {% block body %}
 
 <blockquote>
-    Fini les mots, place aux maux. Le profil santé résume toutes vos misères physiques en un seul endroit, vous permettant ainsi de contempler l'effondrement de votre bien-être.
+    Fini les mots, place aux maux. Le profil santé résume toutes vos misères physiques en un seul endroit, vous
+    permettant ainsi de contempler l'effondrement de votre bien-être.
 </blockquote>
 
 <h1>Mon profil santé</h1>
@@ -33,7 +34,7 @@
                     {% for weight in weights %}
                     <div class="container-flex-between">
                         <li class="dark-text">
-                            Le {{ weight.date|date('d-m-Y') }} :
+                            {{ weight.date|format_datetime('full', 'none', locale='fr') }} :
                         </li>
                         <span class="more-strong-txt">
                             {% if weight.weight|round(2, 'floor') == weight.weight|round(0,
@@ -56,7 +57,7 @@
                 </p>
             </div>
             <div class="card-action">
-                <a href="{{ path('health_weight_new') }}">Ajouter</a>
+                <a href="{{ path('health_weight_new') }}" class="custom-btn">Ajouter</a>
             </div>
         </div>
     </div>
@@ -82,7 +83,7 @@
                     <a href="{{ path('health_height_delete', {'id':height.id}) }}" class="disabled"><i
                             class="material-icons red-text">delete_forever</i></a>
                     {% else %}
-                    <a href="{{ path('health_height_new') }}">Ajouter</a>
+                    <a href="{{ path('health_height_new') }}" class="custom-btn">Ajouter</a>
                     {% endif %}
                 </div>
             </div>
@@ -113,10 +114,10 @@
                     <tbody>
                         {% for vaccine in vaccines %}
                         <tr>
-                            <td>{{ vaccine.injectionDate|date('m/Y') }}</td>
+                            <td>{{ vaccine.injectionDate|format_datetime('full', 'none', locale='fr') }}</td>
                             <td>{{ vaccine.title }}
                             </td>
-                            <td>{{ vaccine.deadlineDate|date('m/Y') }}
+                            <td>{{ vaccine.deadlineDate|format_datetime('full', 'none', locale='fr') }}
                             </td>
                             <td>
                                 <a href="{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"
@@ -132,7 +133,7 @@
                 {% endif %}
             </div>
             <div class="card-action">
-                <a href="{{ path('health_vaccine_new') }}">Ajouter</a>
+                <a href="{{ path('health_vaccine_new') }}" class="custom-btn">Ajouter</a>
             </div>
         </div>
     </div>
@@ -160,7 +161,7 @@
                 {% else %}
                 Non disponible
                 <div class="card-action">
-                    <a href="{{ path('health_blood_type_new') }}">Ajouter</a>
+                    <a href="{{ path('health_blood_type_new') }}" class="custom-btn">Ajouter</a>
                 </div>
                 {% endif %}
             </div>
@@ -200,7 +201,7 @@
                 Aucun traitement enregistré
                 {% endif %}
                 <div class="card-action">
-                    <a href="{{ path('health_medication_new') }}">Ajouter</a>
+                    <a href="{{ path('health_medication_new') }}" class="custom-btn">Ajouter</a>
                 </div>
             </div>
         </div>

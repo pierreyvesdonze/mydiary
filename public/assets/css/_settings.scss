@@ -137,6 +137,10 @@ MATERIALIZE
   margin-left: 20px !important;
 }
 
+input {
+  color: var(--dark-text) !important;
+}
+
 .select-dropdown>li>span {
   color: var(--primary-color) !important;
   font-weight: bold;
@@ -190,6 +194,7 @@ textarea::placeholder {
 }
 
 blockquote {
+  font-style: italic;
   border-left: 5px solid var(--link-color) !important;
   font-size: 1.3em !important;
   font-weight: 500 !important;
