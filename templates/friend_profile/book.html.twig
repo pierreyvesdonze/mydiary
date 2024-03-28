@@ -4,10 +4,11 @@
 
 {% block body %}
 <blockquote>
-    Entrez dans le monde tumultueux et parfois dramatique de le journal de {{ friendUser.pseudo }}, où les péripéties de la vie quotidienne
+    Entrez dans le monde tumultueux et parfois dramatique de le journal de {{ friendUser.pseudo }}, où les péripéties de
+    la vie quotidienne
     sont exposées avec une sincérité désarmante
 </blockquote>
-<div class="book">
+<div class="book-container">
     <h4>Journal de {{ friendUser.pseudo }}</h4>
 
     <hr class="hr">
@@ -30,27 +31,28 @@
     </div>
 
     <br>
+    <div class="book">
+        {% for content in bookContents %}
 
-    {% for content in bookContents %}
+        <div class="container-inline">
+            {% if content.updatedAt %}
+            <h5>{{ content.updatedAt|format_datetime('full', 'none', locale='fr')}}</h5>
+            {% else %}
+            <h5>{{ content.createdAt|format_datetime('full', 'none', locale='fr') }}</h5>
+            {% endif %}
 
-    <div class="container-inline">
-        {% if content.updatedAt %}
-        <h5>{{ content.updatedAt|format_datetime('full', 'none', locale='fr')}}</h5>
-        {% else %}
-        <h5>{{ content.createdAt|format_datetime('full', 'none', locale='fr') }}</h5>
-        {% endif %}
+        </div>
 
+        <div class="content">
+            <p>{{ content.content }}</p>
+        </div>
+
+        {% endfor %}
     </div>
-
-    <div class="content">
-        <p>{{ content.content }}</p>
-    </div>
-
-    {% endfor %}
+    <br><br>
+    <a href="{{ path('friend_profile_index', {'user2':friendUser.id}) }}" class="custom-btn">Revenir au profil</a>
 </div>
 
-<br><br>
 
-<a href="{{ path('friend_profile_index', {'user2':friendUser.id}) }}" class="custom-btn">Revenir au profil</a>
 
 {% endblock %}

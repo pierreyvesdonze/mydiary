@@ -5,7 +5,8 @@
 {% block body %}
 
 <blockquote>
-    Rien de tel qu'un journal de bord pour envoyer une bouteille à la mer ! À moins que quelque part, quelqu'un vous épie. 
+    Rien de tel qu'un journal de bord pour envoyer une bouteille à la mer ! À moins que quelque part, quelqu'un vous
+    épie.
 </blockquote>
 
 <div class="book">
@@ -32,28 +33,28 @@
 
     <br>
 
-    <h3>Vos dernières entrées</h3>
+    <div class="book-container">
+        <h3>Vos dernières entrées</h3>
 
-    {% for content in bookContents %}
+        {% for content in bookContents %}
 
-    <div class="container-inline">
-        {% if content.updatedAt %}
-        <h5>{{ content.updatedAt|format_datetime('full', 'none', locale='fr') }}</h5>
-        {% else %}
-        <h5>Le {{ content.createdAt|format_datetime('full', 'none', locale='fr') }}</h5>
-        {% endif %}
-    </div>
-
-    <div class="content">
-        <p>{{ content.content }}</p>
-        <div class="btn-control-flex">
-            <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
-            {% include "book_content/_delete_form.html.twig" %}
+        <div class="container-inline">
+            {% if content.updatedAt %}
+            <h5>{{ content.updatedAt|format_datetime('full', 'none', locale='fr') }}</h5>
+            {% else %}
+            <h5>Le {{ content.createdAt|format_datetime('full', 'none', locale='fr') }}</h5>
+            {% endif %}
         </div>
+
+        <div class="content">
+            <p>{{ content.content }}</p>
+            <div class="btn-control-flex">
+                <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
+                {% include "book_content/_delete_form.html.twig" %}
+            </div>
+        </div>
+        <br><br>
+        {% endfor %}
     </div>
-
-    <br><br>
-
-    {% endfor %}
 </div>
 {% endblock %}

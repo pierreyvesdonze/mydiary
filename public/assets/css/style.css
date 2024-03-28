@@ -536,6 +536,10 @@ CONTAINERS
 BOOK
  ***************************
  */
+.book-container {
+  padding: 0 10px;
+}
+
 #counter-documents {
   margin-left: 2em;
 }

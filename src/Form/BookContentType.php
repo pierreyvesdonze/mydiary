@@ -15,19 +15,19 @@ class BookContentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content', TextareaType::class, [
+            ->add('content', CKEditorType::class, [
                 'label' => 'Contenu',
                 'attr' => [
                     'class' => 'large-input'
-                ]
+                ],
+                'config_name' => 'my_config'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
                 'attr' => [
-                    'class' => "custom-btn validate-btn" 
+                    'class' => "custom-btn validate-btn"
                 ]
-            ]);
-        ;
+            ]);;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
