@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Vaccine;
-use App\Form\HealthVaccineType;
+use App\Entity\HealthCondition;
+use App\Form\HealthConditionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/sante')]
-class HealthVaccineController extends AbstractController
+class HealthConditionController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $em)
     {}
 
-    #[Route('/vaccin/creer', name: 'health_vaccine_new')]
+    #[Route('/particularite/creer', name: 'health_condition_new')]
     public function newVaccine(Request $request): Response
     {
         $user = $this->getUser();
@@ -24,38 +24,38 @@ class HealthVaccineController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $vaccine = new Vaccine();
-        $form = $this->createForm(HealthVaccineType::class, $vaccine);
+        $healthCondition = new HealthCondition();
+        $form = $this->createForm(HealthConditionType::class, $healthCondition);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $vaccine->setHealthContainer($user->getHealthContainer());
+            $healthCondition->setHealthContainer($user->getHealthContainer());
             
-            $this->em->persist($vaccine);
+            $this->em->persist($healthCondition);
             $this->em->flush();
 
-            $this->addFlash('success', 'Nouveau vaccin enregistré.');
+            $this->addFlash('success', 'Maladie/Handicap enregistré(e).');
 
             return $this->redirectToRoute('health_index');
         }
 
-        return $this->render('health/vaccine.new.html.twig', [
+        return $this->render('health/healthCondition.new.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
-    #[Route('/vaccine/supprimer/{id}', name: 'health_vaccine_delete')]
-    public function deleteVaccine(Vaccine $vaccine): Response
+    #[Route('/particularite/supprimer/{id}', name: 'health_condition_delete')]
+    public function deleteVaccine(HealthCondition $healthCondition): Response
     {
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('login');
         }
 
-        $this->em->remove($vaccine);
+        $this->em->remove($healthCondition);
         $this->em->flush();
 
-        $this->addFlash('success', 'Vaccin supprimé');
+        $this->addFlash('success', 'Maladie/Handicap supprimé(e).');
 
         return $this->redirectToRoute('health_index');
     }

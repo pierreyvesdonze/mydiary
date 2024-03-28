@@ -17,7 +17,14 @@
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
+                    {% if weights %}
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/weight.png') }}" alt="balance">
+                    </span>
+                    {% else %}
                     <span class="card-title">Mon poids</span>
+                    {% endif %}
+
                     {% if weights %}
                     <span>
                         {% if isHigher %}
@@ -73,7 +80,13 @@
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
-                    <span class="card-title">Taille</span>
+                    {% if height %}
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/height.png') }}" alt="taille">
+                    </span>
+                    {% else %}
+                    <span class="card-title">Ma taille</span>
+                    {% endif %}
                 </div>
                 {% if height %}
                 <div class="container-flex-center">
@@ -106,7 +119,13 @@
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
+                    {% if vaccines %}
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/vaccine.png') }}" alt="vaccin">
+                    </span>
+                    {% else %}
                     <span class="card-title">Vaccins</span>
+                    {% endif %}
                 </div>
                 {% if vaccines|length > 0 %}
                 <table class="centered">
@@ -145,51 +164,9 @@
     </div>
 </div>
 
-
-<div class="row">
-    {# Traitement #}
-    <div class="col s12 m12 l12">
-        <div class="card white">
-            <div class="card-content dark-text">
-                <div class="container-flex-between">
-                    <span class="card-title">Traitements</span>
-                </div>
-                {% if medications is not empty %}
-                <table class="centered">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Psologie</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for medication in medications %}
-                        <tr>
-                            <td>{{ medication.name }}</td>
-                            <td>{{ medication.dosage }}</td>
-                            <td>
-                                <a href="{{ path('health_medication_delete', {'id':medication.id}) }}" class=""
-                                    onclick="return confirm('Supprimer ce traitement ?');"><i
-                                        class="material-icons red-text">delete_forever</i></a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                Aucun traitement enregistré
-                {% endif %}
-                <div class="card-action">
-                    <a href="{{ path('health_medication_new') }}" class="custom-btn">Ajouter</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     {# Groupe sanguin #}
-    <div class="col s6 m6 l3">
+    <div class="col s6 m4 l3">
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
@@ -223,6 +200,88 @@
         </div>
     </div>
 
+    {# Maladies/handicaps #}
+    <div class="col s6 m8 l9">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    {% if healthConditions|length > 0 %}
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/healthcare.png') }}" alt="sante">
+                    </span>
+                    {% else %}
+                    <span class="card-title">Handicaps/Maladies</span>
+                    {% endif %}
+                </div>
+                {% if healthConditions %}
+                <div class="container-flex-between">
+                    {% for healthCondition in healthConditions %}
+                    <span class="more-strong-txt">
+                        {{ healthCondition.title }}
+                    </span>
+                    <a href="{{ path('health_condition_delete', {'id':healthCondition.id}) }}"
+                        onclick="return confirm('Supprimer cette condition ?');">
+                        <i class="material-icons red-text">delete_forever</i>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                Aucune donnée enregistrée pour le moment
+                {% endif %}
+            </div>
+            <div class="card-action">
+                <a href="{{ path('health_condition_new') }}" class="custom-btn">Ajouter</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {# Traitement #}
+    <div class="col s12 m12 l12">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    {% if medications %}
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/drugs.png') }}" alt="medicaments">
+                    </span>
+                    {% else %}
+                    <span class="card-title">Traitements</span>
+                    {% endif %}
+
+                </div>
+                {% if medications is not empty %}
+                <table class="centered">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Psologie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medication in medications %}
+                        <tr>
+                            <td>{{ medication.name }}</td>
+                            <td>{{ medication.dosage }}</td>
+                            <td>
+                                <a href="{{ path('health_medication_delete', {'id':medication.id}) }}" class=""
+                                    onclick="return confirm('Supprimer ce traitement ?');"><i
+                                        class="material-icons red-text">delete_forever</i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                Aucun traitement enregistré
+                {% endif %}
+                <div class="card-action">
+                    <a href="{{ path('health_medication_new') }}" class="custom-btn">Ajouter</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

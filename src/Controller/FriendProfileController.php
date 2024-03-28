@@ -6,6 +6,7 @@ use App\Repository\BloodTypeRepository;
 use App\Repository\BookContentRepository;
 use App\Repository\BookRepository;
 use App\Repository\DateRepository;
+use App\Repository\HealthConditionRepository;
 use App\Repository\HeightRepository;
 use App\Repository\MedicationRepository;
 use App\Repository\MoodRepository;
@@ -121,16 +122,18 @@ class FriendProfileController extends AbstractController
         BloodTypeRepository $bloodTypeRepository,
         VaccineRepository $vaccineRepository,
         MedicationRepository $medicationRepository,
+        HealthConditionRepository $healthConditionRepository,
         HealthService $healthService,
     ): Response
     {
-        $friendUser      = $this->userRepository->findOneBy(['id' => $friend]);
-        $healthContainer = $friendUser->getHealthContainer();
-        $weights         = $weightRepository->findByHealthContainer($healthContainer);
-        $height          = $heightRepository->findByHealthContainer($healthContainer);
-        $bloodType       = $bloodTypeRepository->findByHealthContainer($healthContainer);
-        $vaccines        = $vaccineRepository->findByHealthContainer($healthContainer);
-        $medications     = $medicationRepository->findByHealthContainer($healthContainer);
+        $friendUser       = $this->userRepository->findOneBy(['id' => $friend]);
+        $healthContainer  = $friendUser->getHealthContainer();
+        $weights          = $weightRepository->findByHealthContainer($healthContainer);
+        $height           = $heightRepository->findByHealthContainer($healthContainer);
+        $bloodType        = $bloodTypeRepository->findByHealthContainer($healthContainer);
+        $vaccines         = $vaccineRepository->findByHealthContainer($healthContainer);
+        $medications      = $medicationRepository->findByHealthContainer($healthContainer);
+        $healthConditions = $healthConditionRepository->findByHealthContainer($healthContainer);
 
         // Formate le poids
         if($height) {
@@ -156,15 +159,16 @@ class FriendProfileController extends AbstractController
         }
 
         return $this->render('friend_profile/health.html.twig', [
-            'weights'        => $weights,
-            'friendUser'     => $friendUser,
-            'formatedHeight' => $formatedHeight,
-            'height'         => $height,
-            "imc"            => $imc,
-            'imcCategory'    => $imcCategory,
-            'bloodType'      => $bloodType[0],
-            'vaccines'       => $vaccines,
-            'medications'    => $medications,
+            'weights'          => $weights ,
+            'friendUser'       => $friendUser ,
+            'formatedHeight'   => $formatedHeight ,
+            'height'           => $height ,
+            "imc"              => $imc ,
+            'imcCategory'      => $imcCategory ,
+            'bloodType'        => $bloodType[0] ,
+            'vaccines'         => $vaccines ,
+            'medications'      => $medications,
+            'healthConditions' => $healthConditions,
         ]);
     }
 }

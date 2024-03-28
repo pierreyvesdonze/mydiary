@@ -40,12 +40,16 @@ class HealthContainer
     #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Medication::class)]
     private Collection $medications;
 
+    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: HealthCondition::class)]
+    private Collection $healthConditions;
+
     public function __construct()
     {
         $this->vaccines = new ArrayCollection();
         $this->cares = new ArrayCollection();
         $this->weights = new ArrayCollection();
         $this->medications = new ArrayCollection();
+        $this->healthConditions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -225,6 +229,36 @@ class HealthContainer
             // set the owning side to null (unless already changed)
             if ($medication->getHealthContainer() === $this) {
                 $medication->setHealthContainer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HealthCondition>
+     */
+    public function getHealthConditions(): Collection
+    {
+        return $this->healthConditions;
+    }
+
+    public function addHealthCondition(HealthCondition $healthCondition): static
+    {
+        if (!$this->healthConditions->contains($healthCondition)) {
+            $this->healthConditions->add($healthCondition);
+            $healthCondition->setHealthContainer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHealthCondition(HealthCondition $healthCondition): static
+    {
+        if ($this->healthConditions->removeElement($healthCondition)) {
+            // set the owning side to null (unless already changed)
+            if ($healthCondition->getHealthContainer() === $this) {
+                $healthCondition->setHealthContainer(null);
             }
         }
 

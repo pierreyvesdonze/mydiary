@@ -30,11 +30,12 @@ class HealthController extends AbstractController
          */
         $healthContainer = $user->getHealthContainer();
 
-        $cares       = $healthContainer->getCares();
-        $height      = $healthContainer->getHeight();
-        $bloodType   = $healthContainer->getBloodType();
-        $vaccines    = $healthContainer->getVaccines()->toArray();
-        $medications = $healthContainer->getMedications();
+        $cares            = $healthContainer->getCares();
+        $height           = $healthContainer->getHeight();
+        $bloodType        = $healthContainer->getBloodType();
+        $vaccines         = $healthContainer->getVaccines()->toArray();
+        $medications      = $healthContainer->getMedications();
+        $healthConditions = $healthContainer->getHealthConditions();
 
         // Effectue un tri sur la collection pour déterminer si le poids actuel est en hausse
         $weights  = $healthContainer->getWeights()->toArray();
@@ -74,7 +75,7 @@ class HealthController extends AbstractController
             $imcCategory = $imcArray[1];
         }
 
-        // Tri les vaccins par date décroissante
+        // Tri les vaccins par date décroissant
         if($vaccines) {
             usort($vaccines, function($a, $b) {
                 return $b->getInjectionDate() <=> $a->getInjectionDate();
@@ -82,17 +83,18 @@ class HealthController extends AbstractController
         }
 
         return $this->render('health/index.html.twig', [
-            'cares'          => $cares,
-            'vaccines'       => $vaccines,
-            'height'         => $height,
-            'weights'        => $weights,
-            'isHigher'       => $isHigher,
-            'height'         => $height,
-            'formatedHeight' => $formatedHeight,
-            'imc'            => $imc,
-            'imcCategory'    => $imcCategory,
-            'bloodType'      => $bloodType,
-            'medications'    => $medications,
+            'cares'            => $cares,
+            'vaccines'         => $vaccines,
+            'height'           => $height,
+            'weights'          => $weights,
+            'isHigher'         => $isHigher,
+            'height'           => $height,
+            'formatedHeight'   => $formatedHeight,
+            'imc'              => $imc,
+            'imcCategory'      => $imcCategory,
+            'bloodType'        => $bloodType,
+            'medications'      => $medications,
+            'healthConditions' => $healthConditions,
         ]);
     }
 }

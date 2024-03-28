@@ -15,7 +15,9 @@
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
-                    <span class="card-title">Poids</span>
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/weight.png') }}" alt="balance">
+                    </span>
                 </div>
                 <p>
                     {% if weights|length > 0 %}
@@ -50,7 +52,9 @@
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
-                    <span class="card-title">Taille</span>
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/height.png') }}" alt="taille">
+                    </span>
                 </div>
                 {% if height %}
                 <div class="container-flex-center">
@@ -73,7 +77,9 @@
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
-                    <span class="card-title">Vaccins</span>
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/vaccine.png') }}" alt="vaccin">
+                    </span>
                 </div>
                 {% if vaccines|length > 0 %}
                 <table class="centered">
@@ -105,32 +111,14 @@
 </div>
 
 <div class="row">
-    {# Groupe sanguin #}
-    <div class="col s6 m4 l3">
+    {# Traitement #}
+    <div class="col s12 m12 l12">
         <div class="card white">
             <div class="card-content dark-text">
                 <div class="container-flex-between">
                     <span class="card-title card-title-center">
-                        <img src="{{ asset('assets/icons/blood.png') }}" alt="">
+                        <img src="{{ asset('assets/icons/drugs.png') }}" alt="medicaments">
                     </span>
-                </div>
-                {% if bloodType %}
-                <div class="container-flex-center">
-                    <h5 class="more-strong-txt">{{ bloodType.value }}</h5>
-                </div>
-                {% else %}
-                Non disponible
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-    {# Traitement #}
-    <div class="col s6 m6 l9">
-        <div class="card white">
-            <div class="card-content dark-text">
-                <div class="container-flex-between">
-                    <span class="card-title">Traitements</span>
                 </div>
                 {% if medications is not empty %}
                 <table class="centered">
@@ -155,7 +143,56 @@
             </div>
         </div>
     </div>
+</div>
 
+<div class="row">
+    {# Groupe sanguin #}
+    <div class="col s6 m4 l3">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/blood.png') }}" alt="">
+                    </span>
+                </div>
+                {% if bloodType %}
+                <div class="container-flex-center">
+                    <h5 class="more-strong-txt">{{ bloodType.value }}</h5>
+                </div>
+                {% else %}
+                Non renseigné
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {# Maladies/handicaps #}
+    <div class="col s6 m8 l9">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <div class="container-flex-between">
+                    {% if healthConditions|length > 0 %}
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/healthcare.png') }}" alt="sante">
+                    </span>
+                    {% else %}
+                    <span class="card-title">Handicaps/Maladies</span>
+                    {% endif %}
+                </div>
+                {% if healthConditions %}
+                <div class="container-flex-between">
+                    {% for healthCondition in healthConditions %}
+                    <span class="more-strong-txt">
+                        {{ healthCondition.title }}
+                    </span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                Aucune donnée enregistrée pour le moment
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
