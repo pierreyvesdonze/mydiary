@@ -169,14 +169,14 @@
     {# Maladies/handicaps #}
     <div class="col s6 m8 l9">
         <div class="card white">
-            <div class="card-content dark-text">
+            <div class="card-content dark-text max-height-container">
                 <div class="container-flex-between">
                     {% if healthConditions|length > 0 %}
                     <span class="card-title card-title-center">
                         <img src="{{ asset('assets/icons/healthcare.png') }}" alt="sante">
                     </span>
                     {% else %}
-                    <span class="card-title">Handicaps/Maladies</span>
+                    <span class="card-title">Handicaps/Maladies/Allergies</span>
                     {% endif %}
                 </div>
                 {% if healthConditions %}
@@ -186,6 +186,7 @@
                         {{ healthCondition.title }}
                     </span>
                 </div>
+                <br>
                 {% endfor %}
                 {% else %}
                 Aucune donnée enregistrée pour le moment

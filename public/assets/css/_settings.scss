@@ -139,6 +139,11 @@ MATERIALIZE
   margin-left: 20px !important;
 }
 
+.max-height-container {
+  max-height: 300px;
+    overflow-y: auto;
+}
+
 input {
   color: var(--dark-text) !important;
 }
