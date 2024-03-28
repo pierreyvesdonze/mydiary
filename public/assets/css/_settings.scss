@@ -1,19 +1,39 @@
 :root {
-  //--body-bg: #406179;
   --body-bg: white;
+  --body-img: url('../images/always-grey.png');
   --dark-text: rgb(80, 82, 83);
   --alert-bg: rgba(0, 0, 0, 0.589);
   --primary-color: #676a6f;
+  --border-color: rgba(160, 160, 160, 0.2);
   --link-color: #5181a3;
   --link-hover-color: #3d92cf;
   --disabled-color: rgb(141, 139, 139);
   --danger-color: #a3515c;
   --nav-color: #ffffffe8;
+  --main-content-color: white;
   --flash-alert: rgb(49, 114, 49);
   --active-color: #ebebeba1;
   --indicator-color: #213c85a1;
   --divider-color: #c4c5c5;
+}
 
+:root[theme='dark'] {
+  --body-bg: rgb(20 21 22);
+  --body-img: url('../images/always-grey-dark.png');
+  --dark-text: rgb(206, 213, 216);
+  --alert-bg: rgba(0, 0, 0, 0.589);
+  --primary-color: #abb1b9;
+  --border-color: rgba(160, 160, 160, 0.2);
+  --link-color: #5181a3;
+  --link-hover-color: #3d92cf;
+  --disabled-color: rgb(141, 139, 139);
+  --danger-color: #a3515c;
+  --nav-color: rgba(20, 21, 22, 0.774);
+  --main-content-color: rgb(20, 21, 22);
+  --flash-alert: rgb(49, 114, 49);
+  --active-color: #ffffffa1;
+  --indicator-color: #213c85a1;
+  --divider-color: #e4e4e4;
 }
 
 body {
@@ -21,7 +41,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background: var(--body-bg);
-  background-image: url('../images/always-grey.png');
+  background-image: var(--body-img);
   background-repeat: repeat;
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
@@ -78,6 +98,37 @@ textarea {
 MATERIALIZE
  ***************************
  */
+.collection {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.collection-header,
+.collection-item
+{
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.collapsible {
+  border-top: 1px solid var(--border-color) !important;
+  border-right: 1px solid var(--border-color) !important;
+  border-left: 1px solid var(--border-color) !important;
+}
+
+.collapsible-header {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.card-content,
+.collection .collection-header,
+.collection-item,
+.collapsible-header,
+.collapsible-body,
+.card-action
+ {
+  background-color: var(--main-content-color) !important;
+}
+
 .collapsible-header {
   justify-content: center;
 }
