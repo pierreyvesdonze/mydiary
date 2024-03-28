@@ -180,13 +180,13 @@
                     {% endif %}
                 </div>
                 {% if healthConditions %}
-                <div class="container-flex-between">
-                    {% for healthCondition in healthConditions %}
+                {% for healthCondition in healthConditions %}
+                <div class="container-flex-center">
                     <span class="more-strong-txt">
                         {{ healthCondition.title }}
                     </span>
-                    {% endfor %}
                 </div>
+                {% endfor %}
                 {% else %}
                 Aucune donnée enregistrée pour le moment
                 {% endif %}

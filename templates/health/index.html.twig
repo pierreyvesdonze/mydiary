@@ -214,8 +214,8 @@
                     {% endif %}
                 </div>
                 {% if healthConditions %}
+                {% for healthCondition in healthConditions %}
                 <div class="container-flex-between">
-                    {% for healthCondition in healthConditions %}
                     <span class="more-strong-txt">
                         {{ healthCondition.title }}
                     </span>
@@ -223,8 +223,9 @@
                         onclick="return confirm('Supprimer cette condition ?');">
                         <i class="material-icons red-text">delete_forever</i>
                     </a>
-                    {% endfor %}
                 </div>
+                <br>
+                {% endfor %}
                 {% else %}
                 Aucune donnée enregistrée pour le moment
                 {% endif %}
