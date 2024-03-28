@@ -65,9 +65,9 @@ var appContact = {
             return normalize(str).includes(normalize(term));
         };
     
-        $('.custom-row').hide();
+        $('.search-contact-container').hide();
         // Convertir le contenu en minuscules et comparer avec la version normalisée
-        $('.custom-row').filter(function() {
+        $('.search-contact-container').filter(function() {
             return containsNormalized($(this).text().toLowerCase(), userInput);
         }).show();
     

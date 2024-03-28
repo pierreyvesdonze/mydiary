@@ -25,7 +25,7 @@
             {% set friend = contact.user1 %}        
         {% endif %}
 
-        <div class="custom-row">
+        <div class="custom-row search-contact-container">
             <strong>{{ friend.pseudo }}</strong>
             <a href="{{ path('delete_friendship', {'friend':friend.id}) }}"
                 class="secondary-content link-btn-danger"

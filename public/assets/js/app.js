@@ -14,7 +14,7 @@ var app = {
             $('.alert').fadeOut('fast')
         }, 1500);
 
-        app.closeLoadingAnim();
+        //app.closeLoadingAnim();
 
         // nav sticky au scroll
         window.addEventListener('scroll', function() {
