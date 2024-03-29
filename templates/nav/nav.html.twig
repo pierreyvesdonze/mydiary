@@ -1,5 +1,5 @@
 <!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
+<ul id="dropdown-user" class="dropdown-content dropdown-nav">
   {% if app.user %}
   <li><a href="{{ path('parameters') }}">Paramètres</a></li>
   <li><a href="{{ path('logout') }}">Déconnexion</a></li>
@@ -7,6 +7,14 @@
   <li><a href="{{ path('login') }}">Connexion</a></li>
   <li><a href="{{ path('register') }}">S'enregistrer</a></li>
   {% endif %}
+</ul>
+
+<ul id="dropdown-tools" class="dropdown-content dropdown-nav">
+{#   <li><a href="#">Routines</a></li>
+  <li><a href="#">Méditation</a></li>
+  <li><a href="#">Respiration</a></li>
+  <li><a href="#">Gestion du stress</a></li> #}
+  <li><a href="{{ path('quotes') }}">Citations</a></li>
 </ul>
 
 <nav class="nav">
@@ -30,7 +38,8 @@
       {% endif %}
 
       <!-- Dropdown Trigger -->
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><i class="material-icons right">person</i></a>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-tools">Outils</a>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-user"><i class="material-icons right">person</i></a>
       </li>
     </ul>
   </div>
@@ -42,6 +51,11 @@
   <li><a href="{{ path('mood_index') }}">Humeur</a></li>
   <li><a href="{{ path('health_index') }}">Santé</a></li>
   <li><a href="{{ path('date_index') }}">Dates</a></li>
+{#   <li><a href="#">Routines</a></li>
+  <li><a href="#">Méditation</a></li>
+  <li><a href="#">Respiration</a></li>
+  <li><a href="#">Gestion du stress</a></li> #}
+  <li><a href="{{ path('quotes') }}">Citations</a></li>
   {# <li><a href="#">Idées</a></li>
   <li><a href="#">Projets</a></li> #}
 {#   <li><a href="{{ path('file_index') }}">Fichiers</a></li> #}

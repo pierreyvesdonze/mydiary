@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Citations{% endblock %}
+{% block body %}
+
+<br><br>
+
+<div class="quote-container">
+    <blockquote>"{{ randomQuote.text }}"</blockquote>
+</div>
+
+<br><br>
+
+<div class="container-flex-center">
+    <i class="material-icons">arrow_upward</i>
+</div>
+<br>
+<div class="container-flex-center">
+    <a href="{{ path('quotes') }}" class="custom-btn">Rafraichir</a>
+</div>
+
+<br><br>
+<br><br>
+
+<div class="container-flex-center">
+    {{ form_start(form) }}
+    {{ form_label(form.text) }}
+    {{ form_widget(form.text) }}
+    <br>
+    {{ form_widget(form.submit, {'attr': {'class': 'custom-submit-button'}} ) }}
+    {{ form_end(form) }}
+</div>
+
+
+{% endblock %}

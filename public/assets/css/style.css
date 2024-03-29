@@ -17,6 +17,7 @@ MEDIA QUERIES
   --nav-color: #ffffffe8;
   --main-content-color: white;
   --flash-alert: rgb(49, 114, 49);
+  --flash-alert-error: rgb(150, 47, 47);
   --active-color: #ebebeba1;
   --indicator-color: #213c85a1;
   --divider-color: #c4c5c5;
@@ -36,6 +37,7 @@ MEDIA QUERIES
   --nav-color: rgba(20, 21, 22, 0.774);
   --main-content-color: rgb(20, 21, 22);
   --flash-alert: rgb(49, 114, 49);
+  --flash-alert-error: rgb(150, 47, 47);
   --active-color: #ffffffa1;
   --indicator-color: #213c85a1;
   --divider-color: #e4e4e4;
@@ -387,6 +389,14 @@ ALERT / FLASH MESSAGE
   }
 }
 
+.alert-success {
+  color: var(--flash-alert);
+}
+
+.alert-error {
+  color: var(--flash-alert-error);
+}
+
 /*
  ***************************
 NAV
@@ -407,7 +417,7 @@ nav .nav-wrapper a {
   z-index: 1000;
 }
 
-#dropdown1 {
+.dropdown-nav {
   width: 150px !important;
   background-color: var(--nav-color) !important;
 }
@@ -460,17 +470,24 @@ BUTTONS
   margin-left: 0 !important;
 }
 
-.custom-btn {
+.custom-btn,
+.custom-submit-button {
   padding: 7px;
   border: solid 1px var(--link-color);
   border-radius: 10px;
   transition: ease-in-out 0.12s;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--link-color);
+  font-family: "Montserrat", sans-serif !important;
 }
-.custom-btn:hover {
-  background-color: var(--link-color);
+.custom-btn:hover,
+.custom-submit-button:hover {
+  background-color: var(--link-hover-color);
   color: var(--nav-color) !important;
 }
-.custom-btn:focus {
+.custom-btn:focus,
+.custom-submit-button:focus {
   background-color: #fff;
 }
 
@@ -527,6 +544,7 @@ CONTAINERS
 }
 
 .container-flex-center {
+  padding: 0 10px;
   display: flex;
   justify-content: center;
 }
@@ -633,4 +651,27 @@ HEALTH
 
 .health-small-form {
   width: 50%;
+}
+
+/*
+ ***************************
+OUTILS
+ ***************************
+ */
+.quote-type {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+textarea#quote_text {
+  border-radius: 10px !important;
+  padding: 2em;
+  width: 390px !important;
+  height: 80px !important;
+}
+
+.quote-container {
+  width: 100%;
+  height: 90px;
 }/*# sourceMappingURL=style.css.map */
