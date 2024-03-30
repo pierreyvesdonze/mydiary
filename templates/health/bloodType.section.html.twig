@@ -1,0 +1,33 @@
+<div class="card white">
+    <div class="card-content dark-text">
+        <div class="container-flex-between">
+            {% if bloodType %}
+            <span class="card-title card-title-center">
+                <img src="{{ asset('assets/icons/blood.png') }}" alt="sang">
+            </span>
+            {% else %}
+            <span class="card-title">Groupe sanguin</span>
+            {% endif %}
+        </div>
+        {% if bloodType %}
+        <div class="container-flex-center">
+            <h5 class="more-strong-txt">{{ bloodType.value }}</h5>
+        </div>
+        {% else %}
+        Non renseigné
+        {% endif %}
+    </div>
+    <div class="card-action">
+        <div class="container-flex-center">
+            {% if bloodType %}
+            <a href="{{ path('health_blood_type_edit', {'id':bloodType.id}) }}"><i
+                    class="material-icons">sync</i></a>
+            <a href="{{ path('health_blood_type_delete', {'id':bloodType.id}) }}"
+                onclick="return confirm('Supprimer votre groupe sanguin ?');" class=""><i
+                    class="material-icons red-text">delete_forever</i></a>
+            {% else %}
+            <a href="{{ path('health_blood_type_new') }}" class="custom-btn">Ajouter</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

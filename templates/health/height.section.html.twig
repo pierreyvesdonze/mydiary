@@ -1,0 +1,32 @@
+<div class="card white">
+    <div class="card-content dark-text">
+        <div class="container-flex-between">
+            {% if height %}
+            <span class="card-title card-title-center">
+                <img src="{{ asset('assets/icons/height.png') }}" alt="taille">
+            </span>
+            {% else %}
+            <span class="card-title">Ma taille</span>
+            {% endif %}
+        </div>
+        {% if height %}
+        <div class="container-flex-center">
+            <h5 class="more-strong-txt">{{ formatedHeight }}</h5>
+        </div>
+        {% else %}
+        Non renseignée
+        {% endif %}
+    </div>
+    <div class="card-action">
+        <div class="container-flex-center">
+            {% if height %}
+            <a href="{{ path('health_height_edit', {'id':height.id}) }}"><i class="material-icons">sync</i></a>
+            <a href="{{ path('health_height_delete', {'id':height.id}) }}"
+                onclick="return confirm('Supprimer votre taille ?');" class=""><i
+                    class="material-icons red-text">delete_forever</i></a>
+            {% else %}
+            <a href="{{ path('health_height_new') }}" class="custom-btn">Ajouter</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

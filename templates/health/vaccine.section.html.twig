@@ -1,0 +1,45 @@
+<div class="card white">
+    <div class="card-content dark-text">
+        <div class="container-flex-between">
+            {% if vaccines %}
+            <span class="card-title card-title-center">
+                <img src="{{ asset('assets/icons/vaccine.png') }}" alt="vaccin">
+            </span>
+            {% else %}
+            <span class="card-title">Vaccins</span>
+            {% endif %}
+        </div>
+        {% if vaccines|length > 0 %}
+        <table class="centered">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Rappel</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vaccine in vaccines %}
+                <tr>
+                    <td>{{ vaccine.injectionDate|format_datetime('short', 'none', locale='fr') }}</td>
+                    <td>{{ vaccine.title }}
+                    </td>
+                    <td>{{ vaccine.deadlineDate|format_datetime('short', 'none', locale='fr') }}
+                    </td>
+                    <td>
+                        <a href="{{ path('health_vaccine_delete', {'id':vaccine.id}) }}"
+                            onclick="return confirm('Supprimer ce vaccin ?');"><i
+                                class="material-icons red-text">delete_forever</i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        Aucune donnée enregistrée pour le moment
+        {% endif %}
+    </div>
+    <div class="card-action">
+        <a href="{{ path('health_vaccine_new') }}" class="custom-btn">Ajouter</a>
+    </div>
+</div>

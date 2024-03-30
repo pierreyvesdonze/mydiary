@@ -1,0 +1,58 @@
+<div class="card white">
+    <div class="card-content dark-text">
+        <div class="container-flex-between">
+            {% if weights %}
+            <span class="card-title card-title-center">
+                <img src="{{ asset('assets/icons/weight.png') }}" alt="balance">
+            </span>
+            {% else %}
+            <span class="card-title">Mon poids</span>
+            {% endif %}
+
+            {% if weights %}
+            <span>
+                {% if isHigher %}
+                <i class="material-icons red-text">arrow_upward</i>
+                {% else %}
+                <i class="material-icons green-text">arrow_downward</i>
+                {% endif %}
+            </span>
+            {% endif %}
+        </div>
+        <p>
+            {% if weights|length > 0 %}
+        <div class="flex-table">
+            <table class="weight-table">
+                <tbody>
+                    {% for weight in weights %}
+                    <tr>
+                        <td class="dark-text">
+                            {{ weight.date|format_datetime('full', 'none', locale='fr') }}
+                        </td>
+                        <td class="more-strong-text">
+                            {% if weight.weight|round(2, 'floor') == weight.weight|round(0,
+                            'floor') %}
+                            {{ weight.weight|round(0, 'floor') }} kg
+                            {% else %}
+                            {{ weight.weight }} kg
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('health_weight_delete', {'id':weight.id}) }}"
+                                class="link-btn-danger"><i
+                                    class="material-icons red-text">delete_forever</i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        Aucune donnée enregistrée pour le moment
+        {% endif %}
+        </p>
+    </div>
+    <div class="card-action">
+        <a href="{{ path('health_weight_new') }}" class="custom-btn">Ajouter</a>
+    </div>
+</div>

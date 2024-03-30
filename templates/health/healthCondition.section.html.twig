@@ -1,0 +1,32 @@
+<div class="card white">
+    <div class="card-content dark-text max-height-container">
+        <div class="container-flex-between">
+            {% if healthConditions|length > 0 %}
+            <span class="card-title card-title-center">
+                <img src="{{ asset('assets/icons/healthcare.png') }}" alt="sante">
+            </span>
+            {% else %}
+            <span class="card-title">Handicaps/Maladies/Allergies</span>
+            {% endif %}
+        </div>
+        {% if healthConditions %}
+        {% for healthCondition in healthConditions %}
+        <div class="container-flex-between">
+            <span class="more-strong-txt">
+                {{ healthCondition.title }}
+            </span>
+            <a href="{{ path('health_condition_delete', {'id':healthCondition.id}) }}"
+                onclick="return confirm('Supprimer cette condition ?');">
+                <i class="material-icons red-text">delete_forever</i>
+            </a>
+        </div>
+        <br>
+        {% endfor %}
+        {% else %}
+        Aucune donnée enregistrée pour le moment
+        {% endif %}
+    </div>
+    <div class="card-action">
+        <a href="{{ path('health_condition_new') }}" class="custom-btn">Ajouter</a>
+    </div>
+</div>
