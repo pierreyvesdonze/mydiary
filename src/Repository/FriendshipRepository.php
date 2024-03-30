@@ -50,6 +50,18 @@ class FriendshipRepository extends ServiceEntityRepository
     /**
      * @return Friendship
      */
+    public function findOneByUser($user): array
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('(f.user1 = :user) OR (f.user2 = :user)')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Friendship
+     */
     public function findOneByUsers($user, $friend): array
     {
         return $this->createQueryBuilder('f')

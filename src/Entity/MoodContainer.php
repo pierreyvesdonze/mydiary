@@ -22,7 +22,7 @@ class MoodContainer
     #[ORM\Column]
     private ?bool $visibility = null;
 
-    #[ORM\OneToMany(mappedBy: 'moodContainer', targetEntity: Mood::class)]
+    #[ORM\OneToMany(mappedBy: 'moodContainer', targetEntity: Mood::class,  cascade: ['persist', 'remove'])]
     private Collection $moods;
 
     public function __construct()

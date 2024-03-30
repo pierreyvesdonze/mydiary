@@ -3,19 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Entity\Dates;
 use App\Entity\DatesContainer;
 use App\Entity\HealthContainer;
 use App\Entity\MoodContainer;
 use App\Entity\RoutineContainer;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\FriendshipRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -25,7 +27,7 @@ class RegistrationController extends AbstractController
     {
     }
 
-    #[Route('/register', name: 'register')]
+    #[Route('/enregistrement', name: 'register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
@@ -90,11 +92,44 @@ class RegistrationController extends AbstractController
                 ]);
             }
 
+            $this->addFlash('success', 'Votre compte a bien été créé !');
+
             return $this->redirectToRoute('login');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    #[Route('/supprimer/compte', name: 'delete_account')]
+    public function deleteAccout(
+        FriendshipRepository $friendshipRepository,
+        SessionInterface $session,
+        TokenStorageInterface $tokenStorage,
+    ): Response
+    {
+        $user = $this->getUser();
+        if(!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        // Suppression des amitiés
+        $friendshipsToDelete = $friendshipRepository->findFriendships($user);
+        foreach ($friendshipsToDelete as $toDelete) {
+            $toDelete->setUser1(null);
+            $toDelete->setUser2(null);
+            $this->em->remove($toDelete);
+        }
+
+        $tokenStorage->setToken(null);
+        $session->invalidate();
+        
+        $this->em->remove($user);
+        $this->em->flush();
+
+        $this->addFlash('success', 'Votre compte a bien été supprimé !');
+
+        return $this->redirectToRoute('home');
     }
 }

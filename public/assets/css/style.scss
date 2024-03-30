@@ -336,6 +336,10 @@ CONTAINERS
     justify-content: center;
 }
 
+.auto-margin-container {
+    margin: auto 10px !important;
+}
+
 .control-flex-end {
     display: flex;
     justify-content: end;
@@ -349,17 +353,17 @@ CONTAINERS
 }
 
 .custom-form {
-    width: 60%;
+    width: 100%;
     margin: auto;
 
     @include xs {
-        margin: 10px;
-        width: 100%;
+        margin: 10px auto;
+        width: 90%;
     }
-
+    
     @include sm {
-        margin: 10px;
-        width: 100%;
+        margin: 10px auto;
+        width: 90%;
     }
 }
 
@@ -461,6 +465,7 @@ DATE
 MOOD
  ***************************
  */
+
 .span-mood-txt {
     line-height: 30px;
 }

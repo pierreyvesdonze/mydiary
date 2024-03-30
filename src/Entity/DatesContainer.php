@@ -15,7 +15,7 @@ class DatesContainer
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'datesContainer', targetEntity: Date::class)]
+    #[ORM\OneToMany(mappedBy: 'datesContainer', targetEntity: Date::class, cascade: ['persist', 'remove'])]
     private Collection $dateContent;
 
     #[ORM\OneToOne(inversedBy: 'datesContainer', cascade: ['persist', 'remove'])]

@@ -19,7 +19,7 @@ class HealthHeightType extends AbstractType
             ->add('value', NumberType::class, [
                 'html5' => true,
                 'attr' => [
-                    'placeholder' => 'Ajoutez ici votre taille (en cm)',
+                    'placeholder' => 'Ajoutez ici votre taille en cm (ex: 175)',
                     'min' => 10,
                     'max' => 300
                 ],

@@ -22,7 +22,7 @@ class RoutineContainer
     #[ORM\Column]
     private ?bool $visibility = null;
 
-    #[ORM\OneToMany(mappedBy: 'routineContainer', targetEntity: Routine::class)]
+    #[ORM\OneToMany(mappedBy: 'routineContainer', targetEntity: Routine::class, cascade: ['persist', 'remove'])]
     private Collection $routines;
 
     public function __construct()

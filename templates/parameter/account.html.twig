@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="card">
+            <div class="card-content dark-text">
+                <div class="card-title">
+                    <h5>Mon compte</h5>
+                </div>
+                <div class="card-action">
+                    <div class="container-flex-between">
+                        <div class="accent-title">Mon pseudo : {{ app.user.pseudo }}</div>
+                        <div>
+                            <a href="#!" class="custom-btn">Changer</a>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="container-flex-between">
+                        <div class="accent-title">Supprimer mon compte</div>
+                        <div>
+                            <a href="{{ path('delete_account') }}" class="custom-btn btn-danger"  onclick="return confirm('Attention ! La suppression de votre compte est défininitive, toutes vos données seront effacées de la base de donner. Cliquez pour confirmer.');">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,13 +22,13 @@ class HealthContainer
     #[ORM\Column]
     private ?bool $visibility = null;
 
-    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Vaccine::class)]
+    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Vaccine::class, cascade: ['persist', 'remove'])]
     private Collection $vaccines;
 
     #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Care::class)]
     private Collection $cares;
 
-    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Weight::class)]
+    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Weight::class, cascade: ['persist', 'remove'])]
     private Collection $weights;
 
     #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist', 'remove'])]
@@ -37,10 +37,10 @@ class HealthContainer
     #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist', 'remove'])]
     private ?BloodType $bloodType = null;
 
-    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Medication::class)]
+    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Medication::class, cascade: ['persist', 'remove'])]
     private Collection $medications;
 
-    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: HealthCondition::class)]
+    #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: HealthCondition::class, cascade: ['persist', 'remove'])]
     private Collection $healthConditions;
 
     public function __construct()

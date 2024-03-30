@@ -17,7 +17,7 @@ class HealthWeightType extends AbstractType
             ->add('weight', NumberType::class, [
                 'scale' => 2,
                 'attr' => [
-                    'placeholder' => 'Ajoutez ici votre poids'
+                    'placeholder' => 'Ajoutez ici votre poids en kg (ex: 65)'
                 ]
             ])
             ->add('date', null, [
