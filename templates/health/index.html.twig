@@ -99,7 +99,7 @@
             <div class="card-action">
                 <div class="container-flex-center">
                     {% if height %}
-                    <a href="{{ path('health_height_delete', {'id':height.id}) }}"><i
+                    <a href="{{ path('health_height_delete', {'id':height.id}) }}" class="disabled"><i
                             class="material-icons red-text">delete_forever</i></a>
                     {% else %}
                     <a href="{{ path('health_height_new') }}" class="custom-btn">Ajouter</a>
