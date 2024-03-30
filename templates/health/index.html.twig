@@ -11,8 +11,8 @@
 
 <h1>Mon profil santé</h1>
 
-{# Poids #}
 <div class="row">
+    {# Poids #}
     <div class="col s12 m8 l5">
         <div class="card white">
             <div class="card-content dark-text">
@@ -100,7 +100,7 @@
                     {% if height %}
                     <a href="{{ path('health_height_edit', {'id':height.id}) }}"><i class="material-icons">sync</i></a>
                     <a href="{{ path('health_height_delete', {'id':height.id}) }}"
-                        onclick="return confirm('Supprimer votre taille ?');" class="disabled"><i
+                        onclick="return confirm('Supprimer votre taille ?');" class=""><i
                             class="material-icons red-text">delete_forever</i></a>
                     {% else %}
                     <a href="{{ path('health_height_new') }}" class="custom-btn">Ajouter</a>
@@ -109,11 +109,11 @@
             </div>
         </div>
     </div>
-</div>
 
-{# IMC #}
-<div class="col s6 m5 l3">
-    {% include "common/imc.html.twig" %}
+    {# IMC #}
+    <div class="col s6 m5 l3">
+        {% include "common/imc.html.twig" %}
+    </div>
 </div>
 
 <div class="row">
@@ -178,7 +178,7 @@
                         <img src="{{ asset('assets/icons/blood.png') }}" alt="sang">
                     </span>
                     {% else %}
-                    <span class="card-title">Mon poids</span>
+                    <span class="card-title">Groupe sanguin</span>
                     {% endif %}
                 </div>
                 {% if bloodType %}
@@ -191,11 +191,11 @@
             </div>
             <div class="card-action">
                 <div class="container-flex-center">
-                    {% if height %}
+                    {% if bloodType %}
                     <a href="{{ path('health_blood_type_edit', {'id':bloodType.id}) }}"><i
                             class="material-icons">sync</i></a>
                     <a href="{{ path('health_blood_type_delete', {'id':bloodType.id}) }}"
-                        onclick="return confirm('Supprimer votre groupe sanguin ?');" class="disabled"><i
+                        onclick="return confirm('Supprimer votre groupe sanguin ?');" class=""><i
                             class="material-icons red-text">delete_forever</i></a>
                     {% else %}
                     <a href="{{ path('health_blood_type_new') }}" class="custom-btn">Ajouter</a>
@@ -204,40 +204,40 @@
             </div>
         </div>
     </div>
-</div>
 
-{# Maladies/handicaps #}
-<div class="col s8 m8 l9">
-    <div class="card white">
-        <div class="card-content dark-text max-height-container">
-            <div class="container-flex-between">
-                {% if healthConditions|length > 0 %}
-                <span class="card-title card-title-center">
-                    <img src="{{ asset('assets/icons/healthcare.png') }}" alt="sante">
-                </span>
+    {# Maladies/handicaps #}
+    <div class="col s12 m8 l9">
+        <div class="card white">
+            <div class="card-content dark-text max-height-container">
+                <div class="container-flex-between">
+                    {% if healthConditions|length > 0 %}
+                    <span class="card-title card-title-center">
+                        <img src="{{ asset('assets/icons/healthcare.png') }}" alt="sante">
+                    </span>
+                    {% else %}
+                    <span class="card-title">Handicaps/Maladies/Allergies</span>
+                    {% endif %}
+                </div>
+                {% if healthConditions %}
+                {% for healthCondition in healthConditions %}
+                <div class="container-flex-between">
+                    <span class="more-strong-txt">
+                        {{ healthCondition.title }}
+                    </span>
+                    <a href="{{ path('health_condition_delete', {'id':healthCondition.id}) }}"
+                        onclick="return confirm('Supprimer cette condition ?');">
+                        <i class="material-icons red-text">delete_forever</i>
+                    </a>
+                </div>
+                <br>
+                {% endfor %}
                 {% else %}
-                <span class="card-title">Handicaps/Maladies/Allergies</span>
+                Aucune donnée enregistrée pour le moment
                 {% endif %}
             </div>
-            {% if healthConditions %}
-            {% for healthCondition in healthConditions %}
-            <div class="container-flex-between">
-                <span class="more-strong-txt">
-                    {{ healthCondition.title }}
-                </span>
-                <a href="{{ path('health_condition_delete', {'id':healthCondition.id}) }}"
-                    onclick="return confirm('Supprimer cette condition ?');">
-                    <i class="material-icons red-text">delete_forever</i>
-                </a>
+            <div class="card-action">
+                <a href="{{ path('health_condition_new') }}" class="custom-btn">Ajouter</a>
             </div>
-            <br>
-            {% endfor %}
-            {% else %}
-            Aucune donnée enregistrée pour le moment
-            {% endif %}
-        </div>
-        <div class="card-action">
-            <a href="{{ path('health_condition_new') }}" class="custom-btn">Ajouter</a>
         </div>
     </div>
 </div>

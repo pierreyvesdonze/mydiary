@@ -13,7 +13,7 @@ class BloodType
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'bloodType', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'bloodType', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?HealthContainer $healthContainer = null;
 

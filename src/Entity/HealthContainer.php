@@ -31,10 +31,10 @@ class HealthContainer
     #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Weight::class, cascade: ['persist', 'remove'])]
     private Collection $weights;
 
-    #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist'])]
     private ?Height $height = null;
 
-    #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'healthContainer', cascade: ['persist'])]
     private ?BloodType $bloodType = null;
 
     #[ORM\OneToMany(mappedBy: 'healthContainer', targetEntity: Medication::class, cascade: ['persist', 'remove'])]

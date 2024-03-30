@@ -14,7 +14,7 @@ class Height
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'height', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'height', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?HealthContainer $healthContainer = null;
 

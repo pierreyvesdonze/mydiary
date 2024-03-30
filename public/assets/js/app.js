@@ -15,11 +15,12 @@ var app = {
 
         app.closeLoadingAnim(); */
 
+        console.log('JS is working');
+
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')
         }, 2200);
-
 
         // nav sticky au scroll
         window.addEventListener('scroll', function () {
