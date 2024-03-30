@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use App\Service\EnvironnementService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -74,17 +75,30 @@ class ParameterController extends AbstractController
         return new JsonResponse($requestData);
     }
 
-    /*     #[Route('/changer/pseudo/utilisateur', name: 'change_user_pseudo', options: ['expose' => true])]
-    public function changeUserPseudo(Request $request): JsonResponse
-    {
+    #[Route('/changer/pseudo/utilisateur', name: 'change_user_pseudo', options: ['expose' => true])]
+    public function changeUserPseudo(
+        Request $request,
+        UserRepository $userRepository,
+    ): JsonResponse {
+        
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('login');
         }
 
         $requestData = $request->getContent();
-        $user->setPseudo($requestData);
 
-        return new JsonResponse('ok');
-    } */
+        $userExist = $userRepository->findOneBy([
+            'pseudo' => $requestData
+        ]);
+
+        if($userExist) {
+            return new JsonResponse(true);
+        } 
+
+        $user->setPseudo($requestData);
+        $this->em->flush();
+
+        return new JsonResponse(false);
+    }
 }

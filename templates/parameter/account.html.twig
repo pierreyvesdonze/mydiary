@@ -7,16 +7,18 @@
                 </div>
                 <div class="card-action">
                     <div class="container-flex-between">
-                        <div class="accent-title">Mon pseudo : {{ app.user.pseudo }}</div>
+                        <div class="accent-title" id="user-account-pseudo">Mon pseudo : {{ app.user.pseudo }}</div>
                         <div>
-                            <a href="#modal-pseudo-user" class="custom-btn modal-trigger" id="trigger-modal-pseudo-user">Changer</a>
+                            <a href="#modal-pseudo-user" class="custom-btn modal-trigger"
+                                id="trigger-modal-pseudo-user">Changer</a>
                         </div>
                     </div>
                     <br><br>
                     <div class="container-flex-between">
-                        <div class="accent-title">Supprimer mon compte</div>
+                        <div class="accent-title"></div>
                         <div>
-                            <a href="{{ path('delete_account') }}" class="custom-btn btn-danger"  onclick="return confirm('Attention ! La suppression de votre compte est défininitive, toutes vos données seront effacées de la base de donner. Cliquez pour confirmer.');">Supprimer</a>
+                            <a href="{{ path('delete_account') }}" class="custom-btn btn-danger"
+                                onclick="return confirm('Attention ! La suppression de votre compte est défininitive, toutes vos données seront effacées de la base de donner. Cliquez pour confirmer.');">Supprimer mon</a>
                         </div>
                     </div>
                 </div>
@@ -28,10 +30,13 @@
 <!-- Modal Structure -->
 <div id="modal-pseudo-user" class="modal">
     <div class="modal-content">
-        <h4>Gérer votre routine quotidienne</h4>
-        <p>Créez, organisez et suivez vos routines avec aisance, transformant chaque jour en une symphonie de productivité et de bien-être.</p>
+        <h4 class="modal-content-title">Entrez un nouveau pseudo</h4>
+        <div class="input-field col s6">
+            <input placeholder="Placeholder" id="change-pseudo-input" type="text" class="validate">
+        </div>
     </div>
     <div class="modal-footer">
-        <a href="{{ path('routine_new') }}" class="modal-close custom-btn">  <i class="material-icons dark-text">add</i>Créer une routine</a>
+        <a href="#!" id="confirm-change-user-pseudo" class="custom-btn">Confirmer</a>
+        <a href="#!" id="close-user-pseudo-modal" class="modal-close custom-btn">Annuler</a>
     </div>
 </div>
