@@ -622,7 +622,7 @@ CONTAINERS
 }
 
 .custom-form {
-  width: 100%;
+  width: 70%;
   margin: auto;
 }
 @media (min-width: 300px) and (max-width: 576px) {

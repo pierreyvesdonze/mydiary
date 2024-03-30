@@ -9,6 +9,7 @@ var appParam = {
         */
         //$('.custom-btn').on('click', appParam.loadingAnim);
         $('.btn-visibility').on('click', appParam.changeVisibility);
+        $('#trigger-modal-pseudo-user').on('click', appParam.changeUserPseudo);
     },
 
     /**
@@ -17,7 +18,9 @@ var appParam = {
      * *****************************
     */
     changeVisibility: (e) => {
+
         let objectToChange = e.currentTarget.dataset.type;
+        console.log(objectToChange)
 
         const envType = $('.env').data('envtype');
         if (envType === "prod") {
@@ -54,6 +57,14 @@ var appParam = {
                 console.error('Erreur lors de la requête :', error);
             }
         });
+    },
+
+    changeUserPseudo: () => {
+        let elems = document.querySelectorAll('.modal');
+        let instances = M.Modal.init(elems);
+        let instance = M.Modal.getInstance(document.getElementById('modal-pseudo-user'));
+
+        instance.open()
     },
 }
 

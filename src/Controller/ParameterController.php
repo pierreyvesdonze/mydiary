@@ -26,7 +26,7 @@ class ParameterController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $MoodVisibility    = $user->getMoodContainer()->isVisibility();
+        $moodVisibility    = $user->getMoodContainer()->isVisibility();
         $bookVisibility    = $user->getBook()->isVisibility();
         $datesVisibility   = $user->getDatesContainer()->isVisibility();
         $healthVisibility  = $user->getHealthContainer()->isVisibility();
@@ -35,7 +35,7 @@ class ParameterController extends AbstractController
         return $this->render('parameter/index.html.twig', [
             'bookVisibility'    => $bookVisibility,
             'datesVisibility'   => $datesVisibility,
-            'moodVisibility'    => $MoodVisibility,
+            'moodVisibility'    => $moodVisibility,
             'healthVisibility'  => $healthVisibility,
             'routineVisibility' => $routineVisibility,
             'env'               => $_ENV['APP_ENV'],
@@ -67,10 +67,24 @@ class ParameterController extends AbstractController
         } elseif ($requestData == 'routine') {
             $routineContainer = $user->getRoutineContainer();
             $routineContainer->isVisibility(true) ? $routineContainer->setVisibility(false) : $routineContainer->setVisibility(true);
-
-            $this->em->flush();
-
-            return new JsonResponse($requestData);
         }
+
+        $this->em->flush();
+
+        return new JsonResponse($requestData);
     }
+
+    /*     #[Route('/changer/pseudo/utilisateur', name: 'change_user_pseudo', options: ['expose' => true])]
+    public function changeUserPseudo(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $requestData = $request->getContent();
+        $user->setPseudo($requestData);
+
+        return new JsonResponse('ok');
+    } */
 }
