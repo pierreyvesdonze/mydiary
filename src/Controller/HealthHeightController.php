@@ -17,7 +17,7 @@ class HealthHeightController extends AbstractController
     {}
 
     #[Route('/taille/nouvelle', name: 'health_height_new')]
-    public function newWeight(Request $request): Response
+    public function newHeight(Request $request): Response
     {
         $user = $this->getUser();
         if (!$user) {
@@ -35,6 +35,33 @@ class HealthHeightController extends AbstractController
             $this->em->flush();
 
             $this->addFlash('success', 'Taille enregistrée.');
+
+            return $this->redirectToRoute('health_index');
+        }
+
+        return $this->render('health/height.new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/taille/modifier/{id}', name: 'health_height_edit')]
+    public function editHeight(
+        Height $height,
+        Request $request
+        ): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $form = $this->createForm(HealthHeightType::class, $height);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+        
+            $this->em->flush();
+            $this->addFlash('success', 'Taille modifiée.');
 
             return $this->redirectToRoute('health_index');
         }

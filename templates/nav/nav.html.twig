@@ -11,7 +11,7 @@
 
 <ul id="dropdown-tools" class="dropdown-content dropdown-nav">
   <li><a href="{{ path('routine_index') }}">Routines</a></li>
- {#  <li><a href="#">Méditation</a></li>
+  {# <li><a href="#">Méditation</a></li>
   <li><a href="#">Respiration</a></li>
   <li><a href="#">Gestion du stress</a></li> #}
   <li><a href="{{ path('quotes') }}">Citations</a></li>
@@ -27,21 +27,16 @@
       <li><a href="{{ path('mood_index') }}">Humeur</a></li>
       <li><a href="{{ path('health_index') }}">Santé</a></li>
       <li><a href="{{ path('date_index') }}">Dates</a></li>
-      {# <li><a href="#">Idées</a></li>
-      <li><a href="#">Projets</a></li> #}
-      {# <li><a href="{{ path('file_index') }}">Fichiers</a></li> #}
 
-      <li><a href="{{ path('contacts') }}">
-         <!-- Dropdown Trigger -->
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-tools">Outils</a>
-          {% if invitations %}
-          Contacts <span class="friendRequest">*</span>
-          {% else %}
-          Contacts
-          {% endif %}
-        </a></li>
-
+      <!-- Dropdown Trigger -->
+      {% if invitations %}
+      <li><a href="{{ path('contacts') }}">Contacts <span class="friendRequest">*</span></a></li>
+      {% else %}
+      <li><a href="{{ path('contacts') }}">Contacts</a></li>
       {% endif %}
+      {% endif %}
+
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-tools">Outils</a>
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown-user"><i
             class="material-icons right">person</i></a>
       </li>
@@ -57,20 +52,14 @@
   <li><a href="{{ path('date_index') }}">Dates</a></li>
   <li><a href="{{ path('routine_index') }}">Routines</a></li>
   <li><a href="{{ path('quotes') }}">Citations</a></li>
-  {# <li><a href="#">Méditation</a></li>
-  <li><a href="#">Respiration</a></li>
-  <li><a href="#">Gestion du stress</a></li>
-  <li><a href="#">Idées</a></li>
-  <li><a href="#">Projets</a></li> #}
-  <li><a href="{{ path('file_index') }}">Fichiers</a></li>
   <div class="divider"></div>
   <li><a href="{{ path('contacts') }}">
-    {% if invitations %}
-    Contacts <span class="friendRequest">*</span>
-    {% else %}
-    Contacts
-    {% endif %}
-  </a></li>
+      {% if invitations %}
+      Contacts <span class="friendRequest">*</span>
+      {% else %}
+      Contacts
+      {% endif %}
+    </a></li>
   <div class="divider"></div>
   <li><a href="{{ path('parameters') }}">Paramètres</a></li>
   <div class="divider"></div>

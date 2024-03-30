@@ -1,24 +1,22 @@
 {# IMC #}
-<div class="col s6 m4 l3">
-    <div class="card white">
-        <div class="card-content dark-text">
-            <div class="container-flex-between">
-                <span class="card-title card-title-center">IMC</span>
-            </div>
-            {% if imc %}
-            <div class="container-flex-center">
-                {% if 'Poids normal' == imcCategory %}
-                <h5 class="green-text more-strong-txt">{{ imc }}</h5>
-                {% else %}
-                <h5 class="red-text more-strong-txt">{{ imc }}</h5>
-                {% endif %}
-            </div>
-            <div class="card-action">
-                <span>{{ imcCategory }}</span>
-            </div>
+<div class="card white">
+    <div class="card-content dark-text">
+        <div class="container-flex-between">
+            <span class="card-title card-title-center">IMC</span>
+        </div>
+        {% if imc %}
+        <div class="container-flex-center">
+            {% if 'Poids normal' == imcCategory %}
+            <h5 class="green-text more-strong-txt">{{ imc }}</h5>
             {% else %}
-            Non disponible
+            <h5 class="red-text more-strong-txt">{{ imc }}</h5>
             {% endif %}
         </div>
+        <div class="card-action">
+            <span>{{ imcCategory }}</span>
+        </div>
+        {% else %}
+        Non disponible
+        {% endif %}
     </div>
 </div>

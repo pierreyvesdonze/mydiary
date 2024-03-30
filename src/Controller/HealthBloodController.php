@@ -45,6 +45,33 @@ class HealthBloodController extends AbstractController
         ]);
     }
 
+    #[Route('/groupe/sanguin/modifier{id}', name: 'health_blood_type_edit')]
+    public function editBloodType(
+        BloodType $bloodType,
+        Request $request
+        ): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $form = $this->createForm(HealthBloodTypeType::class, $bloodType);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $this->em->flush();
+            $this->addFlash('success', 'Groupe sanguin modifié.');
+
+            return $this->redirectToRoute('health_index');
+        }
+
+        return $this->render('health/bloodtype.new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
     #[Route('/groupe/sanguin/supprimer/{id}', name: 'health_blood_type_delete')]
     public function deleteBloodType(BloodType $bloodType): Response
     {
