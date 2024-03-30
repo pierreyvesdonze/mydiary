@@ -13,11 +13,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class ParameterController extends AbstractController
 {
 
-    public function __construct
-    (
+    public function __construct(
         private EntityManagerInterface $em
-    )
-    {}
+    ) {
+    }
 
     #[Route('/parametres', name: 'parameters')]
     public function index(): Response
@@ -27,21 +26,23 @@ class ParameterController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $MoodVisibility   = $user->getMoodContainer()->isVisibility();
-        $bookVisibility   = $user->getBook()->isVisibility();
-        $datesVisibility  = $user->getDatesContainer()->isVisibility();
-        $healthVisibility = $user->getHealthContainer()->isVisibility();
+        $MoodVisibility    = $user->getMoodContainer()->isVisibility();
+        $bookVisibility    = $user->getBook()->isVisibility();
+        $datesVisibility   = $user->getDatesContainer()->isVisibility();
+        $healthVisibility  = $user->getHealthContainer()->isVisibility();
+        $routineVisibility = $user->getRoutineContainer()->isVisibility();
 
         return $this->render('parameter/index.html.twig', [
-            'bookVisibility'   => $bookVisibility,
-            'datesVisibility'  => $datesVisibility,
-            'moodVisibility'   => $MoodVisibility,
-            'healthVisibility' => $healthVisibility,
-            'env'              => $_ENV['APP_ENV'],
+            'bookVisibility'    => $bookVisibility,
+            'datesVisibility'   => $datesVisibility,
+            'moodVisibility'    => $MoodVisibility,
+            'healthVisibility'  => $healthVisibility,
+            'routineVisibility' => $routineVisibility,
+            'env'               => $_ENV['APP_ENV'],
         ]);
     }
 
-    #[Route('/visibilite', name: 'change_visibility', options: ['expose' => true] )]
+    #[Route('/visibilite', name: 'change_visibility', options: ['expose' => true])]
     public function changeVisibility(Request $request): JsonResponse
     {
         $user = $this->getUser();
@@ -63,10 +64,13 @@ class ParameterController extends AbstractController
         } elseif ($requestData == 'health') {
             $healthContainer = $user->getHealthContainer();
             $healthContainer->isVisibility(true) ? $healthContainer->setVisibility(false) : $healthContainer->setVisibility(true);
+        } elseif ($requestData == 'routine') {
+            $routineContainer = $user->getRoutineContainer();
+            $routineContainer->isVisibility(true) ? $routineContainer->setVisibility(false) : $routineContainer->setVisibility(true);
+
+            $this->em->flush();
+
+            return new JsonResponse($requestData);
         }
-
-        $this->em->flush();
-
-        return new JsonResponse($requestData);
     }
 }

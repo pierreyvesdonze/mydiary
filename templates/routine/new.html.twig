@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Créer une routine{% endblock %}
+
+{% block body %}
+
+<h4>Créer une nouvelle routine</h4>
+
+<br><br>
+
+{% include "routine/_form.html.twig" %}
+
+<br>
+
+<div class="container-flex-center">
+    <a href="{{ path('routine_index') }}">Revenir à la liste</a>
+</div>
+
+{% endblock %}

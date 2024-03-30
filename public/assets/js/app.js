@@ -7,17 +7,22 @@ var app = {
         * L I S T E N E R S
         * *****************************
         */
-        $('.custom-btn').on('click', app.loadingAnim);
+        /* $('.custom-btn').on('click', function(e) {
+            if (!$(this).hasClass('no-load-anim')) {
+                app.loadingAnim();
+            }
+        });
+
+        app.closeLoadingAnim(); */
 
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')
         }, 2200);
 
-        app.closeLoadingAnim();
 
         // nav sticky au scroll
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const nav = document.querySelector('.nav');
             if (window.scrollY > 200) { // Changez 200 à la hauteur souhaitée pour activer la nav sticky
                 nav.classList.add('sticky');
@@ -33,6 +38,7 @@ var app = {
             $('.collapsible').collapsible();
             $('select').formSelect();
             $('.parallax').parallax();
+            //$('.modal').modal();
         });
     },
 
@@ -41,7 +47,7 @@ var app = {
     * F U N C T I O N S
     * *****************************
     */
-    loadingAnim: () => {
+    loadingAnim: (e) => {
         $('.animation-loading-container').fadeIn().css('display', 'block');
     },
 

@@ -10,6 +10,7 @@ use App\Repository\HealthConditionRepository;
 use App\Repository\HeightRepository;
 use App\Repository\MedicationRepository;
 use App\Repository\MoodRepository;
+use App\Repository\RoutineRepository;
 use App\Repository\UserRepository;
 use App\Repository\VaccineRepository;
 use App\Repository\WeightRepository;
@@ -128,6 +129,7 @@ class FriendProfileController extends AbstractController
     {
         $friendUser       = $this->userRepository->findOneBy(['id' => $friend]);
         $healthContainer  = $friendUser->getHealthContainer();
+
         $weights          = $weightRepository->findByHealthContainer($healthContainer);
         $height           = $heightRepository->findByHealthContainer($healthContainer);
         $bloodType        = $bloodTypeRepository->findByHealthContainer($healthContainer);
@@ -159,16 +161,33 @@ class FriendProfileController extends AbstractController
         }
 
         return $this->render('friend_profile/health.html.twig', [
-            'weights'          => $weights ,
-            'friendUser'       => $friendUser ,
-            'formatedHeight'   => $formatedHeight ,
-            'height'           => $height ,
-            "imc"              => $imc ,
-            'imcCategory'      => $imcCategory ,
-            'bloodType'        => $bloodType[0] ,
-            'vaccines'         => $vaccines ,
+            'weights'          => $weights,
+            'friendUser'       => $friendUser,
+            'formatedHeight'   => $formatedHeight,
+            'height'           => $height,
+            "imc"              => $imc,
+            'imcCategory'      => $imcCategory,
+            'bloodType'        => $bloodType[0],
+            'vaccines'         => $vaccines,
             'medications'      => $medications,
-            'healthConditions' => $healthConditions,
+            'healthConditions' => $healthConditions
+        ]);
+    }
+
+    
+    #[Route('/routine/{friend}', name: 'routine_friend', methods: ['GET'])]
+    public function routine(
+        $friend,
+        RoutineRepository $routineRepository,
+    ): Response
+    {
+        $friendUser       = $this->userRepository->findOneBy(['id' => $friend]);
+        $routineContainer = $friendUser->getRoutineContainer();
+        $routines         = $routineRepository->findByRoutineContainer($routineContainer);
+
+        return $this->render('friend_profile/routines.html.twig', [
+            'routines'   => $routines,
+            'friendUser' => $friendUser
         ]);
     }
 }

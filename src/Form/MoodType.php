@@ -76,9 +76,9 @@ class MoodType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
                 'attr' => [
-                    'class' => "custom-btn validate-btn"
+                    'class' => "custom-btn custom-submit-btn"
                 ]
-            ]);;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

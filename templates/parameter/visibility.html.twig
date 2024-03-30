@@ -52,4 +52,16 @@
             </a>
         </div>
     </li>
+    <li class="collection-item">
+        <div>
+            <strong>Routines</strong>
+            <a href="#!" class="secondary-content btn-visibility" data-type="routine">
+                {% if true == routineVisibility %}
+                <span class="public-btn">Publique</span>
+                {% else %}
+                <span class="private-btn">Privé</span>
+                {% endif %}
+            </a>
+        </div>
+    </li>
 </ul>

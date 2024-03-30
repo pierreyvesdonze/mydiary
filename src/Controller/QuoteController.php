@@ -33,7 +33,7 @@ class QuoteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userQuote = $form->get('text')->getData();
-            
+
             if ($quoteService->isExist($quotes, $userQuote) == false) {
                 $em->persist($newQuote);
                 $em->flush();
@@ -48,7 +48,8 @@ class QuoteController extends AbstractController
 
         return $this->render('quote/index.html.twig', [
             'randomQuote' => $randomQuote,
-            'form'  => $form->createView()
+            'quotes'      => $quotes,
+            'form'        => $form->createView()
         ]);
     }
 }

@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Routine {{ routine.title }}{% endblock %}
+{% block body %}
+
+<h1>{{ routine.title }}</h1>
+
+<br><br>
+<div class="container-flex-center">
+    <a href="{{ path('routine_task_new', {'routine':routine.id}) }}" class="custom-btn">Nouvelle tâche</a>
+</div>
+<br><br><br>
+
+<div class="container-flex-center">
+    <a href="{{ path('routine_index') }}">Retour à l'index</a>
+</div>
+
+<br><br><br>
+
+{% if routineTasks %}
+
+<div>
+    {% for routine_task in routineTasks %}
+    <div class="row container-flex-center">
+        <div class="col s8 m9 l9">
+            <div>
+                <h6 class="accent-title">
+                    <i class="material-icons prefix">access_alarm</i>
+                    {{ routine_task.startAt ? routine_task.startAt|date('H:i') : '' }}
+                </h6>
+            </div>
+            <div>
+                <p class="flow-text">{{ routine_task.description }}</p>
+            </div>
+
+            {% if routine_task.startAt and routine_task.finishAt %}
+            {% set start_time = routine_task.startAt|date('H') * 3600 + routine_task.startAt|date('i') * 60 %}
+            {% set finish_time = routine_task.finishAt|date('H') * 3600 + routine_task.finishAt|date('i') * 60 %}
+            {% if finish_time < start_time %} {% set finish_time=finish_time + 86400 %} {# Ajoute un jour en secondes #}
+                {% endif %} {% set duration_seconds=finish_time - start_time %} {% set duration_hours=duration_seconds
+                // 3600 %} {% set duration_minutes=(duration_seconds % 3600) / 60 %} {% set duration_formatted='' %} {%
+                if duration_hours>= 1 %}
+                {% set duration_formatted = duration_hours ~ 'h' %}
+                {% endif %}
+                {% if duration_minutes >= 1 %}
+                {% set duration_formatted = duration_formatted ~ duration_minutes ~ 'min' %}
+                {% endif %}
+                <div>
+                    <span class="thin-text">
+                        Durée : {{ duration_formatted ?: '0min' }}
+                    </span>
+                </div>
+                {% else %}
+                N/A
+                {% endif %}
+        </div>
+
+        <div class="col s4 m3 l3 control-flex-end control-flex-end-vertical-center">
+            <a href="{{ path('routine_task_edit', {'id': routine_task.id}) }}"><i class="material-icons">sync</i></a>
+            <div class="margin-left-20"></div>
+            <a href="{{ path('routine_task_delete', {'id': routine_task.id}) }}"><i class="material-icons red-text"
+                    onclick="return confirm('Supprimer cette tâche ?');">delete_forever</i></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+
+<h4>Vous n'avez pas de tâche dans cette routine.</h4>
+
+{% endif %}
+{% endblock %}

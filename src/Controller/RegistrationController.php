@@ -7,6 +7,7 @@ use App\Entity\Dates;
 use App\Entity\DatesContainer;
 use App\Entity\HealthContainer;
 use App\Entity\MoodContainer;
+use App\Entity\RoutineContainer;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,6 +58,12 @@ class RegistrationController extends AbstractController
         $healthContainer->setVisibility(0);
         $user->setHealthContainer($healthContainer);
         $this->em->persist($healthContainer);
+
+        // Create new RoutineContainer object
+        $routineContainer = new RoutineContainer();
+        $routineContainer->setVisibility(0);
+        $user->setRoutineContainer($routineContainer);
+        $this->em->persist($routineContainer);
         
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

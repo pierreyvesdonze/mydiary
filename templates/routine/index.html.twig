@@ -1,0 +1,93 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Routines{% endblock %}
+
+{% block body %}
+
+<blockquote>Bienvenue dans votre section "Routines", où vous célébrerez la monotonie délicieuse de la vie quotidienne !
+    Entrez dans le monde magique où chaque jour est une copie carbone du précédent, où la routine règne en maître et
+    l'imprévisibilité est bannie</blockquote>
+
+<h1>Vos routines</h1>
+
+{% if routines %}
+
+<br>
+
+<div class="container-flex-center">
+    <a href="{{ path('routine_new') }}" class="custom-btn">Créer une routine</a>
+</div>
+
+<br><br>
+<div class="row">
+    {% for routine in routines %}
+    <div class="col s12 m6 l4">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">{{ routine.title }}</span>
+                <p>
+                    {% if routine.routineTasks|length == 0 %}
+                    <p>Vous n'avez actuellement aucune tâche assignée à cette routine.</p>
+                    {% else %}
+                    <span class="green-text">{{ routine.routineTasks|length }}</span> tâche(s).
+                    </span>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card-action">
+                <div class="container-flex-between">
+                    <div>
+                        <a href="{{ path('routine_show', {'id':routine.id}) }}" class="custom-btn">Voir</a>
+                    </div>
+                    <div>
+                        <a href="{{ path('routine_edit', {'id':routine.id}) }}"><i class="material-icons">sync</i></a>
+                        <a href="{{ path('routine_delete', {'id':routine.id}) }}"
+                            onclick="return confirm('Supprimer cette routine ?');"><i
+                                class="material-icons red-text">delete_forever</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+
+<h4>Vous n'avez pas de routine pour le moment</h4>
+
+ <!-- Modal Trigger -->
+ <a class="hidden modal-trigger" href="#modal1">Modal</a>
+
+<br><br>
+<div class="container-flex-center">
+    <a href="{{ path('routine_new') }}" class="custom-btn">Créer votre première routine</a>
+</div>
+
+{% endif %}
+
+<!-- Modal Structure -->
+<div id="modal-routine-index" class="modal">
+    <div class="modal-content">
+        <h4>Gérer votre routine quotidienne</h4>
+        <p>Créez, organisez et suivez vos routines avec aisance, transformant chaque jour en une symphonie de productivité et de bien-être.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="{{ path('routine_new') }}" class="modal-close custom-btn">  <i class="material-icons dark-text">add</i>Créer une routine</a>
+    </div>
+</div>
+
+{# Ouvre la modal informative si aucune Routine #}
+{% if not routines %}
+<script>
+    // Ouvre la modal informative si aucune Routine
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+        var instance = M.Modal.getInstance(document.getElementById('modal-routine-index'));
+        instance.open();
+    });
+</script>
+{% endif %}
+
+{% endblock %}

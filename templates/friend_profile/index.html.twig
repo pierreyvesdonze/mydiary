@@ -70,7 +70,6 @@
 </div>
 
 <div class="row">
-
     {# Santé #}
     <div class="col s6 m6">
         <div class="card white">
@@ -85,6 +84,25 @@
             <div class="card-action">
                 {% if friendUser.healthContainer.visibility == true %}
                 <a href="{{ path('health_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+     {# Routines #}
+     <div class="col s6 m6">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">Routine</span>
+                {% if friendUser.routineContainer.visibility == true %}
+                <p>Routines de {{ friendUser.pseudo }}.
+                    {% else %}
+                <p>La visibilité des routines de {{ friendUser.pseudo }} est privée.</p>
+                {% endif %}
+            </div>
+            <div class="card-action">
+                {% if friendUser.routineContainer.visibility == true %}
+                <a href="{{ path('routine_friend', {'friend':friendUser.id}) }}" class="">Visiter</a>
                 {% endif %}
             </div>
         </div>

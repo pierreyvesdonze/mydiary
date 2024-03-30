@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la tâche{% endblock %}
+
+{% block body %}
+    <h1>Modifier la tâche</h1>
+
+    <br><br>
+    {{ include('routine_task/_form.html.twig') }}
+    <br><br>
+
+    <a href="{{ path('routine_show', {'id':routineTask.routine.id}) }}">Revenir à la routine</a>
+    <br><br>
+{% endblock %}

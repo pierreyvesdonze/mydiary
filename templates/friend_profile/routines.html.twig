@@ -1,0 +1,89 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Routines{% endblock %}
+
+{% block body %}
+
+<blockquote>Bienvenue dans la section "Routines", où vous célébrerez la monotonie délicieuse de la vie quotidienne !
+    Entrez dans le monde magique où chaque jour est une copie carbone du précédent, où la routine règne en maître et
+    l'imprévisibilité est bannie</blockquote>
+
+<h1>Routines de {{ friendUser.pseudo }}</h1>
+
+{% if routines %}
+
+<br><br>
+<div class="row">
+
+    {% for routine in routines %}
+    <div class="col s12 m6 l4">
+        <div class="card white">
+            <div class="card-content dark-text">
+                <span class="card-title">{{ routine.title }}</span>
+                <p>
+                    {% if routine.routineTasks|length == 0 %}
+                    Aucune tâche n'est assignée à cette routine.
+                    {% else %}
+                    <span class="green-text">{{ routine.routineTasks|length }}</span> tâche(s).
+                    </span>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card-content">
+                {% set sortedRoutineTasks = routine.routineTasks|sort((a, b) => a.startAt|date('U') -
+                b.startAt|date('U')) %}
+
+                {% for routine_task in sortedRoutineTasks %}
+                <div class="row">
+                    <div>
+                        <div>
+                            <h6 class="accent-title">
+                                <i class="material-icons prefix">access_alarm</i>
+                                {{ routine_task.startAt ? routine_task.startAt|date('H:i') : '' }}
+                            </h6>
+                        </div>
+                        <div>
+                            <p class="flow-text">{{ routine_task.description }}</p>
+                        </div>
+
+                        {# TODO : Revoir ce dummy code qui marche, mais généré par chatGPT #}
+                        {% if routine_task.startAt and routine_task.finishAt %}
+                        {% set start_time = routine_task.startAt|date('H') * 3600 + routine_task.startAt|date('i') * 60
+                        %}
+                        {% set finish_time = routine_task.finishAt|date('H') * 3600 + routine_task.finishAt|date('i') *
+                        60 %}
+                        {% if finish_time < start_time %} {# Ajoute un jour en secondes #} {% set
+                            finish_time=finish_time + 86400 %} {% endif %} {% set duration_seconds=finish_time -
+                            start_time %} {% set duration_hours=duration_seconds // 3600 %} {% set
+                            duration_minutes=(duration_seconds % 3600) / 60 %} {% set duration_formatted='' %} {% if
+                            duration_hours>= 1 %}
+                            {% set duration_formatted = duration_hours ~ 'h' %}
+                            {% endif %}
+                            {% if duration_minutes >= 1 %}
+                            {% set duration_formatted = duration_formatted ~ duration_minutes ~ 'min' %}
+                            {% endif %}
+                            <div>
+                                <span class="thin-text">
+                                    Durée : {{ duration_formatted ?: '0min' }}
+                                </span>
+                            </div>
+                            {% else %}
+                            N/A
+                            {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+
+<h4>{{ friendUser.pseudo }} n'a pas de routine pour le moment</h4>
+<br><br>
+
+{% endif %}
+
+{% endblock %}
