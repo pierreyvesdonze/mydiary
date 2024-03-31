@@ -9,18 +9,23 @@
     épie.
 </blockquote>
 
-<div class="book">
+<div class="auto-margin-container">
     <h1>Journal de bord</h1>
+    <div class="container-flex-center">
 
-    <div class="divider"></div>
-
-    <div class="container-inline">
-        <a href="{{ path('book_content_new')}}" class="custom-btn">Ajouter du contenu</a>
-        {% if bookContents|length <= 1 %} <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length
+        {% if bookContents|length <= 1 %} <p id="counter-documents">Vous avez à ce jour <span>{{
+                bookContents|length
                 }}</span> document rédigé.</p>
             {% else %}
-            <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length }}</span> documents rédigés.</p>
+            <p id="counter-documents">Vous avez à ce jour <span>{{ bookContents|length }}</span> documents
+                rédigés.</p>
             {% endif %}
+    </div>
+    <div class="container-flex-between-bottom">
+        <div></div>
+        <div>
+            <a href="{{ path('book_content_new')}}" class="custom-btn">Ajouter du contenu</a>
+        </div>
     </div>
 
     <div class="divider"></div>
@@ -51,7 +56,9 @@
             <div class="btn-control-flex">
                 <a href="{{ path('book_content_edit', {id:content.id}) }}"><i class="material-icons">sync</i></a>
                 <div class="margin-left-20"></div>
-                <a href="{{ path('book_content_delete', {'id':content.id}) }}" onclick="return confirm('Supprimer cet élément ?');"><i class="material-icons red-text">delete_forever</i></a>
+                <a href="{{ path('book_content_delete', {'id':content.id}) }}"
+                    onclick="return confirm('Supprimer cet élément ?');"><i
+                        class="material-icons red-text">delete_forever</i></a>
             </div>
         </div>
         <br><br>

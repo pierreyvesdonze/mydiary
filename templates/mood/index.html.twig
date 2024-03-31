@@ -8,72 +8,77 @@
 </blockquote>
 
 <div class="auto-margin-container">
-    <div class="container-flex-between-bottom">
-        <h1>Carnet d'humeur</h1>
-        <a href="{{ path('mood_new') }}" class="custom-btn">Créer une humeur</a>
+    <h1>Carnet d'humeur</h1>
+    <div class="container-flex-between">
+        <div></div>
+        <div class="container-flex-between">
+           {#  <a href="{{ path('mood_stats') }}"><i class="small material-icons green-text">trending_up</i></a> #}
+            <div class="margin-left-20"></div>
+            <a href="{{ path('mood_new') }}" class="custom-btn">Créer une humeur</a>
+        </div>
     </div>
+</div>
 
-    {% if moods %}
-    <ul class="collapsible">
-        {% for mood in moods %}
-        <li>
-            <div class="collapsible-header container-flex-between">
-                <h5>
-                    {{ mood.date|format_datetime('full', 'none', locale='fr') }}
-                </h5>
+{% if moods %}
+<ul class="collapsible">
+    {% for mood in moods %}
+    <li>
+        <div class="collapsible-header container-flex-between">
+            <h5>
+                {{ mood.date|format_datetime('full', 'none', locale='fr') }}
+            </h5>
 
-                {# Emoticones #}
-                {% if 'Joyeux' == mood.dayMood %}
-                <img src="{{ asset('assets/icons/joy.png') }}" alt="emoticon" class="mood-emoticon">
-                {% elseif 'Neutre' == mood.dayMood %}
-                <img src="{{ asset('assets/icons/neutral.png') }}" alt="emoticon" class="mood-emoticon">
-                {% elseif 'Fatigué' == mood.dayMood %}
-                <img src="{{ asset('assets/icons/tired.png') }}" alt="emoticon" class="mood-emoticon">
-                {% elseif 'Anxieux' == mood.dayMood %}
-                <img src="{{ asset('assets/icons/anxious.png') }}" alt="emoticon" class="mood-emoticon">
-                {% elseif 'Déprimé' == mood.dayMood %}
-                <img src="{{ asset('assets/icons/depressed.png') }}" alt="emoticon" class="mood-emoticon">
-                {% endif %}
+            {# Emoticones #}
+            {% if 'Joyeux' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/joy.png') }}" alt="emoticon" class="mood-emoticon">
+            {% elseif 'Neutre' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/neutral.png') }}" alt="emoticon" class="mood-emoticon">
+            {% elseif 'Fatigué' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/tired.png') }}" alt="emoticon" class="mood-emoticon">
+            {% elseif 'Anxieux' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/anxious.png') }}" alt="emoticon" class="mood-emoticon">
+            {% elseif 'Déprimé' == mood.dayMood %}
+            <img src="{{ asset('assets/icons/depressed.png') }}" alt="emoticon" class="mood-emoticon">
+            {% endif %}
 
-            </div>
-            <div class="collapsible-body">
-                <span>
-                    <strong class="more-strong-txt">Qualité de l'endormissement : </strong>
-                    <span class="span-txt span-mood-txt">{{ mood.fallingAsleep }}</span>
-                    <br>
-                    <strong class="more-strong-txt">Qualité du sommeil : </strong>
-                    <span class="span-txt span-mood-txt">{{ mood.sleep }}</span>
-                    <br>
-                    <strong class="more-strong-txt">Humeur au réveil : </strong>
-                    <span class="span-txt span-mood-txt">{{ mood.morningMood }}</span>
-                    <br>
-                    <strong class="more-strong-txt">Programme du jour : </strong>
-                    <span class="span-txt span-mood-txt">{{ mood.dayProgram }}</span>
-                    <br>
-                    <strong class="more-strong-txt">Ressenti sur la journée : </strong>
-                    <span class="span-txt span-mood-txt">{{ mood.dayFeeling }}</span>
-                    <br>
-                    <strong class="more-strong-txt">Humeur pendant la journée : </strong>
-                    <span class="span-txt span-mood-txt">{{ mood.dayMood }}</span>
-                    <br>
-                    <br>
-                    <div class="btn-control-flex">
-                        <a href="{{ path('mood_edit', {id:mood.id}) }}"><i
-                                class="material-icons">sync</i></a>
-                        <div class="margin-left-20"></div>
-                        <a href="{{ path('mood_delete', {'id':mood.id}) }}"
-                            onclick="return confirm('Supprimer cet élément ?');"><i
-                                class="material-icons red-text">delete_forever</i></a>
-                    </div>
-                </span>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+        </div>
+        <div class="collapsible-body">
+            <span>
+                <strong class="more-strong-txt">Qualité de l'endormissement : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.fallingAsleep }}</span>
+                <br>
+                <strong class="more-strong-txt">Qualité du sommeil : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.sleep }}</span>
+                <br>
+                <strong class="more-strong-txt">Humeur au réveil : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.morningMood }}</span>
+                <br>
+                <strong class="more-strong-txt">Programme du jour : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.dayProgram }}</span>
+                <br>
+                <strong class="more-strong-txt">Ressenti sur la journée : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.dayFeeling }}</span>
+                <br>
+                <strong class="more-strong-txt">Humeur pendant la journée : </strong>
+                <span class="span-txt span-mood-txt">{{ mood.dayMood }}</span>
+                <br>
+                <br>
+                <div class="btn-control-flex">
+                    <a href="{{ path('mood_edit', {id:mood.id}) }}"><i class="material-icons">sync</i></a>
+                    <div class="margin-left-20"></div>
+                    <a href="{{ path('mood_delete', {'id':mood.id}) }}"
+                        onclick="return confirm('Supprimer cet élément ?');"><i
+                            class="material-icons red-text">delete_forever</i></a>
+                </div>
+            </span>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 
-    {% else %}
+{% else %}
 
-    <h6>Vous n'avez pas d'humeur enregistrée.</h6>
+<h6>Vous n'avez pas d'humeur enregistrée.</h6>
 </div>
 <br>
 {% endif %}

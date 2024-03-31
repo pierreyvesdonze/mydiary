@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<blockquote>Ceci est l'évolution de votre humeur au fil du temps</blockquote>
+
+<div class="container">
+    <canvas id="moodChart" data-moods="{{ moodsArrayJson }}" width="400" height="100"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('moodChart');
+    const moodsDataJson = ctx.dataset.moods;
+    const moodsData = JSON.parse(moodsDataJson);
+    console.log(moodsData)
+    const Utils = {
+        months: (options) => {
+            const months = ["Janv", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            return months.slice(0, options.count);
+        }
+    };
+    const values = Object.values(moodsData);
+    const labels = Object.keys(moodsData);
+    const config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Courbe d'évolution de vos humeurs",
+                data: values,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        }
+    };
+
+    const myChart = new Chart(ctx, config);
+</script>
+{% endblock %}

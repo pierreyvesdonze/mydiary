@@ -128,4 +128,27 @@ class MoodController extends AbstractController
 
         return $this->redirectToRoute('mood_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/voir/stats', name: 'mood_stats')]
+    public function getStats(): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $moods      = $user->getMoodContainer()->getMoods();
+        $moodsArray = [];
+
+        foreach($moods as $mood) {
+            $moodsArray[$mood->getdate()->format('M')] = $mood->getDaymood();
+        };
+
+        ksort($moodsArray);
+        $moodsArrayJson = json_encode($moodsArray);
+
+        return $this->render('mood/stats.html.twig', [
+            'moodsArrayJson' => $moodsArrayJson
+        ]);
+    }
 }
