@@ -58,7 +58,9 @@ class DateController extends AbstractController
         }
 
         $date = new Date();
-        $form = $this->createForm(DateType::class, $date);
+        $form = $this->createForm(DateType::class, $date, [
+            'attr' => ['class' => 'custom-form']
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -104,7 +106,9 @@ class DateController extends AbstractController
             'id' => $dateId
         ]);
         
-        $form = $this->createForm(DateType::class, $date);
+        $form = $this->createForm(DateType::class, $date, [
+            'attr' => ['class' => 'custom-form']
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -121,7 +125,7 @@ class DateController extends AbstractController
         ]);
     }
 
-    #[Route('/supprimer/{id}', name: 'date_delete', methods: ['POST'])]
+    #[Route('/supprimer/{id}', name: 'date_delete')]
     public function delete(Date $date): Response
     {
         $user = $this->getUser();

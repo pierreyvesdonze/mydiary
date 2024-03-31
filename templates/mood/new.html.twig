@@ -3,13 +3,16 @@
 {% block title %}Nouvelle humeur{% endblock %}
 
 {% block body %}
-    <h1>Crée une nouvelle humeur</h1>
+<h1>Crée une nouvelle humeur</h1>
 
-    {{ include('mood/_form.html.twig') }}
+{{ include('mood/_form.html.twig') }}
 
-    <br>
+<br>
+<br>
 
-    <a href="{{ path('mood_index') }}" class="custom-btn">Retour à la liste</a>
+<div class="container-flex-center">
+    <a href="{{ path('mood_index') }}">Retour à la liste</a>
+</div>
 
-    <br><br><br>
+<br><br><br>
 {% endblock %}

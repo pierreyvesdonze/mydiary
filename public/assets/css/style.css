@@ -49,7 +49,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--body-bg);
+  background-color: var(--body-bg);
   background-image: var(--body-img);
   background-repeat: repeat;
   font-family: "Montserrat", sans-serif;
@@ -57,6 +57,7 @@ body {
   color: var(--dark-text);
   overflow-y: auto;
   padding: 0 250px;
+  transition-duration: 0.1s;
 }
 @media (min-width: 992px) and (max-width: 1280px) {
   body {
@@ -239,6 +240,7 @@ blockquote {
 }
 
 .modal,
+.modal-content,
 .modal-footer {
   background-color: var(--nav-color) !important;
 }
@@ -594,6 +596,7 @@ CONTAINERS
 
 .container-flex-between-bottom {
   align-items: flex-end;
+  margin-bottom: 17px;
 }
 .container-flex-between-bottom h1 {
   margin-bottom: 0;

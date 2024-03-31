@@ -4,62 +4,113 @@
 
 {% block body %}
 <blockquote>
-    Ah, les dates clés, ces moments où la vie vous frappe avec la subtilité d'un camion. Grâce à cette section, vous pourrez revivre chaque instant marquant de votre existence, du premier baiser à la chute libre dans l'abîme de l'ennui quotidien.
+    Ah, les dates clés, ces moments où la vie vous frappe avec la subtilité d'un camion. Grâce à cette section, vous
+    pourrez revivre chaque instant marquant de votre existence, du premier baiser à la chute libre dans l'abîme de
+    l'ennui quotidien.
 </blockquote>
-<div class="container-flex-between-bottom">
-    <h1>Dates</h1>
-    <div>
-        <a href="{{ path('date_new') }}" class="custom-btn">Créer une date</a>
-        <a href="{{ path('date_index_guest') }}" class="custom-btn">Vue invité</a>
-    </div>
-</div>
 
-{% if dates %}
+<div class="container">
+    <div class="container-flex-between-bottom">
+        <h1>Dates</h1>
+        <div>
+            <a href="{{ path('date_new') }}" class="custom-btn">Créer une date</a>
+            <a href="{{ path('date_index_guest') }}" class="custom-btn">Vue invité</a>
+        </div>
+    </div>
+
+    {% if dates %}
     {% set sortedDates = dates|sort((a, b) => a.date.timestamp - b.date.timestamp) %}
     <ul class="collapsible date-container">
         {% set previous_year = null %}
         {% for date in sortedDates %}
-            {% set year = date.date|date('Y') %}
-            {% if previous_year is null or previous_year != year %}
-                {% if previous_year is not null %}
-                    </div>
-                {% endif %}
-                <li>
-                    <div class="collapsible-header">
-                        <h5 class="dates-title-el">{{ year }}</h5>
-                    </div>
-                    <div class="collapsible-body">
-                        <span>
-            {% endif %}
-            <strong class="more-strong-txt">Date :</strong> <span class="span-txt">{{ date.date|format_datetime('full', 'none', locale='fr') }}</span>
-            <br>
-            <strong class="more-strong-txt">Événement :</strong><span class="span-txt"> {{ date.event }}</span>
-            <br>
-            <strong class="more-strong-txt">Commentaire :</strong><span class="span-txt"> {{ date.comment }}</span>
-            <br>
-            <br>
-            <div class="btn-control-flex">
-                <a href="{{ path('date_edit', {'dateId':date.id}) }}" class="custom-btn">Modifier</a>
-                <br>
-                <br>
-                <form action="{{ path('date_delete', {'id': date.id}) }}" method="post" onsubmit="return confirm('Supprimer cet élément ?');">
-                    <button type="submit" class="custom-btn btn-danger">Supprimer</button>
-                </form>
+        {% set year = date.date|date('Y') %}
+        {% if previous_year is null or previous_year != year %}
+        {% if previous_year is not null %}
+        {% endif %}
+        <li>
+            <div class="collapsible-header">
+                <h5 class="dates-title-el">{{ year }}</h5>
             </div>
-            <br>
-            <br>
-            {% set previous_year = year %}
-            {% if loop.last %}
-                        </span>
+            <div class="collapsible-body">
+                <span>
+                    {% endif %}
+                    <span class="accent-title">Date :</span>
+                    <span class="span-txt">{{ date.date|format_datetime('full', 'none', locale='fr') }}</span>
+                    <br>
+                    <span class="accent-title">
+                        Événement :
+                    </span>
+                    <span class="span-txt"> {{ date.event }}</span>
+                    <br>
+                    {% if date.comment %}
+                    <span class="accent-title">
+                        Commentaire :
+                    </span>
+                    <span class="span-txt"> {{ date.comment }}</span>
+                    {% endif %}
+                    <br>
+                    <br>
+                    <div class="btn-control-flex">
+                        <a href="{{ path('date_edit', {'dateId':date.id}) }}"><i class="material-icons">sync</i></a>
+                        <div class="margin-left-20"></div>
+                        {# <form action="{{ path('date_delete', {'id': date.id}) }}" method="post"
+                            onsubmit="return confirm('Supprimer cet élément ?');">
+                            <button type="submit" class="custom-btn btn-danger">Supprimer</button>
+                        </form> #}
+                        <a href="{{ path('date_delete', {'id':date.id}) }}"
+                            onclick="return confirm('Supprimer cet élément ?');">
+                            <i class="material-icons red-text">delete_forever</i></a>
                     </div>
-                </li>
-            {% endif %}
+                    <br>
+                    <br>
+                    {% set previous_year = year %}
+                    {% if loop.last %}
+                </span>
+            </div>
+        </li>
+        {% endif %}
         {% endfor %}
     </ul>
+</div>
+
+<br><br><br>
 {% else %}
-    <h2>Vous n'avez aucune date enregistrée.</h2>
+<h4>Vous n'avez aucune date enregistrée.</h4>
 {% endif %}
 
 <br><br>
+
+<!-- Modal Structure -->
+<div id="modal-dates-index" class="modal">
+    <div class="modal-content">
+        <h4></h4>
+        <p>La section "Dates" est un espace dédié à la préservation des moments significatifs de notre vie. Elle nous
+            permet d'inscrire des dates clés, des anniversaires, des commémorations et d'autres événements marquants.
+        </p>
+        <p>
+            Parce que parfois, il est absolument crucial de se souvenir du jour où vous avez mangé cette pizza
+            incroyablement délicieuse (ou de l'anniversaire de votre grand-mère, au choix).
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="{{ path('date_new') }}" class="custom-btn"> <i class="material-icons dark-text">add</i>Créer une
+            date</a>
+        <a href="#!" class="modal-close custom-btn">Ok</a>
+    </div>
+</div>
+
+{% if not dates %}
+<script>
+    // Ouvre la modal informative si aucune Routine
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+        var instance = M.Modal.getInstance(document.getElementById('modal-dates-index'));
+        instance.open();
+    });
+</script>
+
+{% endif %}
+
 
 {% endblock %}

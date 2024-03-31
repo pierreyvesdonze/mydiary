@@ -52,18 +52,18 @@
                     <br>
                     <strong class="more-strong-txt">Ressenti sur la journée : </strong>
                     <span class="span-txt span-mood-txt">{{ mood.dayFeeling }}</span>
+                    <br>
                     <strong class="more-strong-txt">Humeur pendant la journée : </strong>
                     <span class="span-txt span-mood-txt">{{ mood.dayMood }}</span>
                     <br>
                     <br>
                     <div class="btn-control-flex">
-                        <a href="{{ path('mood_edit', {'id':mood.id}) }}" class="custom-btn">Modifier</a>
-                        <br>
-                        <br>
-                        <form action="{{ path('mood_delete', {'id': mood.id}) }}" method="post"
-                            onsubmit="return confirm('Supprimer cet élément ?');">
-                            <button type="submit" class="custom-btn btn-danger">Supprimer</button>
-                        </form>
+                        <a href="{{ path('mood_edit', {id:mood.id}) }}"><i
+                                class="material-icons">sync</i></a>
+                        <div class="margin-left-20"></div>
+                        <a href="{{ path('mood_delete', {'id':mood.id}) }}"
+                            onclick="return confirm('Supprimer cet élément ?');"><i
+                                class="material-icons red-text">delete_forever</i></a>
                     </div>
                 </span>
             </div>
@@ -75,8 +75,39 @@
 
     <h6>Vous n'avez pas d'humeur enregistrée.</h6>
 </div>
-
 <br>
+{% endif %}
 
+<!-- Modal Structure -->
+<div id="modal-mood-index" class="modal">
+    <div class="modal-content">
+        <h4>Gérez votre humeur</h4>
+        <p>
+            Le carnet d'humeur est un outil introspectif et réflexif qui permet à chacun de consigner ses émotions et
+            sentiments quotidiens. Enregistrement des nuances de chaque journée, il capture des éléments tels que la
+            qualité de l'endormissement, l'humeur au réveil, le programme prévu pour la journée et le ressenti global
+            sur les événements vécus. En offrant un espace pour exprimer et analyser ces aspects de notre vie, le carnet
+            d'humeur nous permet de mieux comprendre nos états émotionnels, de suivre notre évolution personnelle et
+            d'identifier des schémas récurrents, contribuant ainsi à une meilleure gestion de notre bien-être mental et
+            émotionnel.
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="{{ path('mood_new') }}" class="custom-btn"> <i class="material-icons dark-text">add</i>Créer une
+            humeur</a>
+        <a href="#!" class="modal-close custom-btn">Ok</a>
+    </div>
+</div>
+
+{% if not moods %}
+<script>
+    // Ouvre la modal informative si aucune Routine
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+        var instance = M.Modal.getInstance(document.getElementById('modal-mood-index'));
+        instance.open();
+    });
+</script>
 {% endif %}
 {% endblock %}

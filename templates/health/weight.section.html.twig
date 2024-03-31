@@ -39,7 +39,7 @@
                         </td>
                         <td>
                             <a href="{{ path('health_weight_delete', {'id':weight.id}) }}"
-                                class="link-btn-danger"><i
+                                class="link-btn-danger" onclick="return confirm('Supprimer ce poids ?');"><i
                                     class="material-icons red-text">delete_forever</i></a>
                         </td>
                     </tr>

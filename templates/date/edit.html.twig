@@ -3,12 +3,15 @@
 {% block title %}Modifier Date{% endblock %}
 
 {% block body %}
-    <h1>Modifier cette date</h1>
+<h1>Modifier cette date</h1>
 
-    {{ include('date/_form.html.twig', {'button_label': 'Update'}) }}
+{{ include('date/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <br>
+<br>
+<br>
 
-    <a href="{{ path('date_index') }}" class="custom-btn">Retour à la liste</a>
+<div class="container-flex-center">
+    <a href="{{ path('date_index') }}">Retour à la liste</a>
+</div>
 
 {% endblock %}

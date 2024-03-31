@@ -1,6 +1,7 @@
 {{ form_start(form) }}
     {{ form_widget(form.date) }}
     {{ form_widget(form.event) }}
-    {{ form_widget(form.comment) }}
+    {{ form_widget(form.comment, {'attr': {'class': 'custom-textarea'}}) }}
+    <br><br>
     {{ form_widget(form.submit) }}
 {{ form_end(form) }}

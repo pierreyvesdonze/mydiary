@@ -49,8 +49,9 @@
         <div class="content">
             <p>{{ content.content }}</p>
             <div class="btn-control-flex">
-                <a href="{{ path('book_content_edit', {id: content.id}) }}" class="custom-btn">Modifier</a>
-                {% include "book_content/_delete_form.html.twig" %}
+                <a href="{{ path('book_content_edit', {id:content.id}) }}"><i class="material-icons">sync</i></a>
+                <div class="margin-left-20"></div>
+                <a href="{{ path('book_content_delete', {'id':content.id}) }}" onclick="return confirm('Supprimer cet élément ?');"><i class="material-icons red-text">delete_forever</i></a>
             </div>
         </div>
         <br><br>

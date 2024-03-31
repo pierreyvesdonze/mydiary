@@ -113,7 +113,7 @@ class MoodController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'mood_delete', methods: ['POST'])]
+    #[Route('/supprimer/{id}', name: 'mood_delete')]
     public function delete(Mood $mood): Response
     {
         $user = $this->getUser();

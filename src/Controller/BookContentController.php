@@ -16,22 +16,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookContentController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $em)
-    {}
+    {
+    }
 
     #[Route('/new', name: 'book_content_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request
-        ): Response
-    {
-        $book        = $this->getUser()->getBook();
+    ): Response {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $book        = $user->getBook();
         $bookContent = new BookContent();
         $bookContent->setBook($book);
         $bookContent->setCreatedAt(new \DatetimeImmutable());
         $bookContent->setUpdatedAt(new \DatetimeImmutable());
-        
+
         $form = $this->createForm(BookContentType::class, $bookContent);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($bookContent);
             $this->em->flush();
@@ -53,6 +58,11 @@ class BookContentController extends AbstractController
     #[Route('/{id}', name: 'book_content_show', methods: ['GET'])]
     public function show(BookContent $bookContent): Response
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
         return $this->render('book_content/show.html.twig', [
             'book_content' => $bookContent,
         ]);
@@ -62,8 +72,13 @@ class BookContentController extends AbstractController
     public function edit(
         Request $request,
         BookContent $bookContent
-        ): Response
-    {
+    ): Response {
+
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
         $book = $bookContent->getBook();
         $form = $this->createForm(BookContentType::class, $bookContent);
 
@@ -87,18 +102,20 @@ class BookContentController extends AbstractController
         ]);
     }
 
-    #[Route('/delete{id}', name: 'book_content_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'book_content_delete')]
     public function delete(
-        Request $request,
         BookContent $bookContent
-        ): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$bookContent->getId(), $request->request->get('_token'))) {
-            $this->em->remove($bookContent);
-            $this->em->flush();
+    ): Response {
 
-            $this->addFlash('success', 'Contenu supprimé !');
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
         }
+
+        $this->em->remove($bookContent);
+        $this->em->flush();
+
+        $this->addFlash('success', 'Contenu supprimé !');
 
         return $this->redirectToRoute('book_show', [
             'id' => $bookContent->getBook()->getId()

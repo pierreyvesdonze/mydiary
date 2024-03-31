@@ -3,24 +3,32 @@
 {% block title %}Dates index{% endblock %}
 
 {% block body %}
-<div class="container-flex-between">
-    <h1>Dates</h1>
-    <a href="{{ path('date_index') }}">Vue utilisateur</a>
+<blockquote>
+    Ah, les dates clés, ces moments où la vie vous frappe avec la subtilité d'un camion. Grâce à cette section, vous
+    pourrez revivre chaque instant marquant de votre existence, du premier baiser à la chute libre dans l'abîme de
+    l'ennui quotidien.
+</blockquote>
+<div class="container">
+    <div class="container-flex-between-bottom">
+        <h1>Dates</h1>
+        <div>
+            <a href="{{ path('date_index') }}" class="custom-btn">Vue utilisateur</a>
+        </div>
+    </div>
+
+    <hr>
+    <br>
+
+    {% if dates %}
+
+    {% include "common/dates.guest.index.html.twig" %}
+
+    {% else %}
+
+    <h2>Aucune date enregistrée.</h2>
+
+    {% endif %}
 </div>
-
-<hr>
-<br>
-
-{% if dates %}
-
-{% include "common/dates.guest.index.html.twig" %}
-
-{% else %}
-
-<h2>Vous n'avez aucune date enregistrée.</h2>
-
-{% endif %}
-
 <br>
 
 {% endblock %}
