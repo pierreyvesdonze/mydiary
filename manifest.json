@@ -1,23 +1,24 @@
 {
-    "name": "My diary",
-    "short_name": "My diary",
+    "name": "Read me I'm sick !",
+    "short_name": "Read me I'm sick !",
     "description": "Journal de bord",
     "icons": [
-        {
-            "src": "/public/assets/images/icon512.png",
-            "type": "image/png",
-            "sizes": "512x512",
-            "purpose": "maskable any"
-        },
-        {
-            "src": "/public/assets/images/icon192.png",
-            "type": "image/png",
-            "sizes": "192x192",
-            "purpose": "maskable any"
-        }
+      {
+        "src": "/public/assets/images/icon512.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "maskable any"
+      },
+      {
+        "src": "/public/assets/images/icon192.png",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "maskable any"
+      }
     ],
     "start_url": "/public/?source=pwa",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#ffffff"
-}
+    "theme_color": "#ffffff",
+    "service_worker": "/public/sw.js"
+  }
