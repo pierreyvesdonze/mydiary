@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Mood;
 use App\Form\MoodType;
 use App\Repository\MoodRepository;
+use App\Service\MoodService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +18,12 @@ class MoodController extends AbstractController
     public function __construct(private EntityManagerInterface $em)
     {
     }
+
     #[Route('/', name: 'mood_index', methods: ['GET'])]
-    public function index(MoodRepository $moodRepository): Response
+    public function index(
+        MoodRepository $moodRepository,
+        MoodService $moodService,
+        ): Response
     {
         $user = $this->getUser();
         if (!$user) {
@@ -40,8 +45,12 @@ class MoodController extends AbstractController
             return ($dateA < $dateB) ? 1 : -1;
         });
 
+        // Calcul de la moyenne de l'humeur en général
+        $moodAverage = lcfirst($moodService->getMoodAverage($moods));
+
         return $this->render('mood/index.html.twig', [
-            'moods' => $moods,
+            'moods'       => $moods,
+            'moodAverage' => $moodAverage,
         ]);
     }
 

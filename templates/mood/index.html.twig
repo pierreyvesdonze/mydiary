@@ -9,10 +9,18 @@
 
 <div class="auto-margin-container">
     <h1>Carnet d'humeur</h1>
+    <br>
+    <div class="container-flex-center">
+        <img src="{{ asset('assets/icons/' ~ moodAverage ~ '.png') }}" alt="emoticon" class="mood-emoticon">.
+    </div>
+    <br>
+    <p class="flow-text center-align">Selon vos données, vous êtes majoritairement {{ moodAverage }}.
+    </p>
+    <br>
     <div class="container-flex-between">
         <div></div>
         <div class="container-flex-between">
-           {#  <a href="{{ path('mood_stats') }}"><i class="small material-icons green-text">trending_up</i></a> #}
+            {# <a href="{{ path('mood_stats') }}"><i class="small material-icons green-text">trending_up</i></a> #}
             <div class="margin-left-20"></div>
             <a href="{{ path('mood_new') }}" class="custom-btn">Créer une humeur</a>
         </div>
@@ -28,19 +36,7 @@
                 {{ mood.date|format_datetime('full', 'none', locale='fr') }}
             </h5>
 
-            {# Emoticones #}
-            {% if 'Joyeux' == mood.dayMood %}
-            <img src="{{ asset('assets/icons/joy.png') }}" alt="emoticon" class="mood-emoticon">
-            {% elseif 'Neutre' == mood.dayMood %}
-            <img src="{{ asset('assets/icons/neutral.png') }}" alt="emoticon" class="mood-emoticon">
-            {% elseif 'Fatigué' == mood.dayMood %}
-            <img src="{{ asset('assets/icons/tired.png') }}" alt="emoticon" class="mood-emoticon">
-            {% elseif 'Anxieux' == mood.dayMood %}
-            <img src="{{ asset('assets/icons/anxious.png') }}" alt="emoticon" class="mood-emoticon">
-            {% elseif 'Déprimé' == mood.dayMood %}
-            <img src="{{ asset('assets/icons/depressed.png') }}" alt="emoticon" class="mood-emoticon">
-            {% endif %}
-
+            <img src="{{ asset('assets/icons/' ~ mood.dayMood ~ '.png') }}" alt="emoticon" class="mood-emoticon">
         </div>
         <div class="collapsible-body">
             <span>
