@@ -64,5 +64,12 @@
         <br><br>
         {% endfor %}
     </div>
+
+    <div class="container-flex-between">
+        <div></div>
+        <div class="paginator">
+            {{ knp_pagination_render(bookContents) }}
+        </div>
+    </div>
 </div>
 {% endblock %}

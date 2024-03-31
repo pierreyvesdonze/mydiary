@@ -7,7 +7,6 @@ var appParam = {
         * L I S T E N E R S
         * *****************************
         */
-        //$('.custom-btn').on('click', appParam.loadingAnim);
         $('.btn-visibility').on('click', appParam.changeVisibility);
         $('#trigger-modal-pseudo-user').on('click', appParam.triggerUserChangeModal);
         $('#confirm-change-user-pseudo').on('click', appParam.changeUserPseudo)

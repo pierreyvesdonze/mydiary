@@ -7,6 +7,7 @@ use App\Form\MoodType;
 use App\Repository\MoodRepository;
 use App\Service\MoodService;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,8 @@ class MoodController extends AbstractController
     public function index(
         MoodRepository $moodRepository,
         MoodService $moodService,
+        PaginatorInterface $paginator,
+        Request $request,
         ): Response
     {
         $user = $this->getUser();
@@ -51,8 +54,15 @@ class MoodController extends AbstractController
         // Calcul la moyenne de la qualité du sommeil
         $sleepAverage = $moodService->getSleepAverage($moods);
 
+        // Pagination
+        $paginatedMoods = $paginator->paginate(
+            $moods,
+            $request->query->getInt('page', 1),
+            7
+        );
+
         return $this->render('mood/index.html.twig', [
-            'moods'        => $moods,
+            'moods'        => $paginatedMoods,
             'moodAverage'  => $moodAverage,
             'sleepAverage' => $sleepAverage,
         ]);

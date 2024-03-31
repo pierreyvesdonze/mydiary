@@ -542,3 +542,24 @@ textarea#quote_text,
     height: 90px;
 }
 
+/**********************
+PAGINATOR
+**********************/
+.pagination {
+	justify-content: center;
+}
+
+.first,
+.current,
+.page,
+.next,
+.previous,
+.last {
+	padding-right: 0.6em;
+	padding-left: 0.6em;
+	font-size: 1.4em;
+}
+
+.current {
+	font-size: 2em !important;
+}

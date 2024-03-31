@@ -8,6 +8,7 @@ use App\Form\BookType;
 use App\Repository\BookContentRepository;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,14 +51,23 @@ class BookController extends AbstractController
     #[Route('/{id}', name: 'book_show', methods: ['GET'])]
     public function show(
         Book $book,
-        BookContentRepository $bookContentRepository
+        BookContentRepository $bookContentRepository,
+        PaginatorInterface $paginator,
+        Request $request,
         ): Response
     {
         $bookContents = $bookContentRepository->findBookContentByDesc($book);
 
+         // Pagination
+         $paginated = $paginator->paginate(
+            $bookContents,
+            $request->query->getInt('page', 1),
+            7
+         );
+
         return $this->render('book/show.html.twig', [
             'book'         => $book,
-            'bookContents' => $bookContents
+            'bookContents' => $paginated
         ]);
     }
 
