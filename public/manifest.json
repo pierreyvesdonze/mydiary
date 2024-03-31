@@ -19,6 +19,5 @@
     "start_url": "/public/?source=pwa",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#ffffff",
-    "service_worker": "/public/sw.js"
+    "theme_color": "#ffffff"
   }
