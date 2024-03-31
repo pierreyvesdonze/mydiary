@@ -38,4 +38,36 @@ class MoodService
         // $mostCommonMood contient maintenant le mood le plus courant
         return $mostCommonMood;
     }
+
+    public function getSleepAverage($moods)
+    {
+        // Initialiser un tableau pour compter le nombre de chaque daySleep
+        $moodCounts = [
+            'Excellent' => 0,
+            'Bon' => 0,
+            'Moyen' => 0,
+            'Mauvais' => 0,
+        ];
+
+        // Parcourir les moods et compter le nombre de chaque dayMood
+        foreach ($moods as $mood) {
+            $daySleep = $mood->getSleep();
+            if (array_key_exists($daySleep, $moodCounts)) {
+                $moodCounts[$daySleep]++;
+            }
+        }
+
+        // Trouver le mood avec le nombre le plus élevé
+        $mostCommonSleep = '';
+        $maxCount = 0;
+        foreach ($moodCounts as $daySleep => $count) {
+            if ($count > $maxCount) {
+                $mostCommonSleep = $daySleep;
+                $maxCount = $count;
+            }
+        }
+
+        // $mostCommonMood contient maintenant le mood le plus courant
+        return $mostCommonSleep;
+    }
 }

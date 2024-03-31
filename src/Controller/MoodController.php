@@ -45,12 +45,16 @@ class MoodController extends AbstractController
             return ($dateA < $dateB) ? 1 : -1;
         });
 
-        // Calcul de la moyenne de l'humeur en général
-        $moodAverage = lcfirst($moodService->getMoodAverage($moods));
+        // Calcul la moyenne de l'humeur
+        $moodAverage = $moodService->getMoodAverage($moods);
+
+        // Calcul la moyenne de la qualité du sommeil
+        $sleepAverage = $moodService->getSleepAverage($moods);
 
         return $this->render('mood/index.html.twig', [
-            'moods'       => $moods,
-            'moodAverage' => $moodAverage,
+            'moods'        => $moods,
+            'moodAverage'  => $moodAverage,
+            'sleepAverage' => $sleepAverage,
         ]);
     }
 
@@ -85,7 +89,7 @@ class MoodController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'mood_show', methods: ['GET'])]
+    #[Route('/voir/{id}', name: 'mood_show', methods: ['GET'])]
     public function show(Mood $mood): Response
     {
         $user = $this->getUser();
