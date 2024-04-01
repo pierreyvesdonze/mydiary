@@ -17,8 +17,11 @@ class MoodService
             'Déprimé' => 0
         ];
 
+        // Récupérer les 7 derniers moods ou moins si la collection en contient moins
+        $lastSevenMoods = $this->getLastSevenMoods($moods);
+
         // Parcourir les moods et compter le nombre de chaque dayMood
-        foreach ($moods as $mood) {
+        foreach ($lastSevenMoods as $mood) {
             $dayMood = $mood->getDayMood();
             if (array_key_exists($dayMood, $moodCounts)) {
                 $moodCounts[$dayMood]++;
@@ -49,8 +52,11 @@ class MoodService
             'Mauvais' => 0,
         ];
 
+        // Récupérer les 7 derniers moods ou moins si la collection en contient moins
+        $lastSevenMoods = $this->getLastSevenMoods($moods);
+
         // Parcourir les moods et compter le nombre de chaque dayMood
-        foreach ($moods as $mood) {
+        foreach ($lastSevenMoods as $mood) {
             $daySleep = $mood->getSleep();
             if (array_key_exists($daySleep, $moodCounts)) {
                 $moodCounts[$daySleep]++;
@@ -69,5 +75,19 @@ class MoodService
 
         // $mostCommonMood contient maintenant le mood le plus courant
         return $mostCommonSleep;
+    }
+
+    public function getLastSevenMoods($moods)
+    {
+        // Détermine le nombre total de moods
+        $totalMoods = count($moods);
+
+        // Nombre maximal d'éléments à récupérer
+        $maxItems = min($totalMoods, 7);
+
+        // Récupérer les 7 derniers moods ou moins si la collection en contient moins
+        $lastSevenMoods = array_slice($moods, -$maxItems, $maxItems);
+
+        return $lastSevenMoods;
     }
 }

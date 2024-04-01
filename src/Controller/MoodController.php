@@ -48,7 +48,7 @@ class MoodController extends AbstractController
             return ($dateA < $dateB) ? 1 : -1;
         });
 
-        // Calcul la moyenne de l'humeur
+        // Calcul la moyenne de l'humeur sur les 7 dernières entrées
         $moodAverage = $moodService->getMoodAverage($moods);
 
         // Calcul la moyenne de la qualité du sommeil
