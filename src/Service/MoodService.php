@@ -86,7 +86,7 @@ class MoodService
         $maxItems = min($totalMoods, 7);
 
         // Récupérer les 7 derniers moods ou moins si la collection en contient moins
-        $lastSevenMoods = array_slice($moods, -$maxItems, $maxItems);
+        $lastSevenMoods = array_slice($moods, 0, 7);
 
         return $lastSevenMoods;
     }

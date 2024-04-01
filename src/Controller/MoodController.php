@@ -37,15 +37,8 @@ class MoodController extends AbstractController
         $moods = $moodRepository->findByMoodContainer($moodContainer);
 
         // Tri des humeurs par ordre décroissant
-        usort($moods, function ($a, $b) {
-            $dateA = $a->getDate()->getTimestamp();
-            $dateB = $b->getDate()->getTimestamp();
-
-            // Trier en ordre décroissant
-            if ($dateA == $dateB) {
-                return 0;
-            }
-            return ($dateA < $dateB) ? 1 : -1;
+        usort($moods, function($a, $b) {
+            return $b->getDate() <=> $a->getDate();
         });
 
         // Calcul la moyenne de l'humeur sur les 7 dernières entrées
