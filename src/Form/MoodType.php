@@ -63,6 +63,13 @@ class MoodType extends AbstractType
                     'placeholder' => 'Décrivez votre ressenti sur cette journée (optionnel)'
                 ]
             ])
+            ->add('dayJoy', TextareaType::class, [
+                'label'    => 'Choses positives du jour',
+                'required' => false,
+                'attr'     => [
+                    'placeholder' => 'Citez 3 choses positives qui se sont passées durant cette journée (optionnel)'
+                ]
+            ])
             ->add('fallingAsleep', ChoiceType::class, [
                 'label'   => 'Qualité de votre endormissement la nuit précédente',
                 'choices' => [

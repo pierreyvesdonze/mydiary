@@ -39,6 +39,9 @@ class Mood
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $dayJoy = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +139,18 @@ class Mood
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getDayJoy(): ?string
+    {
+        return $this->dayJoy;
+    }
+
+    public function setDayJoy(?string $dayJoy): static
+    {
+        $this->dayJoy = $dayJoy;
 
         return $this;
     }
