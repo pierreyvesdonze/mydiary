@@ -79,12 +79,6 @@ class MoodService
 
     public function getLastSevenMoods($moods)
     {
-        // Détermine le nombre total de moods
-        $totalMoods = count($moods);
-
-        // Nombre maximal d'éléments à récupérer
-        $maxItems = min($totalMoods, 7);
-
         // Récupérer les 7 derniers moods ou moins si la collection en contient moins
         $lastSevenMoods = array_slice($moods, 0, 7);
 
