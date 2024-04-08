@@ -103,7 +103,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/supprimer/compte', name: 'delete_account')]
-    public function deleteAccout(
+    public function deleteAccount(
         FriendshipRepository $friendshipRepository,
         SessionInterface $session,
         TokenStorageInterface $tokenStorage,
