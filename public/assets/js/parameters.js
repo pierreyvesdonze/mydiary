@@ -21,12 +21,6 @@ var appParam = {
 
         let objectToChange = e.currentTarget.dataset.type;
 
-        /* const envType = $('.env').data('envtype');
-        if (envType === "prod") {
-            envUrl = '/public/visibilite';
-        } else {
-            envUrl = '/visibilite'
-        } */
         envUrl = '/visibilite'
 
         $.ajax({
@@ -68,11 +62,8 @@ var appParam = {
 
     changeUserPseudo: () => {
         const envType = $('.env').data('envtype');
-        if (envType === "prod") {
-            envUrl = '/mydiary/public/changer/pseudo/utilisateur';
-        } else {
-            envUrl = '/changer/pseudo/utilisateur'
-        }
+
+        envUrl = '/changer/pseudo/utilisateur'
 
         let newPseudo         = $('#change-pseudo-input').val();
         let modalTitle        = $('.modal-content-title');
