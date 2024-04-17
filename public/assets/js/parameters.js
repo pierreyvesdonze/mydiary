@@ -21,12 +21,13 @@ var appParam = {
 
         let objectToChange = e.currentTarget.dataset.type;
 
-        const envType = $('.env').data('envtype');
+        /* const envType = $('.env').data('envtype');
         if (envType === "prod") {
             envUrl = '/public/visibilite';
         } else {
             envUrl = '/visibilite'
-        }
+        } */
+        envUrl = '/visibilite'
 
         $.ajax({
             url: envUrl,

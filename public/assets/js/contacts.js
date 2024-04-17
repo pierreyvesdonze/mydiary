@@ -22,13 +22,16 @@ var appContact = {
         let currentTarget = $(e.currentTarget);
         let targetId = currentTarget.data('targetid');
 
-        const envType = $('.env').data('envtype');
+       /*  const envType = $('.env').data('envtype');
 
         if (envType === "prod") {
             envUrl = '/public/contacts/envoyer/invitation';
         } else {
             envUrl = '/contacts/envoyer/invitation'
         }
+ */
+        envUrl = '/contacts/envoyer/invitation';
+
         $.ajax({
             url: envUrl,
             type: 'POST',
