@@ -25,7 +25,7 @@ var appContact = {
         const envType = $('.env').data('envtype');
 
         if (envType === "prod") {
-            envUrl = '/mydiary/public/contacts/envoyer/invitation';
+            envUrl = '/public/contacts/envoyer/invitation';
         } else {
             envUrl = '/contacts/envoyer/invitation'
         }
