@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>{% block title %}My Diary{% endblock %}</title>
-    <link rel="manifest" href="{{ asset("manifest.json") }}">
+    <link rel="manifest" href="{{ asset(" manifest.json") }}">
     <link rel="icon" href="{{ asset('assets/icons/favicon.png') }}">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,7 +28,10 @@
 
     {# NAV #}
     <section class="main">
-        {{ render(controller('App\\Controller\\HomeController::navbar')) }}
+        {# {{ render(controller('App\\Controller\\HomeController::navbar')) }} #}
+        
+        {# Nav #}
+        {% include "nav/nav.html.twig" %}
 
         {# Flash messages #}
         <div class="flash-container">

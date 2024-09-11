@@ -30,11 +30,11 @@
 			<li><a href="{{ path('health_index') }}">Santé</a></li>
 			<li><a href="{{ path('date_index') }}">Dates</a></li>
 
-			{% if invitations %}
+			{# {% if invitations %}
 			<li><a href="{{ path('contacts') }}">Contacts <span class="friendRequest">*</span></a></li>
 			{% else %}
 			<li><a href="{{ path('contacts') }}">Contacts</a></li>
-			{% endif %}
+			{% endif %} #}
 			{% endif %}
 
 			<!-- Trigger modal tools -->
@@ -57,8 +57,8 @@
 	<li><a href="{{ path('health_index') }}">Santé</a></li>
 	<li><a href="{{ path('date_index') }}">Dates</a></li>
 	{# <li><a href="{{ path('quotes') }}">Citations</a></li> #}
-	<div class="divider"></div>
-	<li>
+	{# <div class="divider"></div> #}
+	{# <li>
 		<a href="{{ path('contacts') }}">
 			{% if invitations %}
 			Contacts <span class="friendRequest">*</span>
@@ -66,7 +66,7 @@
 			Contacts
 			{% endif %}
 		</a>
-	</li>
+	</li> #}
 	<div class="divider"></div>
 	<li><a href="{{ path('parameters') }}">Paramètres</a></li>
 	<div class="divider"></div>

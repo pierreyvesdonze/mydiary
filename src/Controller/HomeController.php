@@ -23,7 +23,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    public function navbar()
+    /* public function navbar()
     {
         $user = $this->getUser();
         $invitations = $this->friendshipRequestRepository->findInvitations($user);
@@ -31,5 +31,5 @@ class HomeController extends AbstractController
         return $this->render('nav/nav.html.twig', [
             'invitations' => $invitations
         ]);
-    }
+    } */
 }
