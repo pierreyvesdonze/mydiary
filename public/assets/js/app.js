@@ -15,8 +15,6 @@ var app = {
 
         app.closeLoadingAnim(); */
 
-        console.log('JS is working');
-
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')

@@ -7,11 +7,12 @@
 
 <a href="{{ path('goal_new') }}" class="custom-btn">Créer un objectif</a>
 
-<br>
-<br>
-{% if goal is defined and goal is not null %}
-<p>Cliquer sur l'icone du statut pour modifier celui-ci</p>
+<br><br>
+
+{% if goals is defined and goals is not empty %}
+<p>Cliquer sur l'icône du statut pour modifier celui-ci</p>
 {% endif %}
+
 <table>
     <thead>
         <tr>
@@ -26,11 +27,10 @@
             <td><span class="span-txt">{{ goal.description }}</span></td>
             <td>
                 <form action="{{ path('goal_set_achieved', { 'id': goal.id }) }}" method="POST"
-                    style="display: inline;">
-                    <button type="submit" style="background: none; border: none; padding: 0;">
+                    class="goal-form" data-goal-id="{{ goal.id }}" data-achieved="{{ goal.isAchieved ? 'true' : 'false' }}">
+                    <button type="submit" class="goal-icon" style="background: none; border: none; padding: 0;">
                         {% if goal.isAchieved %}
-                        <span class="material-icons pointer-icon"
-                            style="color: green; font-size: 24px;">check_circle</span>
+                        <span class="material-icons pointer-icon" style="color: green; font-size: 24px;">check_circle</span>
                         {% else %}
                         <span class="material-icons pointer-icon" style="color: red; font-size: 24px;">cancel</span>
                         {% endif %}
@@ -48,4 +48,40 @@
         {% endfor %}
     </tbody>
 </table>
+
+{# Ajout du script confetti.js #}
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.1"></script>
+<script>
+    document.querySelectorAll(".goal-form").forEach(form => {
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Empêche l'envoi du formulaire immédiatement
+            
+            let formData = new FormData(this);
+            let actionUrl = this.getAttribute("action");
+
+            // Vérifier si l'objectif était NON atteint avant le clic
+            let wasNotAchieved = this.getAttribute("data-achieved") === "false";
+
+            fetch(actionUrl, {
+                method: "POST",
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    if (wasNotAchieved) {
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                    }
+
+                    // Simuler un rechargement pour mettre à jour l'affichage
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500);
+                }
+            }).catch(error => console.error("Erreur :", error));
+        });
+    });
+</script>
 {% endblock %}
