@@ -33,7 +33,7 @@
 {% if app.user.routineContainer.routines %}
 <h4>
     Vous avez <span class="green-text">{{ app.user.routineContainer.routines|length }}</span> 
-    {{ app.user.routineContainer.routines|length == 1 ? 'routine' : 'routines' }} en cours.
+    {{ app.user.routineContainer.routines|length == 1 ? 'routine' : 'routines' }} en cours
 </h4>
     
 {% else %}
@@ -44,7 +44,12 @@
 <br><br>
 
 {% if goals is not empty %}
-    <h4>Actuellement <span class="green-text">{{ attainedGoals }}</span> objectif(s) atteint(s) sur {{ totalGoals }}.</h4>
+    <h4>Actuellement 
+        <span class="green-text">{{ attainedGoals }}</span> 
+        {{ attainedGoals == 1 ? 'objectif atteint' : 'objectifs atteints' }}
+        sur {{ totalGoals }} 
+        {{ totalGoals == 1 ? 'objectif' : 'objectifs' }}
+    </h4>
 {% else %}
     <h4>Vous n'avez pas encore défini d'objectifs</h4>
     <br>
@@ -52,6 +57,5 @@
 {% endif %}
 
 <br><br>
-
 
 {% endblock %}
