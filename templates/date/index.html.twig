@@ -20,7 +20,7 @@
     </div>
 
     {% if dates %}
-    {% set sortedDates = dates|sort((a, b) => a.date.timestamp - b.date.timestamp) %}
+    {% set sortedDates = dates|sort((a, b) => b.date.timestamp - a.date.timestamp) %}
     <ul class="collapsible date-container">
         {% set previous_year = null %}
         {% for date in sortedDates %}
