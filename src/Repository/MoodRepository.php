@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Mood;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr;
 
 /**
  * @extends ServiceEntityRepository<Mood>
@@ -30,6 +31,20 @@ class MoodRepository extends ServiceEntityRepository
             ->andWhere('m.moodContainer = :val')
             ->setParameter('val', $moodContainer)
             ->orderBy('m.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Mood[] Returns an array of Mood objects
+     */
+    public function findByMoodContainerLast30Entries($moodContainer): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.moodContainer = :val')
+            ->setParameter('val', $moodContainer)
+            ->orderBy('m.date', 'DESC') // Tri décroissant par date pour obtenir les dernières entrées
+            ->setMaxResults(30) // Limite les résultats à 30
             ->getQuery()
             ->getResult();
     }

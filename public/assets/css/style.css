@@ -51,6 +51,7 @@ body {
   min-height: 100vh;
   background-color: var(--body-bg);
   background-image: var(--body-img);
+  background-attachment: fixed;
   background-repeat: repeat;
   font-family: "Montserrat", sans-serif;
   font-weight: 200;

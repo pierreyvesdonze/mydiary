@@ -17,6 +17,15 @@
     <p class="center-align flow-text display-2">Selon vos données, vous êtes majoritairement {{ moodAverage|capitalize|lower }} et votre sommeil est {{ sleepAverage|capitalize|lower }}.
     </p>
     <br>
+
+    {# STATS #}
+    {% include "stats/index.html.twig" with {
+        'labels': labels,
+        'moodData': moodData
+    } %}
+
+    <br><br>
+
     <div class="container-flex-between">
         <div></div>
         <div class="container-flex-between">

@@ -16,9 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/humeur')]
 class MoodController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em)
-    {
-    }
+    public function __construct(private EntityManagerInterface $em) {}
 
     #[Route('/', name: 'mood_index', methods: ['GET'])]
     public function index(
@@ -26,18 +24,19 @@ class MoodController extends AbstractController
         MoodService $moodService,
         PaginatorInterface $paginator,
         Request $request,
-        ): Response
-    {
+    ): Response {
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('login');
         }
 
         $moodContainer = $user->getMoodContainer();
-        $moods = $moodRepository->findByMoodContainer($moodContainer);
+        
+        // Récupère les 30 dernières entrées
+        $moods = $moodRepository->findByMoodContainerLast30Entries($moodContainer);
 
         // Tri des humeurs par ordre décroissant
-        usort($moods, function($a, $b) {
+        usort($moods, function ($a, $b) {
             return $b->getDate() <=> $a->getDate();
         });
 
@@ -46,6 +45,15 @@ class MoodController extends AbstractController
 
         // Calcul la moyenne de la qualité du sommeil
         $sleepAverage = $moodService->getSleepAverage($moods);
+
+        // Calcul des données pour le graphique
+        $labels    = [];
+        $moodData  = [];
+
+        foreach ($moods as $mood) {
+            $labels[] = $mood->getDate()->format('Y-m-d'); // formatage de la date
+            $moodData[] = $mood->getDayMood(); // ou la valeur de l'humeur
+        }
 
         // Pagination
         $paginatedMoods = $paginator->paginate(
@@ -58,6 +66,8 @@ class MoodController extends AbstractController
             'moods'        => $paginatedMoods,
             'moodAverage'  => $moodAverage,
             'sleepAverage' => $sleepAverage,
+            'labels'       => json_encode($labels),
+            'moodData'     => json_encode($moodData)
         ]);
     }
 
@@ -156,7 +166,7 @@ class MoodController extends AbstractController
         $moods      = $user->getMoodContainer()->getMoods();
         $moodsArray = [];
 
-        foreach($moods as $mood) {
+        foreach ($moods as $mood) {
             $moodsArray[$mood->getdate()->format('M')] = $mood->getDaymood();
         };
 

@@ -1,0 +1,87 @@
+{% block body %}
+
+<canvas id="moodChart" width="100%" height="70"></canvas>
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+<!-- Ajout de l'adaptateur pour les dates -->
+
+<script>
+    const ctx = document.getElementById('moodChart').getContext('2d');
+
+    // Récupération des données passées depuis le contrôleur
+    const moodChartLabels = {{ labels| raw }};
+    const moodChartData = {{ moodData| raw }};
+
+    function convertMoodToNumber(mood) {
+        const moodMap = {
+            "Déprimé": 1,
+            "Fatigué": 2,
+            "Neutre": 3,
+            "Joyeux": 4
+        };
+        return moodMap[mood] || 0;  // Retourne 0 si l'humeur n'est pas définie
+    }
+
+    // Appliquer la conversion à toutes les valeurs de moodData
+    const numericMoodData = moodChartData.map(mood => convertMoodToNumber(mood));
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: moodChartLabels,  // Les dates formatées ISO
+            datasets: [
+                {
+                    label: 'Humeur',
+                    data: numericMoodData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true }
+            },
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'll',
+                        unitStepSize: 1,
+                        displayFormats: {
+                            day: 'MMM d',
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date',
+                    },
+                },
+                y: {
+                    min: 0,
+                    max: 4,
+                    ticks: {
+                        stepSize: 1,
+                        callback: function (value) {
+                            const moodLabels = ['Déprimé', 'Fatigué', 'Neutre', 'Joyeux'];
+                            return moodLabels[value - 1] || '';
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Échelle',
+                    },
+                }
+            }
+        }
+    });
+
+</script>
+{% endblock %}
+{% endblock %}
