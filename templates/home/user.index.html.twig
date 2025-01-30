@@ -31,17 +31,24 @@
 <br><br>
 
 {% if app.user.routineContainer.routines %}
-
 <h4>
     Vous avez <span class="green-text">{{ app.user.routineContainer.routines|length }}</span> 
     {{ app.user.routineContainer.routines|length == 1 ? 'routine' : 'routines' }} en cours.
 </h4>
     
-
 {% else %}
     
 <h4>Vous n'avez pas encore créé de routine.</h4>
+{% endif %}
 
+<br><br>
+
+{% if goals is not empty %}
+    <h4>Actuellement <span class="green-text">{{ attainedGoals }}</span> objectif(s) atteint(s) sur {{ totalGoals }}.</h4>
+{% else %}
+    <h4>Vous n'avez pas encore défini d'objectifs</h4>
+    <br>
+    <a href="{{ path('goal_new') }}" class="custom-btn">Ajouter un objectif</a>
 {% endif %}
 
 <br><br>

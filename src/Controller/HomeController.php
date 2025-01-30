@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\MoodContainer;
 use App\Repository\FriendshipRequestRepository;
+use App\Repository\GoalRepository;
 use App\Repository\MoodRepository;
 use App\Service\MoodService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,10 +38,23 @@ class HomeController extends AbstractController
                 $moodData[] = $mood->getDayMood(); // ou la valeur de l'humeur
             }
 
+            $goals = $user->getGoals();
+
+            // Convertir la PersistentCollection en tableau
+            $goalsArray = $goals->toArray();
+
+            // Compter le nombre d'objectifs atteints
+            $attainedGoals = array_filter($goalsArray, fn($goal) => $goal->isAchieved() === true);
+
+            $totalGoals = count($goalsArray);
+
             return $this->render('home/user.index.html.twig', [
-                'moodAverage' => $moodAverage,
-                'labels'       => json_encode($labels),
-                'moodData'     => json_encode($moodData)
+                'moodAverage'   => $moodAverage,
+                'labels'        => json_encode($labels),
+                'moodData'      => json_encode($moodData),
+                'goals'         => $goalsArray,
+                'attainedGoals' => count($attainedGoals),
+                'totalGoals'    => $totalGoals
             ]);
         }
         return $this->render('home/index.html.twig', [

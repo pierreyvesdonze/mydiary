@@ -59,11 +59,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 400, nullable: true)]
     private ?string $mantra = null;
 
+    /**
+     * @var Collection<int, Goal>
+     */
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Goal::class)]
+    private Collection $goals;
+
     public function __construct()
     {
         $this->dates = new ArrayCollection();
         $this->friendshipRequests = new ArrayCollection();
         $this->friendships = new ArrayCollection();
+        $this->goals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -331,6 +338,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMantra(?string $mantra): static
     {
         $this->mantra = $mantra;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Goal>
+     */
+    public function getGoals(): Collection
+    {
+        return $this->goals;
+    }
+
+    public function addGoal(Goal $goal): static
+    {
+        if (!$this->goals->contains($goal)) {
+            $this->goals->add($goal);
+            $goal->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGoal(Goal $goal): static
+    {
+        if ($this->goals->removeElement($goal)) {
+            // set the owning side to null (unless already changed)
+            if ($goal->getUser() === $this) {
+                $goal->setUser(null);
+            }
+        }
 
         return $this;
     }

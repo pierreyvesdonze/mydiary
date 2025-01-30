@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Objectifs{% endblock %}
+
+{% block body %}
+<h1>Liste des objectifs</h1>
+
+<a href="{{ path('goal_new') }}" class="custom-btn">Créer un objectif</a>
+
+<br>
+<br>
+{% if goal is defined and goal is not null %}
+<p>Cliquer sur l'icone du statut pour modifier celui-ci</p>
+{% endif %}
+<table>
+    <thead>
+        <tr>
+            <th><span class="accent-title">Description</span></th>
+            <th><span class="accent-title">Statut</span></th>
+            <th><span class="accent-title">Action</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for goal in goals %}
+        <tr>
+            <td><span class="span-txt">{{ goal.description }}</span></td>
+            <td>
+                <form action="{{ path('goal_set_achieved', { 'id': goal.id }) }}" method="POST"
+                    style="display: inline;">
+                    <button type="submit" style="background: none; border: none; padding: 0;">
+                        {% if goal.isAchieved %}
+                        <span class="material-icons pointer-icon"
+                            style="color: green; font-size: 24px;">check_circle</span>
+                        {% else %}
+                        <span class="material-icons pointer-icon" style="color: red; font-size: 24px;">cancel</span>
+                        {% endif %}
+                    </button>
+                </form>
+            </td>
+            <td>
+                <a href="{{ path('goal_show', {'id':goal.id}) }}" class="custom-btn">Voir</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">Aucun objectif trouvé.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

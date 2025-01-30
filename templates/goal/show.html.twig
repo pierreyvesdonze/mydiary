@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Objectif{% endblock %}
+
+{% block body %}
+<h1>Détails de l'objectif</h1>
+<ul>
+    <li><span class="accent-title">Description :</span> <span class="span-txt">{{ goal.description }}</span></li>
+    <li><span class="accent-title">Catégorie :</span> <span class="span-txt">{{ goal.category.name }}</span></li>
+    <li><span class="accent-title">Date limite :</span> <span class="span-txt"> {{ goal.deadline ?
+            goal.deadline|date('Y-m-d') : 'Pas de date limite' }}</li>
+    <li><span class="accent-title">Statut :</span> <span class="span-txt">{{ goal.isAchieved ? 'Atteint' : 'Non atteint' }}</span></li>
+</ul>
+
+<div class="container-flex-between">
+    <a href="{{ path('goal_edit', {'id':goal.id}) }}" class="custom-btn">Modifier</a>
+    <br>
+    <br>
+    <a href="{{ path('goal_delete', {'id': goal.id}) }}" class="custom-btn btn-danger"
+        onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cet objectif ?')">Supprimer</a>
+
+</div>
+<br>
+<br>
+<a href="{{ path('goal_index') }}" class="custom-btn">Retour à la liste</a>
+{% endblock %}
