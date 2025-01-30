@@ -17,10 +17,12 @@
     function convertMoodToNumber(mood) {
         const moodMap = {
             "Déprimé": 1,
-            "Fatigué": 2,
-            "Neutre": 3,
-            "Joyeux": 4
+            "Anxieux": 2,
+            "Fatigué": 3,
+            "Neutre": 4,
+            "Joyeux": 5
         };
+        console.log(mood, moodMap[mood])
         return moodMap[mood] || 0;  // Retourne 0 si l'humeur n'est pas définie
     }
 
@@ -65,11 +67,11 @@
                 },
                 y: {
                     min: 0,
-                    max: 4,
+                    max: 5,
                     ticks: {
                         stepSize: 1,
                         callback: function (value) {
-                            const moodLabels = ['Déprimé', 'Fatigué', 'Neutre', 'Joyeux'];
+                            const moodLabels = ['Déprimé','Anxieux', 'Fatigué', 'Neutre', 'Joyeux'];
                             return moodLabels[value - 1] || '';
                         }
                     },
