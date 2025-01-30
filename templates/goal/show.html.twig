@@ -10,14 +10,16 @@
 
 <h4>Objectif : {{ goal.description }}</h4>
 <br>
-<h5>Date limite : {{ goal.deadline ?
-    goal.deadline|format_datetime('full', 'short', locale: 'fr') : 'Pas de date limite' }}</h5>
+<h5>Date limite : {{ goal.deadline ? goal.deadline|format_datetime('long', locale='fr')|split(' à')|first : 'Pas de date limite' }}</h5>
+
 <br>
 <h6>Status : {{ goal.isAchieved ? 'Atteint' : 'Non atteint' }}
     {% if goal.isAchieved %}
-    <span class="material-icons" style="color: green; vertical-align: middle;">check_circle</span>
+    <span class="material-icons green-text" style="vertical-align: middle;">check_circle</span>
+
     {% else %}
-    <span class="material-icons" style="color: red; vertical-align: middle;">cancel</span>
+    
+    <span class="material-icons red-text" style="vertical-align: middle;">cancel</span>
     {% endif %}
 </h6>
 

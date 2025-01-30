@@ -30,9 +30,10 @@
                     class="goal-form" data-goal-id="{{ goal.id }}" data-achieved="{{ goal.isAchieved ? 'true' : 'false' }}">
                     <button type="submit" class="goal-icon" style="background: none; border: none; padding: 0;">
                         {% if goal.isAchieved %}
-                        <span class="material-icons pointer-icon" style="color: green; font-size: 24px;">check_circle</span>
+                        <span class="material-icons pointer-icon green-text" style="vertical-align: middle;">check_circle</span>
+
                         {% else %}
-                        <span class="material-icons pointer-icon" style="color: red; font-size: 24px;">cancel</span>
+                        <span class="material-icons pointer-icon red-text" style="font-size: 24px;">cancel</span>
                         {% endif %}
                     </button>
                 </form>
