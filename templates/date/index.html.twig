@@ -54,10 +54,6 @@
                     <div class="btn-control-flex">
                         <a href="{{ path('date_edit', {'dateId':date.id}) }}"><i class="material-icons">sync</i></a>
                         <div class="margin-left-20"></div>
-                        {# <form action="{{ path('date_delete', {'id': date.id}) }}" method="post"
-                            onsubmit="return confirm('Supprimer cet élément ?');">
-                            <button type="submit" class="custom-btn btn-danger">Supprimer</button>
-                        </form> #}
                         <a href="{{ path('date_delete', {'id':date.id}) }}"
                             onclick="return confirm('Supprimer cet élément ?');">
                             <i class="material-icons red-text">delete_forever</i></a>

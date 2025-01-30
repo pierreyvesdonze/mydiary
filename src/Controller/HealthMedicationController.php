@@ -3,14 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Medication;
-use App\Entity\Weight;
 use App\Form\HealthMedicationType;
-use App\Form\HealthWeightType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 
