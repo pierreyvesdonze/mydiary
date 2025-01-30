@@ -3,14 +3,25 @@
 {% block title %}Objectif{% endblock %}
 
 {% block body %}
-<h1>Détails de l'objectif</h1>
-<ul>
-    <li><span class="accent-title">Description :</span> <span class="span-txt">{{ goal.description }}</span></li>
-    <li><span class="accent-title">Catégorie :</span> <span class="span-txt">{{ goal.category.name }}</span></li>
-    <li><span class="accent-title">Date limite :</span> <span class="span-txt"> {{ goal.deadline ?
-            goal.deadline|date('Y-m-d') : 'Pas de date limite' }}</li>
-    <li><span class="accent-title">Statut :</span> <span class="span-txt">{{ goal.isAchieved ? 'Atteint' : 'Non atteint' }}</span></li>
-</ul>
+<h1>{{ goal.category.name }}</h1>
+<br>
+<hr>
+<br>
+
+<h4>Objectif : {{ goal.description }}</h4>
+<br>
+<h5>Date limite : {{ goal.deadline ?
+    goal.deadline|format_datetime('full', 'short', locale: 'fr') : 'Pas de date limite' }}</h5>
+<br>
+<h6>Status : {{ goal.isAchieved ? 'Atteint' : 'Non atteint' }}
+    {% if goal.isAchieved %}
+    <span class="material-icons" style="color: green; vertical-align: middle;">check_circle</span>
+    {% else %}
+    <span class="material-icons" style="color: red; vertical-align: middle;">cancel</span>
+    {% endif %}
+</h6>
+
+<br><br>
 
 <div class="container-flex-between">
     <a href="{{ path('goal_edit', {'id':goal.id}) }}" class="custom-btn">Modifier</a>
@@ -18,7 +29,6 @@
     <br>
     <a href="{{ path('goal_delete', {'id': goal.id}) }}" class="custom-btn btn-danger"
         onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer cet objectif ?')">Supprimer</a>
-
 </div>
 <br>
 <br>

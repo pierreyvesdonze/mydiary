@@ -1,5 +1,3 @@
-
-
 <div class="container">
     <canvas id="moodChart" {# data-moods="{{ moodsArrayJson }}" #} width="400" height="100"></canvas>
 </div>
@@ -9,7 +7,6 @@
     const ctx = document.getElementById('moodChart');
     const moodsDataJson = ctx.dataset.moods;
     const moodsData = JSON.parse(moodsDataJson);
-    console.log(moodsData)
     const Utils = {
         months: (options) => {
             const months = ["Janv", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

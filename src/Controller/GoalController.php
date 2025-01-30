@@ -86,16 +86,20 @@ final class GoalController extends AbstractController
     #[Route('/{id}/modifier', name: 'goal_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Goal $goal, EntityManagerInterface $entityManager): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+
         $form = $this->createForm(GoalType::class, $goal);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Objectif modifié !');
+
             return $this->redirectToRoute('goal_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        $this->addFlash('success', 'Objectif modifié !');
 
         return $this->render('goal/edit.html.twig', [
             'goal' => $goal,
@@ -106,6 +110,10 @@ final class GoalController extends AbstractController
     #[Route('/supprimer/{id}', name: 'goal_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, Goal $goal, EntityManagerInterface $entityManager): Response
     {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+        
         $entityManager->remove($goal);
         $entityManager->flush();
 
