@@ -9,38 +9,49 @@
 	{% endif %}
 </ul>
 
-<!-- Dropdown Tools -->
-<ul id="dropdown-tools" class="dropdown-content dropdown-nav">
+<!-- Dropdown Bien-être -->
+<ul id="dropdown-bien-etre" class="dropdown-content dropdown-nav">
+	<li><a href="{{ path('mood_index') }}">Humeur</a></li>
 	<li><a href="{{ path('routine_index') }}">Routines</a></li>
-	{# <li><a href="#">Méditation</a></li>
-	<li><a href="#">Respiration</a></li>
-	<li><a href="#">Gestion du stress</a></li> #}
-	<li><a href="{{ path('quotes') }}">Citations</a></li>
 </ul>
+
+<!-- Dropdown Santé -->
+<ul id="dropdown-sante" class="dropdown-content dropdown-nav">
+	<li><a href="{{ path('health_index') }}">Carnet</a></li>
+	<li><a href="#">Sport</a></li>
+	<li><a href="#">Alimentation</a></li>
+</ul>
+
+<!-- Dropdown Journal -->
+<ul id="dropdown-journal" class="dropdown-content dropdown-nav">
+	{% if app.user %}
+	<li><a href="{{ path('book_show', {id:app.user.book.id}) }}">Journal</a></li>
+	<li><a href="{{ path('date_index') }}">Dates</a></li>
+	{% endif %}
+</ul>
+
+
 
 <nav class="nav">
 	<div class="nav-wrapper">
 		<a href="{{ path('home') }}" class="brand-logo"><i class="large material-icons right">home</i></a>
 		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 		<ul class="right hide-on-med-and-down">
-			{% if app.user %}
-			<li><a href="{{ path('book_show', {id:app.user.book.id}) }}">Journal</a></li>
-			<li><a href="{{ path('mood_index') }}">Humeur</a></li>
-			<li><a href="{{ path('routine_index') }}">Routines</a></li>
-			<li><a href="{{ path('health_index') }}">Santé</a></li>
-			<li><a href="{{ path('date_index') }}">Dates</a></li>
-
-			{# {% if invitations %}
-			<li><a href="{{ path('contacts') }}">Contacts <span class="friendRequest">*</span></a></li>
-			{% else %}
-			<li><a href="{{ path('contacts') }}">Contacts</a></li>
-			{% endif %} #}
-			{% endif %}
-
-			<!-- Trigger modal tools -->
-			{# <li><a class="dropdown-trigger" href="#!" data-target="dropdown-tools">Outils</a> #}
-
-				<!-- Trigger modal user -->
+			<li>
+				<a class="dropdown-trigger" href="#!" data-target="dropdown-bien-etre">
+					Bien-être
+				</a>
+			</li>
+			<li>
+				<a class="dropdown-trigger" href="#!" data-target="dropdown-sante">
+					Santé
+				</a>
+			</li>
+			<li>
+				<a class="dropdown-trigger" href="#!" data-target="dropdown-journal">
+					Journal
+				</a>
+			</li>
 			<li><a class="dropdown-trigger" href="#!" data-target="dropdown-user"><i
 						class="material-icons right">person</i></a>
 			</li>
@@ -56,17 +67,6 @@
 	<li><a href="{{ path('routine_index') }}">Routines</a></li>
 	<li><a href="{{ path('health_index') }}">Santé</a></li>
 	<li><a href="{{ path('date_index') }}">Dates</a></li>
-	{# <li><a href="{{ path('quotes') }}">Citations</a></li> #}
-	{# <div class="divider"></div> #}
-	{# <li>
-		<a href="{{ path('contacts') }}">
-			{% if invitations %}
-			Contacts <span class="friendRequest">*</span>
-			{% else %}
-			Contacts
-			{% endif %}
-		</a>
-	</li> #}
 	<div class="divider"></div>
 	<li><a href="{{ path('parameters') }}">Paramètres</a></li>
 	<div class="divider"></div>
