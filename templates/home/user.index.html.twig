@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Humeur{% endblock %}
+
+{% block body %}
+<blockquote>
+    {% if app.user.mantra %}
+    {{ app.user.mantra }}
+    {% else %}
+    Bienvenue sur votre journal de bord !
+    {% endif %}
+</blockquote>
+
+<br><br>
+
+<div class="auto-margin-container">
+    {% if moodAverage %}
+    <p class="center-align flow-text display-2">Bonjour {{ app.user.pseudo }} ! Selon vos données, vous êtes
+        majoritairement {{ moodAverage|capitalize|lower }}.
+    </p>
+    {% endif %}
+</div>
+
+<br><br>
+
+{% include "stats/index.html.twig" with {
+'labels': labels,
+'moodData': moodData
+} %}
+
+{% endblock %}

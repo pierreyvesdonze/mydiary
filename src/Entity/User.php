@@ -56,6 +56,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?RoutineContainer $routineContainer = null;
 
+    #[ORM\Column(length: 400, nullable: true)]
+    private ?string $mantra = null;
+
     public function __construct()
     {
         $this->dates = new ArrayCollection();
@@ -316,6 +319,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->routineContainer = $routineContainer;
+
+        return $this;
+    }
+
+    public function getMantra(): ?string
+    {
+        return $this->mantra;
+    }
+
+    public function setMantra(?string $mantra): static
+    {
+        $this->mantra = $mantra;
 
         return $this;
     }

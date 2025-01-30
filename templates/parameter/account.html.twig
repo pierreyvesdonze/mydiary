@@ -6,6 +6,7 @@
                     <h5>Mon compte</h5>
                 </div>
                 <div class="card-action">
+                    {# Pseudo #}
                     <div class="container-flex-between">
                         <div class="accent-title" id="user-account-pseudo">Mon pseudo : {{ app.user.pseudo }}</div>
                         <div>
@@ -13,12 +14,30 @@
                                 id="trigger-modal-pseudo-user">Changer</a>
                         </div>
                     </div>
+
                     <br><br>
+
+                    {# Mantra #}
+                    <div class="container-flex-between">
+
+                        <div class="accent-title" id="user-account-mantra">Mon mantra : {% if app.user.mantra %} {{
+                            app.user.mantra }} {% endif %}
+                        </div>
+
+                        <div>
+                            <a href="#modal-mantra-user" class="custom-btn modal-trigger"
+                                id="trigger-modal-mantra-user">Changer</a>
+                        </div>
+                    </div>
+                    <br><br>
+
+                    {# delete account #}
                     <div class="container-flex-between">
                         <div class="accent-title"></div>
                         <div>
                             <a href="{{ path('delete_account') }}" class="custom-btn btn-danger"
-                                onclick="return confirm('Attention ! La suppression de votre compte est défininitive, toutes vos données seront effacées de la base de donner. Cliquez pour confirmer.');">Supprimer mon compte</a>
+                                onclick="return confirm('Attention ! La suppression de votre compte est défininitive, toutes vos données seront effacées de la base de donner. Cliquez pour confirmer.');">Supprimer
+                                mon compte</a>
                         </div>
                     </div>
                 </div>
@@ -27,7 +46,7 @@
     </div>
 </div>
 
-<!-- Modal Structure -->
+<!-- Modal Structure pseudo-->
 <div id="modal-pseudo-user" class="modal">
     <div class="modal-content">
         <h4 class="modal-content-title">Entrez un nouveau pseudo</h4>
@@ -38,5 +57,19 @@
     <div class="modal-footer">
         <a href="#!" id="confirm-change-user-pseudo" class="custom-btn">Confirmer</a>
         <a href="#!" id="close-user-pseudo-modal" class="modal-close custom-btn">Annuler</a>
+    </div>
+</div>
+
+<!-- Modal Structure mantra -->
+<div id="modal-mantra-user" class="modal">
+    <div class="modal-content">
+        <h4 class="modal-content-title">Entrez un nouveau mantra</h4>
+        <div class="input-field col s6">
+            <input placeholder="Placeholder" id="change-mantra-input" type="text" class="validate">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="confirm-change-user-mantra" class="custom-btn">Confirmer</a>
+        <a href="#!" id="close-user-mantra-modal" class="modal-close custom-btn">Annuler</a>
     </div>
 </div>

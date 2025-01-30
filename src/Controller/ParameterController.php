@@ -101,4 +101,31 @@ class ParameterController extends AbstractController
 
         return new JsonResponse(false);
     }
+
+    #[Route('/changer/mantra/utilisateur', name: 'change_user_mantra', options: ['expose' => true])]
+    public function changeUserMantra(
+        Request $request,
+        UserRepository $userRepository,
+    ): JsonResponse {
+        
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $requestData = $requestData = $request->get('mantra');
+
+        $userExist = $userRepository->findOneBy([
+            'pseudo' => $requestData
+        ]);
+
+        if($userExist) {
+            return new JsonResponse(true);
+        } 
+
+        $user->setMantra($requestData);
+        $this->em->flush();
+
+        return new JsonResponse(false);
+    }
 }

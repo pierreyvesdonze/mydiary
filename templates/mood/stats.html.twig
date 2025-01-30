@@ -1,11 +1,7 @@
-{% extends "base.html.twig" %}
 
-{% block body %}
-
-<blockquote>Ceci est l'évolution de votre humeur au fil du temps</blockquote>
 
 <div class="container">
-    <canvas id="moodChart" data-moods="{{ moodsArrayJson }}" width="400" height="100"></canvas>
+    <canvas id="moodChart" {# data-moods="{{ moodsArrayJson }}" #} width="400" height="100"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -38,4 +34,3 @@
 
     const myChart = new Chart(ctx, config);
 </script>
-{% endblock %}
