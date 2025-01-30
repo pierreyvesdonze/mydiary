@@ -28,4 +28,23 @@
 'moodData': moodData
 } %}
 
+<br><br>
+
+{% if app.user.routineContainer.routines %}
+
+<h4>
+    Vous avez <span class="green-text">{{ app.user.routineContainer.routines|length }}</span> 
+    {{ app.user.routineContainer.routines|length == 1 ? 'routine' : 'routines' }} en cours.
+</h4>
+    
+
+{% else %}
+    
+<h4>Vous n'avez pas encore créé de routine.</h4>
+
+{% endif %}
+
+<br><br>
+
+
 {% endblock %}

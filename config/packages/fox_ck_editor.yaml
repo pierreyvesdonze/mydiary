@@ -1,5 +1,0 @@
-fos_ck_editor:
-    configs:
-        my_config:
-            toolbar: [ ["Source", "-", "Save"], "/", ["Anchor"], "/", ["Maximize"] ]
-            uiColor: "#000000"
