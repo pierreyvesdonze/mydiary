@@ -463,6 +463,7 @@ nav .nav-wrapper a {
 }
 
 .sidenav {
+  z-index: 8000 !important;
   background-color: var(--nav-color) !important;
 }
 .sidenav li a {

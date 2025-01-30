@@ -213,6 +213,7 @@ nav {
 }
 
 .sidenav {
+    z-index: 8000 !important;
     background-color: var(--nav-color) !important;
 
     li a {

@@ -15,7 +15,7 @@ self.addEventListener('fetch', evt => {
 
                 return await fetch(evt.request)
             } catch (e) {
-                return new Response("Vous semblez être hors ligne... Vous devez être en ligne pour faire fonctionner l'application.")
+                return new Response("L'application est complètement pétée... Désolé.")
             }
 
         })())
