@@ -52,7 +52,7 @@
         </div>
 
         <div class="content">
-            <p>{{ content.content }}</p>
+            <p>{{ content.content|nl2br }}</p>
             <div class="btn-control-flex">
                 <a href="{{ path('book_content_edit', {id:content.id}) }}"><i class="material-icons">sync</i></a>
                 <div class="margin-left-20"></div>

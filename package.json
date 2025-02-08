@@ -1,5 +1,13 @@
 {
   "dependencies": {
     "chart.js": "^4.4.7"
+  },
+  "devDependencies": {
+    "@ehyiah/ux-quill": "file:vendor/ehyiah/ux-quill/assets",
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "axios": "^1.4.0",
+    "file-loader": "^6.2.0",
+    "quill": "2.0.3"
   }
 }
